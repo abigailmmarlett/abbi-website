@@ -1,0 +1,199 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header Styles */
+header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 60px 0;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+header .subtitle {
+    font-size: 1.2em;
+    opacity: 0.9;
+}
+
+/* Main Content */
+main {
+    padding: 40px 20px;
+}
+
+/* Section Styles */
+section {
+    background: white;
+    margin-bottom: 30px;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+    color: #667eea;
+    font-size: 2em;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #667eea;
+}
+
+/* Work Experience Styles */
+.experience-item {
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.experience-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.experience-item h3 {
+    color: #333;
+    font-size: 1.5em;
+    margin-bottom: 8px;
+}
+
+.company {
+    font-weight: bold;
+    color: #667eea;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+}
+
+.duration {
+    color: #666;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.experience-item ul {
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.experience-item li {
+    margin-bottom: 8px;
+    color: #555;
+}
+
+/* Education and Certification Styles */
+#education-certification .subsection {
+    margin-bottom: 35px;
+}
+
+#education-certification .subsection:last-child {
+    margin-bottom: 0;
+}
+
+#education-certification .subsection h3 {
+    color: #764ba2;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.education-item,
+.certification-item {
+    margin-bottom: 25px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-left: 4px solid #667eea;
+    border-radius: 4px;
+}
+
+.education-item:last-child,
+.certification-item:last-child {
+    margin-bottom: 0;
+}
+
+.education-item h4,
+.certification-item h4 {
+    color: #333;
+    font-size: 1.3em;
+    margin-bottom: 8px;
+}
+
+.institution,
+.issuer {
+    font-weight: bold;
+    color: #667eea;
+    margin-bottom: 5px;
+}
+
+.date {
+    color: #666;
+    font-style: italic;
+    margin-bottom: 5px;
+}
+
+.details {
+    color: #555;
+    margin-top: 8px;
+}
+
+/* Footer Styles */
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 40px;
+}
+
+footer p {
+    font-size: 0.9em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2em;
+    }
+
+    header .subtitle {
+        font-size: 1em;
+    }
+
+    section {
+        padding: 25px;
+    }
+
+    section h2 {
+        font-size: 1.6em;
+    }
+
+    .experience-item h3,
+    #education-certification .subsection h3 {
+        font-size: 1.3em;
+    }
+
+    .education-item h4,
+    .certification-item h4 {
+        font-size: 1.1em;
+    }
+}
