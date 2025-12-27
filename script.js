@@ -42,14 +42,18 @@ navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
         const targetId = link.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
+        
+        // Validate that targetId is a valid hash anchor
+        if (targetId && targetId.startsWith('#') && /^#[a-zA-Z0-9_-]+$/.test(targetId)) {
+            const targetSection = document.querySelector(targetId);
 
-        if (targetSection) {
-            const offsetTop = targetSection.offsetTop - 70;
-            window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
-            });
+            if (targetSection) {
+                const offsetTop = targetSection.offsetTop - 70;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
         }
     });
 });
