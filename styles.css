@@ -136,10 +136,11 @@ body {
 .section-title {
     font-size: 36px;
     margin-bottom: 30px;
+    color: var(--primary-color);
     background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
     position: relative;
     display: inline-block;
 }
@@ -382,8 +383,12 @@ body {
 }
 
 @keyframes fillBar {
-    from {
-        width: 0 !important;
+    0% {
+        width: 0;
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
 }
 
