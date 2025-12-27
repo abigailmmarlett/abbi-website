@@ -1,0 +1,47 @@
+.contact {
+  padding: 4rem 2rem;
+  background-color: #1a1a1a;
+}
+
+.contact h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #fff;
+  text-align: center;
+}
+
+.contact-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-content p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.87);
+  margin-bottom: 2rem;
+}
+
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.contact-button {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background-color: #646cff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.contact-button:hover {
+  background-color: #535bf2;
+  transform: translateY(-2px);
+}
