@@ -10,76 +10,90 @@ export function Welcome() {
     >
       <ParticleBackground />
       <div className="container mx-auto px-6 relative z-20">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-cyan-700 font-medium mb-4 animate-fade-in opacity-0" style={{ animationDelay: '0.1s' }}>
-            Hello, I'm
-          </p>
-          <h1 className="text-5xl md:text-7xl font-display font-bold text-foreground mb-6 animate-fade-in opacity-0" style={{ animationDelay: '0.2s' }}>
-            Abigail Marlett
-          </h1>
-          <h2 className="text-2xl md:text-3xl font-light text-muted-foreground mb-8 animate-fade-in opacity-0" style={{ animationDelay: '0.3s' }}>
-            Full-Stack Software Engineer
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10 animate-fade-in opacity-0" style={{ animationDelay: '0.4s' }}>
-            Passionate about building elegant, scalable web applications with modern technologies.
-            I bring ideas to life through clean code and thoughtful design.
-          </p>
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
+            {/* Headshot */}
+            <div className="flex-shrink-0 animate-fade-in opacity-0" style={{ animationDelay: '0.1s' }}>
+              <img
+                src="/images/headshot.JPG"
+                alt="Abigail Marlett"
+                className="w-72 h-96 md:w-80 md:h-[28rem] rounded-2xl object-cover shadow-lg opacity-95"
+              />
+            </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-wrap items-center justify-center gap-4 mb-12 animate-fade-in opacity-0" style={{ animationDelay: '0.5s' }}>
-            <Button
-              size="lg"
-              className="px-8"
-              onClick={() => document.querySelector('#experience')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              View My Work
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="px-8"
-              onClick={() => window.open('mailto:abigailmarlett@gmail.com')}
-            >
-              Get in Touch
-            </Button>
-          </div>
+            {/* Content */}
+            <div className="text-left flex-1">
+              <p className="text-cyan-700 font-medium mb-4 animate-fade-in opacity-0" style={{ animationDelay: '0.2s' }}>
+                Hello, I'm
+              </p>
+              <h1 className="text-5xl md:text-6xl font-display font-bold text-foreground mb-4 animate-fade-in opacity-0" style={{ animationDelay: '0.3s' }}>
+                Abigail Marlett
+              </h1>
+              <h2 className="text-2xl md:text-3xl font-light text-muted-foreground mb-8 animate-fade-in opacity-0" style={{ animationDelay: '0.4s' }}>
+                Full-Stack Software Engineer
+              </h2>
+              <p className="text-lg text-muted-foreground mb-10 leading-relaxed animate-fade-in opacity-0" style={{ animationDelay: '0.5s' }}>
+                Passionate about building elegant, scalable web applications with modern technologies.
+                I bring ideas to life through clean code and thoughtful design.
+              </p>
 
-          {/* Contact Info */}
-          <div className="flex flex-wrap items-center justify-center gap-6 text-muted-foreground animate-fade-in opacity-0" style={{ animationDelay: '0.6s' }}>
-            <a
-              href="mailto:abigailmarlett@gmail.com"
-              className="flex items-center gap-2 hover:text-accent transition-colors"
-            >
-              <Mail size={18} />
-              <span className="text-sm">abigailmarlett@gmail.com</span>
-            </a>
-            <a
-              href="tel:+18287195574"
-              className="flex items-center gap-2 hover:text-accent transition-colors"
-            >
-              <Phone size={18} />
-              <span className="text-sm">(828) 719-5574</span>
-            </a>
-          </div>
+              {/* CTA Buttons */}
+              <div className="flex flex-wrap gap-4 mb-10 animate-fade-in opacity-0" style={{ animationDelay: '0.6s' }}>
+                <Button
+                  size="lg"
+                  className="px-8"
+                  onClick={() => document.querySelector('#experience')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  View My Work
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="px-8"
+                  onClick={() => window.open('mailto:abigailmarlett@gmail.com')}
+                >
+                  Get in Touch
+                </Button>
+              </div>
 
-          {/* Social Links */}
-          <div className="flex items-center justify-center gap-4 mt-6 animate-fade-in opacity-0" style={{ animationDelay: '0.7s' }}>
-            <a
-              href="https://linkedin.com/in/abigail-marlett"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 rounded-full bg-secondary hover:bg-cyan-700 hover:text-white text-muted-foreground transition-all duration-300"
-            >
-              <Linkedin size={20} />
-            </a>
-            <a
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 rounded-full bg-secondary hover:bg-cyan-700 hover:text-white text-muted-foreground transition-all duration-300"
-            >
-              <Github size={20} />
-            </a>
+              {/* Contact Info */}
+              <div className="flex flex-col gap-4 text-muted-foreground mb-6 animate-fade-in opacity-0" style={{ animationDelay: '0.7s' }}>
+                <a
+                  href="mailto:abigailmarlett@gmail.com"
+                  className="flex items-center gap-2 hover:text-accent transition-colors"
+                >
+                  <Mail size={18} />
+                  <span className="text-sm">abigailmarlett@gmail.com</span>
+                </a>
+                <a
+                  href="tel:+18287195574"
+                  className="flex items-center gap-2 hover:text-accent transition-colors"
+                >
+                  <Phone size={18} />
+                  <span className="text-sm">(828) 719-5574</span>
+                </a>
+              </div>
+
+              {/* Social Links */}
+              <div className="flex gap-4 animate-fade-in opacity-0" style={{ animationDelay: '0.8s' }}>
+                <a
+                  href="https://linkedin.com/in/abigail-marlett"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 rounded-full bg-secondary hover:bg-cyan-700 hover:text-white text-muted-foreground transition-all duration-300"
+                >
+                  <Linkedin size={20} />
+                </a>
+                <a
+                  href="https://github.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 rounded-full bg-secondary hover:bg-cyan-700 hover:text-white text-muted-foreground transition-all duration-300"
+                >
+                  <Github size={20} />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
