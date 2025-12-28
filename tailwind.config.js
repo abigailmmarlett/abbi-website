@@ -19,7 +19,7 @@ export default {
         'background': 'hsl(var(--background))',
         'muted': 'hsl(var(--muted))',
         'muted-foreground': 'hsl(var(--muted-foreground))',
-        'accent': '#06b6d4',
+        'accent': '#4B9CD3',
         'accent-foreground': '#ffffff',
         /* Legacy OKLCH colors */
         'cream': 'oklch(86.9% 0.005 56.366)',         /* warm beige */

@@ -48,14 +48,14 @@ export function Welcome() {
           <div className="flex flex-wrap items-center justify-center gap-6 text-muted-foreground animate-fade-in opacity-0" style={{ animationDelay: '0.6s' }}>
             <a
               href="mailto:abigailmarlett@gmail.com"
-              className="flex items-center gap-2 hover:text-cyan-700 transition-colors"
+              className="flex items-center gap-2 hover:text-accent transition-colors"
             >
               <Mail size={18} />
               <span className="text-sm">abigailmarlett@gmail.com</span>
             </a>
             <a
               href="tel:+18287195574"
-              className="flex items-center gap-2 hover:text-cyan-700 transition-colors"
+              className="flex items-center gap-2 hover:text-accent transition-colors"
             >
               <Phone size={18} />
               <span className="text-sm">(828) 719-5574</span>

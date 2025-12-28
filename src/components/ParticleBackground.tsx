@@ -12,16 +12,16 @@ const ParticleBackground = () => {
   const [particles, setParticles] = useState<Particle[]>([]);
 
   useEffect(() => {
-    const particleCount = 12;
+    const particleCount = 6;
     const newParticles: Particle[] = [];
 
     for (let i = 0; i < particleCount; i++) {
       newParticles.push({
         id: i,
         left: Math.random() * 100,
-        size: Math.random() * 3 + 2,
-        duration: Math.random() * 30 + 25,
-        delay: Math.random() * 15,
+        size: Math.random() * 80 + 60,
+        duration: Math.random() * 15 + 20,
+        delay: Math.random() * 8,
       });
     }
 
@@ -49,12 +49,12 @@ const ParticleBackground = () => {
             bottom: '0',
             width: `${particle.size}px`,
             height: `${particle.size}px`,
-            backgroundColor: '#06b6d4',
+            backgroundColor: 'rgba(75, 156, 211, 0.08)',
             borderRadius: '50%',
             pointerEvents: 'none',
-            animation: `floatUp ${particle.duration}s linear ${particle.delay}s infinite`,
-            opacity: 0.12,
-            boxShadow: '0 0 5px rgba(6, 182, 212, 0.2)',
+            animation: `floatUp ${particle.duration}s ease-in-out ${particle.delay}s infinite`,
+            border: '1px solid rgba(75, 156, 211, 0.15)',
+            boxShadow: 'inset -2px -2px 8px rgba(75, 156, 211, 0.1), 0 8px 16px rgba(75, 156, 211, 0.08)',
           }}
         />
       ))}
@@ -62,17 +62,20 @@ const ParticleBackground = () => {
         @keyframes floatUp {
           0% {
             opacity: 0;
-            transform: translateY(0);
+            transform: translateY(0) translateX(0);
           }
-          15% {
+          10% {
             opacity: 1;
           }
-          85% {
+          50% {
+            transform: translateY(-50vh) translateX(30px);
+          }
+          90% {
             opacity: 1;
           }
           100% {
             opacity: 0;
-            transform: translateY(-100vh);
+            transform: translateY(-120vh) translateX(-30px);
           }
         }
       `}</style>

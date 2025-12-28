@@ -70,7 +70,7 @@ const techStack: TechItem[] = [
     name: "Tailwind CSS",
     icon: (
       <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
-        <rect x="2" y="2" width="20" height="20" fill="#06B6D4" />
+        <rect x="2" y="2" width="20" height="20" fill="#4B9CD3" />
         <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">TW</text>
       </svg>
     ),

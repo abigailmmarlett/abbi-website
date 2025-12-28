@@ -96,27 +96,27 @@ export function Experience() {
                 className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow data-[state=open]:border-primary/50"
               >
                 <AccordionTrigger className="px-6 py-4 hover:no-underline group">
-                  <div className="flex flex-col md:flex-row md:items-center justify-between w-full text-left gap-2 pr-4">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between w-full text-left gap-4 pr-4">
                     <div>
                       {exp.roles ? (
                         <>
-                          <h3 className="text-lg font-semibold text-foreground">
+                          <h3 className="text-lg font-semibold text-foreground mb-0.5">
                             {exp.roles[0].title}
                           </h3>
-                          <p className="text-xs text-muted-foreground mt-1">
+                          <p className="text-xs text-muted-foreground mb-2">
                             {exp.roles.length > 1 ? `${exp.roles.length} roles` : '1 role'}
                           </p>
                         </>
                       ) : (
                         <>
-                          <h3 className="text-lg font-semibold text-foreground">
+                          <h3 className="text-lg font-semibold text-foreground mb-2">
                             {exp.role}
                           </h3>
                         </>
                       )}
-                      <p className="text-primary font-medium">{exp.company}</p>
+                      <p className="text-accent font-medium">{exp.company}</p>
                     </div>
-                    <div className="flex flex-col md:items-end gap-1 text-sm text-muted-foreground">
+                    <div className="flex flex-col md:items-end gap-2 text-sm text-muted-foreground">
                       <span className="flex items-center gap-1">
                         <MapPin size={14} />
                         {exp.location}
@@ -130,44 +130,44 @@ export function Experience() {
                 </AccordionTrigger>
                 <AccordionContent className="px-6 pb-6 border-t border-gray-200">
                   {exp.roles ? (
-                    <div className="space-y-6">
+                    <div className="space-y-8">
                       {exp.roles.map((role, roleIndex) => (
                         <div key={roleIndex}>
-                          <div className="mb-3">
-                            <h4 className="text-base font-semibold text-foreground italic">{role.title}</h4>
-                            <p className="text-sm text-muted-foreground">{role.period}</p>
+                          <div className="mb-4">
+                            <h4 className="text-base font-semibold text-foreground italic mb-1">{role.title}</h4>
+                            <p className="text-xs text-muted-foreground">{role.period}</p>
                           </div>
-                          <ul className="space-y-2">
+                          <ul className="space-y-3">
                             {role.achievements.map((achievement, index) => (
                               <li
                                 key={index}
-                                className="text-muted-foreground flex items-start gap-2 text-sm"
+                                className="text-muted-foreground flex items-start gap-3 text-sm leading-relaxed"
                               >
-                                <span className="text-primary mt-1.5">●</span>
-                                {achievement}
+                                <span className="text-accent flex-shrink-0 mt-1">●</span>
+                                <span>{achievement}</span>
                               </li>
                             ))}
                           </ul>
                           {roleIndex < exp.roles.length - 1 && (
-                            <div className="my-4 border-t border-gray-200" />
+                            <div className="mt-8 border-t border-gray-200" />
                           )}
                         </div>
                       ))}
                     </div>
                   ) : (
-                    <ul className="space-y-2 mb-4">
+                    <ul className="space-y-3 mb-6">
                       {exp.achievements.map((achievement, index) => (
                         <li
                           key={index}
-                          className="text-muted-foreground flex items-start gap-2"
+                          className="text-muted-foreground flex items-start gap-3 text-sm leading-relaxed"
                         >
-                          <span className="text-primary mt-1.5">•</span>
-                          {achievement}
+                          <span className="text-accent flex-shrink-0 mt-1">●</span>
+                          <span>{achievement}</span>
                         </li>
                       ))}
                     </ul>
                   )}
-                  <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-200">
+                  <div className="flex flex-wrap gap-2 pt-6 border-t border-gray-200">
                     {exp.techStack.map((tech) => (
                       <Badge
                         key={tech}
