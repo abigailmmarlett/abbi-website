@@ -34,7 +34,7 @@ const certifications: Certification[] = [
 
 export function Education() {
   return (
-    <section id="education" className="py-16 px-6" style={{ backgroundColor: 'hsl(var(--background))' }}>
+    <section id="education" className="py-16 px-6">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground text-center mb-3">

@@ -1,16 +1,17 @@
 import { Mail, Phone, Linkedin, Github } from 'lucide-react';
 import { Button } from '../components/ui/button';
+import ParticleBackground from '../components/ParticleBackground';
 
 export function Welcome() {
   return (
     <section
       id="welcome"
       className="min-h-screen flex items-center justify-center pt-20 pb-16 relative"
-      style={{ backgroundColor: 'hsl(var(--background))' }}
     >
-      <div className="container mx-auto px-6">
+      <ParticleBackground />
+      <div className="container mx-auto px-6 relative z-20">
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-primary font-medium mb-4 animate-fade-in opacity-0" style={{ animationDelay: '0.1s' }}>
+          <p className="text-cyan-700 font-medium mb-4 animate-fade-in opacity-0" style={{ animationDelay: '0.1s' }}>
             Hello, I'm
           </p>
           <h1 className="text-5xl md:text-7xl font-display font-bold text-foreground mb-6 animate-fade-in opacity-0" style={{ animationDelay: '0.2s' }}>
@@ -28,7 +29,7 @@ export function Welcome() {
           <div className="flex flex-wrap items-center justify-center gap-4 mb-12 animate-fade-in opacity-0" style={{ animationDelay: '0.5s' }}>
             <Button
               size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8"
+              className="px-8"
               onClick={() => document.querySelector('#experience')?.scrollIntoView({ behavior: 'smooth' })}
             >
               View My Work
@@ -36,7 +37,7 @@ export function Welcome() {
             <Button
               size="lg"
               variant="outline"
-              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground px-8"
+              className="px-8"
               onClick={() => window.open('mailto:abigailmarlett@gmail.com')}
             >
               Get in Touch
@@ -47,14 +48,14 @@ export function Welcome() {
           <div className="flex flex-wrap items-center justify-center gap-6 text-muted-foreground animate-fade-in opacity-0" style={{ animationDelay: '0.6s' }}>
             <a
               href="mailto:abigailmarlett@gmail.com"
-              className="flex items-center gap-2 hover:text-primary transition-colors"
+              className="flex items-center gap-2 hover:text-cyan-700 transition-colors"
             >
               <Mail size={18} />
               <span className="text-sm">abigailmarlett@gmail.com</span>
             </a>
             <a
               href="tel:+18287195574"
-              className="flex items-center gap-2 hover:text-primary transition-colors"
+              className="flex items-center gap-2 hover:text-cyan-700 transition-colors"
             >
               <Phone size={18} />
               <span className="text-sm">(828) 719-5574</span>
@@ -67,7 +68,7 @@ export function Welcome() {
               href="https://linkedin.com/in/abigail-marlett"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground text-muted-foreground transition-all duration-300"
+              className="p-3 rounded-full bg-secondary hover:bg-cyan-700 hover:text-white text-muted-foreground transition-all duration-300"
             >
               <Linkedin size={20} />
             </a>
@@ -75,7 +76,7 @@ export function Welcome() {
               href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground text-muted-foreground transition-all duration-300"
+              className="p-3 rounded-full bg-secondary hover:bg-cyan-700 hover:text-white text-muted-foreground transition-all duration-300"
             >
               <Github size={20} />
             </a>

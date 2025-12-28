@@ -51,7 +51,7 @@ export function Hobbies() {
   };
 
   return (
-    <section id="outside-work" className="py-32" style={{ backgroundColor: 'hsl(var(--background))' }}>
+    <section id="outside-work" className="py-32">
       <div className="max-w-6xl mx-auto relative z-10">
         <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground text-center mb-4">
           Outside of my 9-5

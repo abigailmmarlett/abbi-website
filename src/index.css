@@ -20,9 +20,9 @@
   --muted: 0 0% 90%;
   --muted-foreground: 0 0% 50%;
 
-  /* Accent color */
-  --accent: 263 80% 50%;
-  --accent-foreground: 0 0% 100%;
+  /* Accent color - Cyan 700 (#06b6d4) in RGB for better opacity support */
+  --accent: 6 182 212;
+  --accent-foreground: 255 255 255;
 
   /* Legacy OKLCH colors */
   --color-primary: oklch(29.3% 0.066 243.157);      /* darker teal/blue */
@@ -156,4 +156,26 @@ h1, h2, h3 {
 
 .animate-ribbon-twirl {
   animation: ribbonTwirl 4s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
+/* Particle float animation */
+@keyframes particle-float {
+  0% {
+    opacity: 0;
+    transform: translateY(0px);
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100vh);
+  }
+}
+
+.animate-particle-float {
+  animation: particle-float linear forwards;
 }
