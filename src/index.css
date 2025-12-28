@@ -1,3 +1,159 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/* Design System Color Variables (HSL format) */
+:root {
+  /* Primary color - Teal */
+  --primary: 215 48% 39%;
+  --primary-foreground: 0 0% 100%;
+
+  /* Secondary color - Light gray background */
+  --secondary: 0 0% 96%;
+  --secondary-foreground: 0 0% 10%;
+
+  /* Foreground - Text color (dark for light background) */
+  --foreground: 215 20% 20%;
+
+  /* Background - Light background */
+  --background: 0 0% 99%;
+
+  /* Muted colors */
+  --muted: 0 0% 90%;
+  --muted-foreground: 0 0% 50%;
+
+  /* Accent color */
+  --accent: 263 80% 50%;
+  --accent-foreground: 0 0% 100%;
+
+  /* Legacy OKLCH colors */
+  --color-primary: oklch(29.3% 0.066 243.157);      /* darker teal/blue */
+  --color-cream: oklch(86.9% 0.005 56.366);         /* warm beige */
+  --color-accentMauve: oklch(28.4% 0.109 3.907);    /* dark reddish/mauve */
+  --color-accentBlue: oklch(90.1% 0.058 230.902);   /* light cool blue */
+  --color-accentRose: oklch(60% 0.1 15);            /* rose (derived from oklch space) */
+  --color-accent-new: oklch(60.9% 0.126 221.723);   /* new accent color */
+}
+
+/* Animated depth gradient */
+@keyframes subtle-depth {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.depth-gradient {
+  background: linear-gradient(
+    135deg,
+    oklch(29.3% 0.066 243.157) 0%,
+    oklch(32% 0.07 245) 25%,
+    oklch(27% 0.06 242) 50%,
+    oklch(31% 0.065 244) 75%,
+    oklch(29.3% 0.066 243.157) 100%
+  );
+  background-size: 400% 400%;
+  animation: subtle-depth 20s ease infinite;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideInUp 0.8s ease-out forwards;
+}
+
+/* Subtle animations only */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  25% { transform: translateY(-30px) translateX(20px); }
+  50% { transform: translateY(-60px) translateX(-20px); }
+  75% { transform: translateY(-30px) translateX(20px); }
+}
+
+/* Utility classes */
+.animate-float-slow {
+  animation: float-slow 8s ease-in-out infinite;
+}
+
+.animate-float-medium {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.animate-float-fast {
+  animation: float-slow 4s ease-in-out infinite;
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Typography enhancements */
+body {
+  font-family: 'Andada Pro', serif;
+  @apply transition-colors duration-300;
+  background-color: hsl(var(--background));
+}
+
+h1, h2, h3 {
+  font-family: 'Andada Pro', serif;
+  letter-spacing: -0.5px;
+}
+
+
+/* Ribbon animation - flows from bottom-left to top-right */
+@keyframes ribbonTwirl {
+  0% {
+    opacity: 0;
+    transform: translate(-600px, 600px) rotate(-30deg) scaleX(0.3) scaleY(1);
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(1200px, -600px) rotate(-30deg) scaleX(1) scaleY(1);
+  }
+}
+
+.animate-ribbon-twirl {
+  animation: ribbonTwirl 4s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}

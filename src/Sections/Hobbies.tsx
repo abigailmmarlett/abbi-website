@@ -1,129 +1,118 @@
-import { useState } from 'react'
+import { useState } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Button } from '../components/ui/button';
+// import { Button } from '@/components/ui/button';
 
-interface CarouselImage {
-  src: string
-  alt: string
-  caption: string
-  description: string
-}
-
-
-const carouselImages: CarouselImage[] = [
+const hobbies = [
   {
-    src: "/images/solidcore-headshot.JPG",
-    alt: "Solidcore headshot",
+    id: 1,
     caption: "Coaching a Solidcore class",
-    description: "Outside of my 9–5, I’ve been coaching fitness classes at Solidcore since April 2024. I originally started coaching to push myself outside my comfort zone and become more confident speaking to large groups, but it soon became a meaningful outlet centered on fitness, movement, and personal growth."
+    description: "Outside of my 9–5, I’ve been coaching fitness classes at Solidcore since April 2024. I originally started coaching to push myself outside my comfort zone and become more confident speaking to large groups, but it soon became a meaningful outlet centered on fitness, movement, and personal growth.",
+    image: '/images/solidcore-headshot.JPG',
   },
   {
-    src: "/images/pip.png",
-    alt: "Pip",
-    caption: "With my cat Pip",
-    description: "Yes, named after the Python package installer."
+    id: 2,
+    description: "Yes, named after the Python package installer.",
+    image: '/images/pip.png',
   },
   {
-    src: "/images/hiking.png",
-    alt: "Hiking ",
-    caption: "Outside hiking",
-    description: "I grew up in the mountains of North Carolina, where hiking became a big part of my life from a very young age and has continued into adulthood. Years ago, I completed a week-long backpacking trip on the Appalachian Trail, and more recently, I hiked in the Dolomites in Italy."
-  },
-  {
-    src: "/images/ski.png",
-    alt: "Skiing experience",
+    id: 3,
     caption: "On the slopes",
-    description: "I learned to ski around the time I started elementary school, and it’s been a part of my life ever since. My first job was at a ski mountain during high school, and winter still brings that same excitement to get back on the slopes."
+    description: "I learned to ski around the time I started elementary school, and it’s been a part of my life ever since. My first job was at a ski mountain during high school, and winter still brings that same excitement to get back on the slopes.",
+    image: '/images/ski.png',
   },
   {
-    src: "/images/pottery.png",
-    alt: "Pottery and creative work",
+    id: 4,
     caption: "At the wheel",
-    description: "This is a newer hobby of mine! I started pottery classes in early 2024, and while most of my creations are still charmingly lopsided mugs, I’ve explored both wheel throwing and handbuilding."
-  }
+    description: "This is a newer hobby of mine! I started pottery classes in early 2024, and while most of my creations are still charmingly lopsided mugs, I’ve explored both wheel throwing and handbuilding.",
+    image: '/images/pottery.png',
+  },
+  {
+    id: 5,
+    caption: "Outside hiking",
+    description: "I grew up in the mountains of North Carolina, where hiking became a big part of my life from a very young age and has continued into adulthood. Years ago, I completed a week-long backpacking trip on the Appalachian Trail, and more recently, I hiked in the Dolomites in Italy.",
+    image: '/images/hiking.png',
+  },
 ];
 
 export function Hobbies() {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % carouselImages.length)
-  }
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % hobbies.length);
+  };
 
-  const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + carouselImages.length) % carouselImages.length)
-  }
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + hobbies.length) % hobbies.length);
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
+  };
 
   return (
-    <section id="hobbies" className="py-20 px-4 bg-gradient-to-b from-slate-800 to-slate-900 relative">
+    <section id="outside-work" className="py-32" style={{ backgroundColor: 'hsl(var(--background))' }}>
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">Outside of the 9-5</h2>
-          <p className="text-gray-400 text-lg">You can find me... </p>
-          <div className="h-1 w-20 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto rounded-full mt-4"></div>
-        </div>
+        <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground text-center mb-4">
+          Outside of my 9-5
+        </h2>
+        <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+          You can find me...
+        </p>
 
-        {/* Photo Carousel */}
-        <div className="mb-20">
-          <div className="relative bg-gradient-to-br from-slate-800 to-slate-700 rounded-3xl overflow-hidden">
-            <div className="relative w-full aspect-square md:min-h-[500px]">
+        <div className="max-w-4xl mx-auto">
+          <div className="relative overflow-hidden rounded-2xl shadow-xl">
+            {/* Main Image */}
+            <div className="relative min-h-96 md:min-h-screen aspect-auto">
               <img
-                src={carouselImages[currentImageIndex].src}
-                alt={carouselImages[currentImageIndex].alt}
-                className="w-full h-full object-cover"
+                src={hobbies[currentIndex].image}
+                alt={hobbies[currentIndex].caption}
+                className="w-full h-full object-cover transition-opacity duration-500"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
 
-              {/* Right side text overlay - vertical transparent block */}
-              <div className="absolute right-0 top-0 bottom-0 w-full md:w-2/5 bg-gradient-to-l from-black/60 via-black/50 to-transparent flex flex-col justify-between p-6 md:p-8">
-                <div></div>
-                <div className="space-y-4">
-                  <h3 className="text-white text-2xl md:text-3xl font-bold">
-                    {carouselImages[currentImageIndex].caption}
-                  </h3>
-                  <p className="text-white/90 text-sm md:text-base leading-relaxed">
-                    {carouselImages[currentImageIndex].description}
-                  </p>
-                </div>
+              {/* Content Overlay */}
+              <div className="absolute bottom-0 left-0 right-0 p-8 bg-black/40 backdrop-blur-sm">
+                <h3 className="text-2xl md:text-3xl font-display font-bold text-foreground mb-2">
+                  {hobbies[currentIndex].caption}
+                </h3>
+                <p className="text-muted-foreground max-w-xl">
+                  {hobbies[currentIndex].description}
+                </p>
               </div>
             </div>
 
-            {/* Navigation Buttons */}
-            <button
-              onClick={prevImage}
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white dark:bg-slate-800/80 dark:hover:bg-slate-700 p-3 rounded-full transition-all duration-200 z-20"
-              aria-label="Previous image"
+            {/* Navigation Arrows */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm hover:bg-background text-foreground rounded-full shadow-lg"
+              onClick={prevSlide}
             >
-              <svg className="w-6 h-6 text-slate-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            <button
-              onClick={nextImage}
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white dark:bg-slate-800/80 dark:hover:bg-slate-700 p-3 rounded-full transition-all duration-200 z-20"
-              aria-label="Next image"
+              <ChevronLeft size={24} />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm hover:bg-background text-foreground rounded-full shadow-lg"
+              onClick={nextSlide}
             >
-              <svg className="w-6 h-6 text-slate-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
+              <ChevronRight size={24} />
+            </Button>
+          </div>
 
-            {/* Dots */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
-              {carouselImages.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentImageIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentImageIndex
-                    ? 'bg-white w-6'
-                    : 'bg-white/50 hover:bg-white/75'
-                    }`}
-                  aria-label={`Go to image ${index + 1}`}
-                />
-              ))}
-            </div>
-
-            {/* Image counter */}
-            <div className="absolute top-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm font-medium">
-              {currentImageIndex + 1} / {carouselImages.length}
-            </div>
+          {/* Dots Indicator */}
+          <div className="flex items-center justify-center gap-2 mt-6">
+            {hobbies.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`h-2 rounded-full transition-all duration-300 ${index === currentIndex
+                  ? 'w-8 bg-primary'
+                  : 'w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50'
+                  }`}
+              />
+            ))}
           </div>
         </div>
       </div>
