@@ -53,17 +53,17 @@ export function Hobbies() {
   }
 
   return (
-    <section id="hobbies" className="py-20 px-4 bg-white dark:bg-slate-950 relative">
+    <section id="hobbies" className="py-20 px-4 bg-gradient-to-b from-slate-800 to-slate-900 relative">
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white mb-4">Outside of the 9-5</h2>
-          <p className="text-slate-600 dark:text-gray-400 text-lg">You can find me... </p>
+          <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">Outside of the 9-5</h2>
+          <p className="text-gray-400 text-lg">You can find me... </p>
           <div className="h-1 w-20 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto rounded-full mt-4"></div>
         </div>
 
         {/* Photo Carousel */}
         <div className="mb-20">
-          <div className="relative bg-gradient-to-br from-sky-100 to-cyan-100 dark:from-sky-900/20 dark:to-cyan-900/20 rounded-3xl overflow-hidden">
+          <div className="relative bg-gradient-to-br from-slate-800 to-slate-700 rounded-3xl overflow-hidden">
             <div className="relative w-full aspect-square md:min-h-[500px]">
               <img
                 src={carouselImages[currentImageIndex].src}
