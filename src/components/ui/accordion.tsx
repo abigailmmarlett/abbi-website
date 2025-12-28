@@ -4,6 +4,7 @@ import { ChevronDown } from 'lucide-react';
 interface AccordionProps {
   type?: 'single' | 'multiple';
   collapsible?: boolean;
+  defaultValue?: string | string[];
   children: React.ReactNode;
   className?: string;
 }
@@ -25,13 +26,18 @@ const useAccordion = () => {
   return context;
 };
 
-export const Accordion = ({ 
-  type = 'single', 
-  collapsible = false, 
-  children, 
-  className = '' 
+export const Accordion = ({
+  type = 'single',
+  collapsible = false,
+  defaultValue,
+  children,
+  className = ''
 }: AccordionProps) => {
-  const [openItems, setOpenItems] = useState<Set<string>>(new Set());
+  const [openItems, setOpenItems] = useState<Set<string>>(() => {
+    if (!defaultValue) return new Set();
+    if (Array.isArray(defaultValue)) return new Set(defaultValue);
+    return new Set([defaultValue]);
+  });
 
   const toggleItem = (id: string) => {
     const newOpen = new Set(openItems);

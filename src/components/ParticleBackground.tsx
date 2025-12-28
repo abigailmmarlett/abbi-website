@@ -12,16 +12,16 @@ const ParticleBackground = () => {
   const [particles, setParticles] = useState<Particle[]>([]);
 
   useEffect(() => {
-    const particleCount = 20;
+    const particleCount = 12;
     const newParticles: Particle[] = [];
 
     for (let i = 0; i < particleCount; i++) {
       newParticles.push({
         id: i,
         left: Math.random() * 100,
-        size: Math.random() * 8 + 4,
-        duration: Math.random() * 20 + 15,
-        delay: Math.random() * 10,
+        size: Math.random() * 3 + 2,
+        duration: Math.random() * 30 + 25,
+        delay: Math.random() * 15,
       });
     }
 
@@ -53,8 +53,8 @@ const ParticleBackground = () => {
             borderRadius: '50%',
             pointerEvents: 'none',
             animation: `floatUp ${particle.duration}s linear ${particle.delay}s infinite`,
-            opacity: 0.25,
-            boxShadow: '0 0 10px rgba(6, 182, 212, 0.4)',
+            opacity: 0.12,
+            boxShadow: '0 0 5px rgba(6, 182, 212, 0.2)',
           }}
         />
       ))}
@@ -64,15 +64,15 @@ const ParticleBackground = () => {
             opacity: 0;
             transform: translateY(0);
           }
-          10% {
+          15% {
             opacity: 1;
           }
-          90% {
+          85% {
             opacity: 1;
           }
           100% {
             opacity: 0;
-            transform: translateY(-120vh);
+            transform: translateY(-100vh);
           }
         }
       `}</style>

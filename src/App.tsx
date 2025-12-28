@@ -70,36 +70,36 @@ function App() {
       {showIntro && <Intro onComplete={() => setShowIntro(false)} />}
       {/* Navigation */}
       {!showIntro && (
-      <nav className="fixed top-0 w-full backdrop-blur-md border-b z-[100] bg-white/80 border-gray-200">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-          <button
-            onClick={() => scrollToSection('welcome')}
-            className="text-xl font-bold text-primary hover:text-primary/80 transition-colors"
-          >
-            Abigail
-          </button>
-          <div className="flex gap-1 items-center">
-            {sections.map(section => (
-              <button
-                key={section.id}
-                onClick={() => scrollToSection(section.id)}
-                className={`px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${activeSection === section.id
-                    ? 'bg-primary text-white font-semibold'
-                    : 'text-gray-600 hover:text-primary hover:bg-primary/10'
-                  }`}
-              >
-                {section.label}
-              </button>
-            ))}
-            <a
-              href="mailto:abigailmarlett@gmail.com"
-              className="ml-2 px-4 py-2 bg-primary hover:bg-primary/90 text-white text-sm font-medium rounded-lg transition-colors"
+        <nav className="fixed top-0 w-full backdrop-blur-md border-b z-[100] bg-white/80 border-gray-200">
+          <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <button
+              onClick={() => scrollToSection('welcome')}
+              className="text-xl font-bold text-cyan-700 hover:text-cyan-600 transition-colors"
             >
-              Contact
-            </a>
+              Abigail
+            </button>
+            <div className="flex gap-1 items-center">
+              {sections.map(section => (
+                <button
+                  key={section.id}
+                  onClick={() => scrollToSection(section.id)}
+                  className={`px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${activeSection === section.id
+                    ? 'bg-cyan-700 text-white font-semibold'
+                    : 'text-gray-600 hover:text-cyan-700 hover:bg-cyan-50'
+                    }`}
+                >
+                  {section.label}
+                </button>
+              ))}
+              <a
+                href="mailto:abigailmarlett@gmail.com"
+                className="ml-2 px-4 py-2 bg-cyan-700 hover:bg-cyan-600 text-white text-sm font-medium rounded-lg transition-colors"
+              >
+                Contact
+              </a>
+            </div>
           </div>
-        </div>
-      </nav>
+        </nav>
       )}
 
       {/* Main Content */}
@@ -132,11 +132,11 @@ function App() {
         <div className="max-w-4xl mx-auto text-center">
           <p className="mb-4 text-sm text-gray-600">© 2025 Abigail Marlett. All rights reserved.</p>
           <div className="flex justify-center gap-6 text-sm">
-            <a href="mailto:abigailmarlett@gmail.com" className="text-primary hover:text-primary/80 transition-colors">Email</a>
+            <a href="mailto:abigailmarlett@gmail.com" className="text-cyan-700 hover:text-cyan-600 transition-colors">Email</a>
             <span className="text-gray-300">•</span>
-            <a href="https://www.linkedin.com/in/abigail-marlett" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 transition-colors">LinkedIn</a>
+            <a href="https://www.linkedin.com/in/abigail-marlett" target="_blank" rel="noopener noreferrer" className="text-cyan-700 hover:text-cyan-600 transition-colors">LinkedIn</a>
             <span className="text-gray-300">•</span>
-            <a href="tel:828-719-5574" className="text-primary hover:text-primary/80 transition-colors">Phone</a>
+            <a href="tel:828-719-5574" className="text-cyan-700 hover:text-cyan-600 transition-colors">Phone</a>
           </div>
         </div>
       </footer>
