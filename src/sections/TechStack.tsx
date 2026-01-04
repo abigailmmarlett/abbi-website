@@ -228,7 +228,7 @@ export function TechStack() {
           className="tech-item flex flex-col items-center gap-3 cursor-pointer"
           title={tech.name}
         >
-          <div className="p-3 sm:p-4 rounded-xl bg-blue-50 border border-blue-200 hover:border-blue-400 hover:bg-blue-100 transition-all" style={{ color: 'hsl(var(--primary))' }}>
+          <div className="p-2 sm:p-4 rounded-xl bg-blue-50 border border-blue-200 hover:border-blue-400 hover:bg-blue-100 transition-all" style={{ color: 'hsl(var(--primary))' }}>
             {tech.icon}
           </div>
           <span className="text-sm font-medium text-center max-w-[80px]" style={{ color: 'hsl(var(--muted-foreground))' }}>{tech.name}</span>

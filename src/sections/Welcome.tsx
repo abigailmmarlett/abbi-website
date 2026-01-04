@@ -16,7 +16,7 @@ export function Welcome({ setIsContactOpen }: WelcomeProps) {
       className="min-h-screen flex items-center justify-center relative"
     >
       <ParticleBackground />
-      <div className="container mx-auto px-6 relative z-20 pt-16 sm:pt-0">
+      <div className="container mx-auto px-6 relative z-20 pt-32 sm:pt-0">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 lg:gap-16">
             {/* Headshot */}
