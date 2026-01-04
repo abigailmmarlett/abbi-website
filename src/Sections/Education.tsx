@@ -36,69 +36,71 @@ export function Education() {
   return (
     <section id="education" className="py-16 px-6">
       <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground text-center mb-3">
-            Education & Certifications
-          </h2>
-          <p className="text-muted-foreground text-center mb-6 max-w-2xl mx-auto">
-            My academic background and professional credentials
-          </p>
-        </div>
+        {/* Hero Section with Grad Cap Background */}
+        <div
+          className="relative rounded-2xl overflow-hidden shadow-lg md:min-h-[450px] min-h-[500px] mb-8"
+          style={{
+            backgroundImage: 'url(/images/new-grad-cap.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          {/* Dark overlay for text readability */}
+          <div className="absolute inset-0 bg-black/20"></div>
 
-        {/* Two Column Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
-          {/* Left: Graduation Photo */}
-          <div className="rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 h-full md:min-h-[400px]">
-            <img
-              src="/images/abbi-grad.JPG"
-              alt="Graduation photo"
-              className="w-full h-full object-cover"
-            />
-          </div>
+          {/* Overlay Content */}
+          <div className="relative z-10 h-full flex items-start justify-start p-6 md:p-8 pt-6">
+            <div className="max-w-lg w-full">
+              {/* Single Combined Card */}
+              <div className="bg-white/10 backdrop-blur-xs p-6 md:p-7 rounded-2xl shadow-none border border-white/10">
+                {/* Education Section */}
+                <div className="mb-6">
+                  <h3 className="text-xs text-white font-medium uppercase tracking-wide mb-2 opacity-70">Education</h3>
 
-          {/* Right Column: Education and Certifications */}
-          <div className="space-y-6 flex flex-col h-full md:min-h-[400px]">
-            {/* Education Card */}
-            <div className="p-5 md:p-6 bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex-1">
-              <div className="flex items-start gap-3 mb-4">
-                <div className="flex-1">
-                  <h1 className="text-lg font-semibold text-foreground">{education.school}</h1>
-                  <p className="text-primary text-xs font-medium">{education.location}</p>
+                  <div className="flex justify-between items-start gap-4 mb-3">
+                    <div className="flex-1">
+                      <h1 className="text-lg md:text-xl font-medium text-white mb-1">{education.school}</h1>
+                      <p className="text-xs text-white font-medium opacity-75">{education.location}</p>
+                    </div>
+                    <p className="text-xs text-white/80 font-medium whitespace-nowrap">
+                      {education.startDate} - {education.endDate}
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-3">
+                    <div>
+                      <p className="text-xs text-white font-medium opacity-70 mb-1">Major</p>
+                      <p className="text-sm font-medium text-white">{education.major}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-white font-medium opacity-70 mb-1">Minor</p>
+                      <p className="text-sm font-medium text-white">{education.minor}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-white font-medium opacity-70 mb-1">GPA</p>
+                      <p className="text-sm font-medium text-white">{education.gpa}</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Divider */}
+                <div className="h-px bg-white/10 mb-6"></div>
+
+                {/* Certifications Section */}
+                <div>
+                  <h3 className="text-xs text-white font-medium uppercase tracking-wide mb-3 opacity-70">Certifications</h3>
+
+                  {certifications.map((cert, index) => (
+                    <div key={index} className={index > 0 ? 'pt-3 mt-3 border-t border-white/10' : ''}>
+                      <div className="flex justify-between items-start gap-4 mb-1">
+                        <h4 className="text-sm font-medium text-white flex-1">{cert.name}</h4>
+                        <p className="text-xs text-white/80 font-medium whitespace-nowrap">{cert.date}</p>
+                      </div>
+                      <p className="text-xs text-white font-medium opacity-75">{cert.issuer}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
-
-              <div className="space-y-3">
-                <div>
-                  <p className="text-xs text-primary font-semibold uppercase tracking-wide mb-1">Major</p>
-                  <p className="text-base font-semibold text-foreground">{education.major}</p>
-                </div>
-                <div>
-                  <p className="text-xs text-primary font-semibold uppercase tracking-wide mb-1">Minor</p>
-                  <p className="text-base font-semibold text-foreground">{education.minor}</p>
-                </div>
-                <div>
-                  <p className="text-xs text-primary font-semibold uppercase tracking-wide mb-1">GPA</p>
-                  <p className="text-base font-semibold text-foreground">{education.gpa}</p>
-                </div>
-                <p className="text-xs text-muted-foreground pt-3 border-t border-gray-200 mt-3">
-                  {education.startDate} - {education.endDate}
-                </p>
-              </div>
-            </div>
-
-            {/* Certifications Card */}
-            <div className="p-5 md:p-6 bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex-1">
-              <div className="flex items-start gap-3 mb-4">
-                <h3 className="text-lg font-semibold text-foreground">Certifications</h3>
-              </div>
-
-              {certifications.map((cert, index) => (
-                <div key={index} className="space-y-1 pb-3 last:pb-0 last:border-b-0 border-b border-gray-200 last:border-0">
-                  <h4 className="text-base font-semibold text-foreground">{cert.name}</h4>
-                  <p className="text-primary text-xs font-medium">{cert.issuer}</p>
-                  <p className="text-xs text-muted-foreground font-medium">{cert.date}</p>
-                </div>
-              ))}
             </div>
           </div>
         </div>

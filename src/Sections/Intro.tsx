@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import gsap from 'gsap'
 
 interface IntroProps {
@@ -11,37 +11,7 @@ export function Intro({ onComplete }: IntroProps) {
   const pathRefs = useRef<SVGPathElement[]>([])
   const [showArrow, setShowArrow] = useState(false)
 
-  useEffect(() => {
-    // Animate all paths as if being written
-    if (pathRefs.current.length > 0) {
-      const timeline = gsap.timeline({
-        onComplete: () => {
-          setShowArrow(true)
-        },
-      })
-
-      pathRefs.current.forEach((path, index) => {
-        const length = path.getTotalLength()
-        
-        // Set initial state
-        path.style.strokeDasharray = length.toString()
-        path.style.strokeDashoffset = length.toString()
-        
-        // Animate the stroke being drawn
-        timeline.to(
-          path,
-          {
-            strokeDashoffset: 0,
-            duration: 0.8,
-            ease: "none",
-          },
-          index * 0.15 // Stagger each letter
-        )
-      })
-    }
-  }, [])
-
-  const handleArrowClick = () => {
+  const handleArrowClick = useCallback(() => {
     if (containerRef.current) {
       // Fade out intro
       gsap.to(containerRef.current, {
@@ -60,7 +30,49 @@ export function Intro({ onComplete }: IntroProps) {
         welcomeElement.scrollIntoView({ behavior: 'smooth' })
       }
     }
-  }
+  }, [onComplete])
+
+  useEffect(() => {
+    // Animate all paths as if being written
+    if (pathRefs.current.length > 0) {
+      const timeline = gsap.timeline({
+        onComplete: () => {
+          setShowArrow(true)
+        },
+      })
+
+      pathRefs.current.forEach((path, index) => {
+        const length = path.getTotalLength()
+
+        // Set initial state
+        path.style.strokeDasharray = length.toString()
+        path.style.strokeDashoffset = length.toString()
+
+        // Animate the stroke being drawn
+        timeline.to(
+          path,
+          {
+            strokeDashoffset: 0,
+            duration: 0.8,
+            ease: "none",
+          },
+          index * 0.15 // Stagger each letter
+        )
+      })
+    }
+  }, [])
+
+  // Handle scroll to close intro
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      if (showArrow && e.deltaY > 0) {
+        handleArrowClick()
+      }
+    }
+
+    window.addEventListener('wheel', handleWheel, { passive: true })
+    return () => window.removeEventListener('wheel', handleWheel)
+  }, [showArrow, handleArrowClick])
 
   return (
     <div
@@ -290,6 +302,20 @@ export function Intro({ onComplete }: IntroProps) {
             strokeLinejoin="round"
             className="text-white"
           />
+
+          {/* ! (exclamation mark) */}
+          <path
+            ref={(el) => {
+              if (el) pathRefs.current[13] = el
+            }}
+            d="M 590,120 L 590,155 M 590,165 L 590,168"
+            stroke="currentColor"
+            strokeWidth="3"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="text-white"
+          />
         </svg>
 
         {/* Scroll indicator arrow */}
@@ -297,7 +323,7 @@ export function Intro({ onComplete }: IntroProps) {
           <button
             ref={arrowRef}
             onClick={handleArrowClick}
-            className="flex flex-col items-center gap-2 text-cream hover:text-accentRose transition-colors cursor-pointer bg-none border-none p-0"
+            className="flex flex-col items-center gap-2 text-white hover:text-accentRose transition-colors cursor-pointer bg-none border-none p-0"
           >
             <svg
               className="w-6 h-6 animate-bounce"

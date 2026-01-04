@@ -67,18 +67,21 @@ export const Accordion = ({
   );
 };
 
-interface AccordionItemProps {
+interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement> {
   value: string;
   children: React.ReactNode;
   className?: string;
 }
 
-export const AccordionItem = ({ value, children, className = '' }: AccordionItemProps) => {
+export const AccordionItem = ({ value, children, className = '', ...props }: AccordionItemProps) => {
   const { openItems } = useAccordion();
   const isOpen = openItems.has(value);
 
+  // Filter out React-specific props that shouldn't be spread to DOM
+  const { ref, key, ...domProps } = props as any;
+
   return (
-    <div className={className} data-state={isOpen ? 'open' : 'closed'}>
+    <div className={className} data-state={isOpen ? 'open' : 'closed'} {...domProps}>
       {React.Children.map(children, (child) =>
         React.cloneElement(child as React.ReactElement, { itemValue: value })
       )}
@@ -121,15 +124,25 @@ interface AccordionContentProps {
   itemValue?: string;
 }
 
-export const AccordionContent = ({ 
-  children, 
-  className = '', 
-  itemValue = '' 
+export const AccordionContent = ({
+  children,
+  className = '',
+  itemValue = ''
 }: AccordionContentProps) => {
   const { openItems } = useAccordion();
   const isOpen = openItems.has(itemValue);
 
-  if (!isOpen) return null;
-
-  return <div className={className}>{children}</div>;
+  return (
+    <div
+      className={`accordion-content transition-all duration-700 ease-in-out overflow-hidden ${className}`}
+      style={{
+        maxHeight: isOpen ? '1000px' : '0px',
+        opacity: isOpen ? 1 : 0,
+        visibility: isOpen ? 'visible' : 'hidden',
+        marginBottom: isOpen ? '1rem' : '0rem',
+      }}
+    >
+      <div className="pt-6 pb-6">{children}</div>
+    </div>
+  );
 };

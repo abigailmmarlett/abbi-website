@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Intro } from './sections/Intro'
 import { Welcome } from './sections/Welcome'
+import { TechStack } from './sections/TechStack'
 import { Experience } from './sections/Experience'
 import { Education } from './sections/Education'
 import { Projects } from './sections/Projects'
 import { Hobbies } from './sections/Hobbies'
+import { SectionDivider } from './components/SectionDivider'
 
 type SectionId = 'welcome' | 'experience' | 'education' | 'projects' | 'hobbies'
 
@@ -98,54 +100,54 @@ function App() {
         <nav className="fixed top-0 w-full backdrop-blur-md border-b z-[100] bg-white/80 border-gray-200">
           <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
             <button
-            onClick={() => scrollToSection('welcome')}
-            className="text-xl font-bold text-accent hover:opacity-80 transition-colors"
-          >
+              onClick={() => scrollToSection('welcome')}
+              className="text-xl font-bold text-accent hover:opacity-80 transition-colors"
+            >
               Abigail
             </button>
             <div className="flex gap-1 items-center">
               {sections.map(section => (
-              <button
-                key={section.id}
-                onClick={() => scrollToSection(section.id)}
-                className={`px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${activeSection === section.id
+                <button
+                  key={section.id}
+                  onClick={() => scrollToSection(section.id)}
+                  className={`px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${activeSection === section.id
                     ? 'text-white font-semibold'
                     : 'text-gray-600'
-                  }`}
+                    }`}
+                  style={{
+                    backgroundColor: activeSection === section.id ? '#4B9CD3' : 'transparent',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (activeSection !== section.id) {
+                      (e.currentTarget as HTMLButtonElement).style.color = '#4B9CD3';
+                      (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#f0f8ff';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (activeSection !== section.id) {
+                      (e.currentTarget as HTMLButtonElement).style.color = '#666';
+                      (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent';
+                    }
+                  }}
+                >
+                  {section.label}
+                </button>
+              ))}
+              <a
+                href="mailto:abigailmarlett@gmail.com"
+                className="ml-2 px-4 py-2 text-white text-sm font-medium rounded-lg transition-colors"
                 style={{
-                  backgroundColor: activeSection === section.id ? '#4B9CD3' : 'transparent',
+                  backgroundColor: '#4B9CD3',
                 }}
                 onMouseEnter={(e) => {
-                  if (activeSection !== section.id) {
-                    (e.currentTarget as HTMLButtonElement).style.color = '#4B9CD3';
-                    (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#f0f8ff';
-                  }
+                  (e.currentTarget as HTMLAnchorElement).style.opacity = '0.9';
                 }}
                 onMouseLeave={(e) => {
-                  if (activeSection !== section.id) {
-                    (e.currentTarget as HTMLButtonElement).style.color = '#666';
-                    (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent';
-                  }
+                  (e.currentTarget as HTMLAnchorElement).style.opacity = '1';
                 }}
               >
-                {section.label}
-              </button>
-            ))}
-              <a
-              href="mailto:abigailmarlett@gmail.com"
-              className="ml-2 px-4 py-2 text-white text-sm font-medium rounded-lg transition-colors"
-              style={{
-                backgroundColor: '#4B9CD3',
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.opacity = '0.9';
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.opacity = '1';
-              }}
-            >
-              Contact
-            </a>
+                Contact
+              </a>
             </div>
           </div>
         </nav>
@@ -157,6 +159,14 @@ function App() {
           <Welcome />
         </div>
 
+        <section >
+          <div className="container mx-auto px-6">
+            <TechStack />
+          </div>
+        </section>
+
+        <SectionDivider />
+
         <div id="experience">
           <Experience />
         </div>
@@ -166,10 +176,15 @@ function App() {
         </div>
 
         {FEATURES.showProjects && (
-          <div id="projects">
-            <Projects />
-          </div>
+          <>
+            <SectionDivider />
+            <div id="projects">
+              <Projects />
+            </div>
+          </>
         )}
+
+        <SectionDivider />
 
         <div id="hobbies">
           <Hobbies />

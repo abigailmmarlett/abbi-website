@@ -84,6 +84,78 @@ const techStack: TechItem[] = [
       </svg>
     ),
   },
+  {
+    name: "TFS",
+    icon: (
+      <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
+        <rect x="2" y="2" width="20" height="20" fill="#0078D4" />
+        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">TFS</text>
+      </svg>
+    ),
+  },
+  {
+    name: "Azure",
+    icon: (
+      <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
+        <rect x="2" y="2" width="20" height="20" fill="#0078D4" />
+        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">Az</text>
+      </svg>
+    ),
+  },
+  {
+    name: "Datadog",
+    icon: (
+      <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
+        <rect x="2" y="2" width="20" height="20" fill="#632CA6" />
+        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">DD</text>
+      </svg>
+    ),
+  },
+  {
+    name: "Entity Framework",
+    icon: (
+      <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
+        <rect x="2" y="2" width="20" height="20" fill="#512BD4" />
+        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="7" fontWeight="bold">EF</text>
+      </svg>
+    ),
+  },
+  {
+    name: "Python",
+    icon: (
+      <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
+        <rect x="2" y="2" width="20" height="20" fill="#3776AB" />
+        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">Py</text>
+      </svg>
+    ),
+  },
+  {
+    name: "Java",
+    icon: (
+      <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
+        <rect x="2" y="2" width="20" height="20" fill="#007396" />
+        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">Java</text>
+      </svg>
+    ),
+  },
+  {
+    name: "Docker",
+    icon: (
+      <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
+        <rect x="2" y="2" width="20" height="20" fill="#2496ED" />
+        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">DK</text>
+      </svg>
+    ),
+  },
+  {
+    name: "Kubernetes",
+    icon: (
+      <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
+        <rect x="2" y="2" width="20" height="20" fill="#326CE5" />
+        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">K8s</text>
+      </svg>
+    ),
+  },
 ]
 
 export function TechStack() {
@@ -140,22 +212,19 @@ export function TechStack() {
   }, [])
 
   return (
-    <div className="mt-16 pt-8 border-t border-gray-200">
-      <h3 className="text-xl font-semibold mb-8" style={{ color: 'hsl(var(--foreground))' }}>Tech Stack</h3>
-      <div ref={containerRef} className="flex flex-wrap gap-6">
-        {techStack.map((tech, index) => (
-          <div
-            key={index}
-            className="tech-item flex flex-col items-center gap-3 cursor-pointer"
-            title={tech.name}
-          >
-            <div className="p-4 rounded-xl bg-blue-50 border border-blue-200 hover:border-blue-400 hover:bg-blue-100 transition-all" style={{ color: 'hsl(var(--primary))' }}>
-              {tech.icon}
-            </div>
-            <span className="text-sm font-medium text-center max-w-[80px]" style={{ color: 'hsl(var(--muted-foreground))' }}>{tech.name}</span>
+    <div ref={containerRef} className="flex flex-wrap gap-6 justify-center">
+      {techStack.map((tech, index) => (
+        <div
+          key={index}
+          className="tech-item flex flex-col items-center gap-3 cursor-pointer"
+          title={tech.name}
+        >
+          <div className="p-4 rounded-xl bg-blue-50 border border-blue-200 hover:border-blue-400 hover:bg-blue-100 transition-all" style={{ color: 'hsl(var(--primary))' }}>
+            {tech.icon}
           </div>
-        ))}
-      </div>
+          <span className="text-sm font-medium text-center max-w-[80px]" style={{ color: 'hsl(var(--muted-foreground))' }}>{tech.name}</span>
+        </div>
+      ))}
     </div>
   )
 }

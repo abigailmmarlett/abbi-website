@@ -1,12 +1,16 @@
+import { useState } from 'react';
 import { Mail, Phone, Linkedin, Github } from 'lucide-react';
 import { Button } from '../components/ui/button';
+import { Modal } from '../components/ui/modal';
 import ParticleBackground from '../components/ParticleBackground';
 
 export function Welcome() {
+  const [isContactOpen, setIsContactOpen] = useState(false);
+
   return (
     <section
       id="welcome"
-      className="min-h-screen flex items-center justify-center pt-20 pb-16 relative"
+      className="min-h-screen flex items-center justify-center pt-20 relative"
     >
       <ParticleBackground />
       <div className="container mx-auto px-6 relative z-20">
@@ -44,13 +48,13 @@ export function Welcome() {
                   className="px-8"
                   onClick={() => document.querySelector('#experience')?.scrollIntoView({ behavior: 'smooth' })}
                 >
-                  View My Work
+                  View My Work Experience
                 </Button>
                 <Button
                   size="lg"
                   variant="outline"
                   className="px-8"
-                  onClick={() => window.open('mailto:abigailmarlett@gmail.com')}
+                  onClick={() => setIsContactOpen(true)}
                 >
                   Get in Touch
                 </Button>
@@ -85,7 +89,7 @@ export function Welcome() {
                   <Linkedin size={20} />
                 </a>
                 <a
-                  href="https://github.com"
+                  href="https://github.com/abigailmmarlett"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-3 rounded-full bg-secondary hover:bg-cyan-700 hover:text-white text-muted-foreground transition-all duration-300"
@@ -97,6 +101,75 @@ export function Welcome() {
           </div>
         </div>
       </div>
+
+      {/* Contact Modal */}
+      <Modal
+        isOpen={isContactOpen}
+        onClose={() => setIsContactOpen(false)}
+        title="Get in Touch"
+      >
+        <div className="space-y-6">
+          <div>
+            <p className="text-sm text-gray-600 mb-4">
+              Say hey! Feel free to reach out to me through any of these channels:
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {/* Email */}
+            <a
+              href="mailto:abigailmarlett@gmail.com"
+              className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-blue-50 transition-colors text-gray-900 hover:text-blue-600 border border-gray-200"
+            >
+              <Mail size={20} className="flex-shrink-0" />
+              <div>
+                <p className="text-sm font-medium">Email</p>
+                <p className="text-sm">abigailmarlett@gmail.com</p>
+              </div>
+            </a>
+
+            {/* Phone */}
+            <a
+              href="tel:+18287195574"
+              className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-blue-50 transition-colors text-gray-900 hover:text-blue-600 border border-gray-200"
+            >
+              <Phone size={20} className="flex-shrink-0" />
+              <div>
+                <p className="text-sm font-medium">Phone</p>
+                <p className="text-sm">(828) 719-5574</p>
+              </div>
+            </a>
+
+            {/* LinkedIn */}
+            <a
+              href="https://linkedin.com/in/abigail-marlett"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-blue-50 transition-colors text-gray-900 hover:text-blue-600 border border-gray-200"
+            >
+              <Linkedin size={20} className="flex-shrink-0" />
+              <div>
+                <p className="text-sm font-medium">LinkedIn</p>
+                <p className="text-sm">abigail-marlett</p>
+              </div>
+            </a>
+
+            {/* GitHub */}
+            <a
+              href="https://github.com/abigailmmarlett"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-blue-50 transition-colors text-gray-900 hover:text-blue-600 border border-gray-200"
+            >
+              <Github size={20} className="flex-shrink-0" />
+              <div>
+                <p className="text-sm font-medium">GitHub</p>
+                <p className="text-sm">abigailmmarlett</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </Modal>
     </section>
   );
 }

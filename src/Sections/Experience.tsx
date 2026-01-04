@@ -1,7 +1,7 @@
+import { useEffect, useRef } from "react";
 import { MapPin, Calendar } from "lucide-react";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "../components/ui/accordion";
 import { Badge } from "../components/ui/badge";
-import { TechStack } from "./TechStack";
 
 
 const experiences = [
@@ -77,114 +77,159 @@ const experiences = [
 ];
 
 export function Experience() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      const cards = containerRef.current.querySelectorAll('.timeline-card');
+
+      // Use Intersection Observer for fade-in animation
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const card = entry.target as HTMLElement;
+              card.classList.add('fade-in');
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '50px'
+        }
+      );
+
+      // Observe each card with staggered delays
+      cards.forEach((card, index) => {
+        const delay = index * 100; // 100ms between each card
+        (card as HTMLElement).style.setProperty('--delay', `${delay}ms`);
+        observer.observe(card);
+      });
+
+      return () => {
+        cards.forEach((card) => {
+          observer.unobserve(card);
+        });
+      };
+    }
+  }, []);
+
   return (
     <section id="experience" className="py-20">
       <div className="container mx-auto px-6">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground text-center mb-4">
             Work Experience
           </h2>
-          <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-center mb-16 max-w-2xl mx-auto">
             A journey through my professional career, building impactful solutions
           </p>
 
-          <Accordion type="multiple" defaultValue={['1']} className="space-y-4">
-            {experiences.map((exp) => (
-              <AccordionItem
-                key={exp.id}
-                value={exp.id}
-                className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow data-[state=open]:border-primary/50"
-              >
-                <AccordionTrigger className="px-6 py-4 hover:no-underline group">
-                  <div className="flex flex-col md:flex-row md:items-center justify-between w-full text-left gap-4 pr-4">
-                    <div>
-                      {exp.roles ? (
-                        <>
-                          <h3 className="text-lg font-semibold text-foreground mb-0.5">
-                            {exp.roles[0].title}
-                          </h3>
-                          <p className="text-xs text-muted-foreground mb-2">
-                            {exp.roles.length > 1 ? `${exp.roles.length} roles` : '1 role'}
-                          </p>
-                        </>
-                      ) : (
-                        <>
-                          <h3 className="text-lg font-semibold text-foreground mb-2">
-                            {exp.role}
-                          </h3>
-                        </>
-                      )}
-                      <p className="text-accent font-medium">{exp.company}</p>
-                    </div>
-                    <div className="flex flex-col md:items-end gap-2 text-sm text-muted-foreground">
-                      <span className="flex items-center gap-1">
-                        <MapPin size={14} />
-                        {exp.location}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Calendar size={14} />
-                        {exp.period}
-                      </span>
-                    </div>
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent className="px-6 pb-6 border-t border-gray-200">
-                  {exp.roles ? (
-                    <div className="space-y-8">
-                      {exp.roles.map((role, roleIndex) => (
-                        <div key={roleIndex}>
-                          <div className="mb-4">
-                            <h4 className="text-base font-semibold text-foreground italic mb-1">{role.title}</h4>
-                            <p className="text-xs text-muted-foreground">{role.period}</p>
-                          </div>
-                          <ul className="space-y-3">
-                            {role.achievements.map((achievement, index) => (
-                              <li
-                                key={index}
-                                className="text-muted-foreground flex items-start gap-3 text-sm leading-relaxed"
-                              >
-                                <span className="text-accent flex-shrink-0 mt-1">●</span>
-                                <span>{achievement}</span>
-                              </li>
-                            ))}
-                          </ul>
-                          {roleIndex < exp.roles.length - 1 && (
-                            <div className="mt-8 border-t border-gray-200" />
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <ul className="space-y-3 mb-6">
-                      {exp.achievements.map((achievement, index) => (
-                        <li
-                          key={index}
-                          className="text-muted-foreground flex items-start gap-3 text-sm leading-relaxed"
-                        >
-                          <span className="text-accent flex-shrink-0 mt-1">●</span>
-                          <span>{achievement}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                  <div className="flex flex-wrap gap-2 pt-6 border-t border-gray-200">
-                    {exp.techStack.map((tech) => (
-                      <Badge
-                        key={tech}
-                        variant="secondary"
-                        className="bg-blue-50 text-primary hover:bg-blue-100"
-                      >
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+          <div ref={containerRef} className="experience-timeline">
+            {/* Vertical center line */}
+            <div className="timeline-center-line" />
 
-          {/* Tech Stack Section */}
-          <TechStack />
+            {/* Timeline items */}
+            <Accordion type="multiple" defaultValue={[]} className="space-y-0">
+              {experiences.map((exp) => (
+                <div key={exp.id} className="timeline-item">
+                  {/* Timeline dot */}
+                  <div className="timeline-dot" />
+
+                  {/* Timeline card */}
+                  <AccordionItem
+                    value={exp.id}
+                    className="timeline-card border-0 shadow-sm hover:shadow-lg"
+                  >
+                    <AccordionTrigger className="px-0 py-0 hover:no-underline group">
+                      <div className="flex flex-col md:flex-row md:items-center justify-between w-full text-left gap-4">
+                        <div>
+                          {exp.roles ? (
+                            <>
+                              <h3 className="text-lg font-semibold text-foreground mb-0.5">
+                                {exp.roles[0].title}
+                              </h3>
+                              <p className="text-xs text-muted-foreground mb-2">
+                                {exp.roles.length > 1 ? `${exp.roles.length} roles` : '1 role'}
+                              </p>
+                            </>
+                          ) : (
+                            <>
+                              <h3 className="text-lg font-semibold text-foreground mb-2">
+                                {exp.role}
+                              </h3>
+                            </>
+                          )}
+                          <p className="text-accent font-medium">{exp.company}</p>
+                        </div>
+                        <div className="flex flex-col md:items-end gap-2 text-sm text-muted-foreground">
+                          <span className="flex items-center gap-1">
+                            <MapPin size={14} />
+                            {exp.location}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <Calendar size={14} />
+                            {exp.period}
+                          </span>
+                        </div>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent className="pt-4 border-0">
+                      {exp.roles ? (
+                        <div className="space-y-8">
+                          {exp.roles.map((role, roleIndex) => (
+                            <div key={roleIndex}>
+                              <div className="mb-4">
+                                <h4 className="text-base font-semibold text-foreground italic mb-1">{role.title}</h4>
+                                <p className="text-xs text-muted-foreground">{role.period}</p>
+                              </div>
+                              <ul className="space-y-3">
+                                {role.achievements.map((achievement, index) => (
+                                  <li
+                                    key={index}
+                                    className="text-muted-foreground flex items-start gap-3 text-sm leading-relaxed"
+                                  >
+                                    <span className="text-accent flex-shrink-0 mt-1">●</span>
+                                    <span>{achievement}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                              {roleIndex < exp.roles.length - 1 && (
+                                <div className="mt-8 border-t border-gray-200" />
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <ul className="space-y-3 mb-6">
+                          {exp.achievements.map((achievement, index) => (
+                            <li
+                              key={index}
+                              className="text-muted-foreground flex items-start gap-3 text-sm leading-relaxed"
+                            >
+                              <span className="text-accent flex-shrink-0 mt-1">●</span>
+                              <span>{achievement}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                      <div className="flex flex-wrap gap-2 pt-6 border-t border-gray-200">
+                        {exp.techStack.map((tech) => (
+                          <Badge
+                            key={tech}
+                            variant="secondary"
+                            className="bg-blue-50 text-primary hover:bg-blue-100"
+                          >
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                </div>
+              ))}
+            </Accordion>
+          </div>
         </div>
       </div>
     </section>

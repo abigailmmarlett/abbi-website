@@ -20,8 +20,8 @@
   --muted: 0 0% 90%;
   --muted-foreground: 0 0% 50%;
 
-  /* Accent color - Cyan 700 (#06b6d4) in RGB for better opacity support */
-  --accent: 6 182 212;
+  /* Accent color - Navy Blue in HSL format */
+  --accent: 217 60% 32%;
   --accent-foreground: 255 255 255;
 
   /* Legacy OKLCH colors */
@@ -179,3 +179,115 @@ h1, h2, h3 {
 .animate-particle-float {
   animation: particle-float linear forwards;
 }
+
+/* Experience section animations */
+#experience {
+  perspective: 1200px;
+}
+
+#experience .space-y-4 {
+  transform-style: preserve-3d;
+}
+
+/* Timeline styles */
+.experience-timeline {
+  position: relative;
+  padding: 20px 0;
+}
+
+/* Vertical center line */
+.timeline-center-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, hsl(var(--accent)) 0%, hsl(var(--accent)) 100%);
+  transform: translateX(-50%);
+  opacity: 0.3;
+}
+
+/* Timeline items alternating left/right */
+.timeline-item {
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.timeline-item:nth-child(odd) {
+  margin-left: 0;
+  margin-right: 50%;
+  padding-right: 4rem;
+}
+
+.timeline-item:nth-child(even) {
+  margin-left: 50%;
+  margin-right: 0;
+  padding-left: 4rem;
+}
+
+/* Connecting lines from cards to center */
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  top: 2rem;
+  width: 2rem;
+  height: 2px;
+  background: hsl(var(--accent));
+  opacity: 0.4;
+}
+
+.timeline-item:nth-child(odd)::before {
+  right: -2rem;
+}
+
+.timeline-item:nth-child(even)::before {
+  left: -2rem;
+}
+
+/* Timeline dot */
+.timeline-dot {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: hsl(var(--accent));
+  border: 3px solid white;
+  border-radius: 50%;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+/* Timeline cards */
+.timeline-card {
+  background: white;
+  border: 1px solid hsl(var(--accent) / 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes timelineFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.timeline-card.fade-in {
+  animation: timelineFadeIn 0.6s ease-out forwards;
+  animation-delay: var(--delay, 0ms);
+}
+
+.timeline-card:hover {
+  border-color: hsl(var(--accent) / 0.5);
+  box-shadow: 0 8px 24px hsl(var(--accent) / 0.1);
+}
+
+/* Accordion content transitions handled by component */
