@@ -51,7 +51,7 @@ export function Hobbies() {
   };
 
   return (
-    <section id="outside-work" className="py-32">
+    <section id="outside-work" className="pt-4 pb-12">
       <div className="container mx-auto px-6">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground text-center mb-4">

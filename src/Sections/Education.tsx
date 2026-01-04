@@ -34,7 +34,7 @@ const certifications: Certification[] = [
 
 export function Education() {
   return (
-    <section id="education" className="py-16 px-6">
+    <section id="education" className="pt-16 px-6">
       <div className="max-w-5xl mx-auto">
         {/* Hero Section with Grad Cap Background */}
         <div

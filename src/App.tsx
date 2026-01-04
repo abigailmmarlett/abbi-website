@@ -22,7 +22,7 @@ const allSections: { id: SectionId; label: string }[] = [
   { id: 'experience', label: 'Experience' },
   { id: 'education', label: 'Education' },
   { id: 'projects', label: 'Projects' },
-  { id: 'hobbies', label: 'Outside Work' },
+  { id: 'hobbies', label: 'OOO' },
 ]
 
 const sections = allSections.filter(section => {
@@ -102,105 +102,72 @@ function App() {
       {showIntro && <Intro onComplete={() => setShowIntro(false)} />}
       {/* Navigation */}
       {!showIntro && (
-        <nav className="fixed top-0 w-full backdrop-blur-md border-b z-[100] bg-white/80 border-gray-200">
-          <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+        <nav className="fixed top-0 w-full z-[100] bg-white border-b border-gray-200">
+          <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
             <button
               onClick={() => scrollToSection('welcome')}
-              className="text-xl font-bold text-accent hover:opacity-80 transition-colors"
+              className="text-lg font-bold text-gray-900 hover:text-gray-700 transition-colors"
             >
-              Abigail
+              AM
             </button>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex gap-1 items-center">
+            <div className="hidden md:flex items-center gap-8">
               {sections.map(section => (
                 <button
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
-                  className={`px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${activeSection === section.id
-                    ? 'text-white font-semibold'
-                    : 'text-gray-600'
+                  className={`text-sm font-medium text-gray-700 transition-colors ${activeSection === section.id
+                    ? 'border-b-2 border-cyan-700 pb-1'
+                    : ''
                     }`}
-                  style={{
-                    backgroundColor: activeSection === section.id ? '#4B9CD3' : 'transparent',
-                  }}
-                  onMouseEnter={(e) => {
-                    if (activeSection !== section.id) {
-                      (e.currentTarget as HTMLButtonElement).style.color = '#4B9CD3';
-                      (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#f0f8ff';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (activeSection !== section.id) {
-                      (e.currentTarget as HTMLButtonElement).style.color = '#666';
-                      (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent';
-                    }
-                  }}
                 >
                   {section.label}
                 </button>
               ))}
-              <button
+              {/* <button
                 onClick={() => setIsContactOpen(true)}
-                className="ml-2 px-4 py-2 text-white text-sm font-medium rounded-lg transition-colors"
-                style={{
-                  backgroundColor: '#4B9CD3',
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLButtonElement).style.opacity = '0.9';
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLButtonElement).style.opacity = '1';
-                }}
+                className="ml-4 px-5 py-2 bg-cyan-700 text-white text-sm font-medium rounded-md hover:bg-cyan-800 transition-colors"
               >
-                Contact
-              </button>
+                Contact Me
+              </button> */}
             </div>
 
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+              className="md:hidden p-2 text-gray-700 hover:text-gray-900"
             >
               {mobileMenuOpen ? (
-                <X size={24} className="text-gray-700" />
+                <X size={24} />
               ) : (
-                <Menu size={24} className="text-gray-700" />
+                <Menu size={24} />
               )}
             </button>
           </div>
 
           {/* Mobile Navigation Menu */}
           {mobileMenuOpen && (
-            <div className="md:hidden border-t border-gray-200 bg-white/95 backdrop-blur-sm">
-              <div className="px-4 py-3 space-y-1">
+            <div className="md:hidden border-t border-gray-200 bg-white">
+              <div className="px-6 py-4 space-y-3">
                 {sections.map(section => (
                   <button
                     key={section.id}
                     onClick={() => scrollToSection(section.id)}
-                    className={`w-full text-left px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${activeSection === section.id
-                      ? 'text-white font-semibold'
-                      : 'text-gray-600 hover:bg-gray-100'
-                      }`}
-                    style={{
-                      backgroundColor: activeSection === section.id ? '#4B9CD3' : 'transparent',
-                    }}
+                    className="block w-full text-left text-sm font-medium text-gray-700"
                   >
                     {section.label}
                   </button>
                 ))}
-                <button
+                {/* <button
                   onClick={() => {
                     setIsContactOpen(true);
                     setMobileMenuOpen(false);
                   }}
-                  className="block w-full px-4 py-2 text-white text-sm font-medium rounded-lg transition-colors mt-2"
-                  style={{
-                    backgroundColor: '#4B9CD3',
-                  }}
+                  className="block w-full px-5 py-2 mt-2 bg-cyan-700 text-white text-sm font-medium rounded-md hover:bg-cyan-800 transition-colors text-center"
                 >
                   Contact
-                </button>
+                </button> */}
               </div>
             </div>
           )}
