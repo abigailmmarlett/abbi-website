@@ -83,7 +83,7 @@ export const AccordionItem = ({ value, children, className = '', ...props }: Acc
   return (
     <div className={className} data-state={isOpen ? 'open' : 'closed'} {...domProps}>
       {React.Children.map(children, (child) =>
-        React.cloneElement(child as React.ReactElement, { itemValue: value })
+        React.cloneElement(child as React.ReactElement, { itemValue: value } as any)
       )}
     </div>
   );

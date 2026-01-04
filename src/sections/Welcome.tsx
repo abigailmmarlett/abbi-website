@@ -4,11 +4,10 @@ import { useTypingAnimation } from '../hooks/useTypingAnimation';
 import ParticleBackground from '../components/ParticleBackground';
 
 interface WelcomeProps {
-  isContactOpen: boolean;
   setIsContactOpen: (value: boolean) => void;
 }
 
-export function Welcome({ isContactOpen, setIsContactOpen }: WelcomeProps) {
+export function Welcome({ setIsContactOpen }: WelcomeProps) {
   const { displayedText } = useTypingAnimation('Full-Stack Software Engineer', 50, 400);
 
   return (

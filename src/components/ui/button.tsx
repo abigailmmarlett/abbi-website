@@ -39,7 +39,6 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         className={`${baseStyles} ${sizeStyles[size]} ${className || ''}`}
         style={{
           ...variantStyles[variant],
-          focusRingColor: accentColor,
         }}
         onMouseEnter={(e) => {
           if (variant === 'default') {

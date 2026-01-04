@@ -7,7 +7,7 @@ interface IntroProps {
 
 export function Intro({ onComplete }: IntroProps) {
   const containerRef = useRef<HTMLDivElement>(null)
-  const arrowRef = useRef<HTMLDivElement>(null)
+  const arrowRef = useRef<HTMLButtonElement>(null)
   const pathRefs = useRef<SVGPathElement[]>([])
   const [showArrow, setShowArrow] = useState(false)
 
