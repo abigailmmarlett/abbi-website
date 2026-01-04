@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { Mail, Phone, Linkedin, Github } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Modal } from '../components/ui/modal';
+import { useTypingAnimation } from '../hooks/useTypingAnimation';
 import ParticleBackground from '../components/ParticleBackground';
 
 export function Welcome() {
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const { displayedText } = useTypingAnimation('Full-Stack Software Engineer', 50, 400);
 
   return (
     <section
@@ -33,8 +35,11 @@ export function Welcome() {
               <h1 className="text-5xl md:text-6xl font-display font-bold text-foreground mb-4 animate-fade-in opacity-0" style={{ animationDelay: '0.3s' }}>
                 Abigail Marlett
               </h1>
-              <h2 className="text-2xl md:text-3xl font-light text-muted-foreground mb-8 animate-fade-in opacity-0" style={{ animationDelay: '0.4s' }}>
-                Full-Stack Software Engineer
+              <h2 className="text-2xl md:text-3xl font-light text-muted-foreground mb-8 animate-fade-in opacity-0 h-[3rem] flex items-center" style={{ animationDelay: '0.4s' }}>
+                <span className="relative">
+                  {displayedText}
+                  <span className="absolute -right-2 animate-pulse">|</span>
+                </span>
               </h2>
               <p className="text-lg text-muted-foreground mb-10 leading-relaxed animate-fade-in opacity-0" style={{ animationDelay: '0.5s' }}>
                 Passionate about building elegant, scalable web applications with modern technologies.
