@@ -156,6 +156,15 @@ const techStack: TechItem[] = [
       </svg>
     ),
   },
+  {
+    name: "Kafka",
+    icon: (
+      <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
+        <rect x="2" y="2" width="20" height="20" fill="#000000" />
+        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">Kf</text>
+      </svg>
+    ),
+  },
 ]
 
 export function TechStack() {
