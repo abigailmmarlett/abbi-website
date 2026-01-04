@@ -290,4 +290,51 @@ h1, h2, h3 {
   box-shadow: 0 8px 24px hsl(var(--accent) / 0.1);
 }
 
+/* Responsive timeline for mobile - single column layout with centered line */
+@media (max-width: 768px) {
+  .experience-timeline {
+    padding: 20px 0;
+  }
+
+  /* Keep center line in the middle for mobile */
+  .timeline-center-line {
+    left: 50%;
+    opacity: 0.3;
+  }
+
+  /* Stack all items centered in single column */
+  .timeline-item {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-bottom: 2rem;
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Hide connecting lines on mobile */
+  .timeline-item::before {
+    display: none;
+  }
+
+  /* Keep timeline dot centered on line */
+  .timeline-dot {
+    left: 50%;
+    top: 1.5rem;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+
+  /* Adjust card styling for mobile - centered with max width */
+  .timeline-card {
+    padding: 1.25rem;
+    margin-bottom: 0;
+    width: 85%;
+    max-width: 400px;
+  }
+}
+
 /* Accordion content transitions handled by component */
