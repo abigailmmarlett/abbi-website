@@ -175,7 +175,7 @@ function App() {
       )}
 
       {/* Main Content */}
-      <main className="pt-20 relative z-20">
+      <main className="relative z-20">
         <div id="welcome">
           <Welcome isContactOpen={isContactOpen} setIsContactOpen={setIsContactOpen} />
         </div>

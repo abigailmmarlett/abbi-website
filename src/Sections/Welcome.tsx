@@ -14,7 +14,7 @@ export function Welcome({ isContactOpen, setIsContactOpen }: WelcomeProps) {
   return (
     <section
       id="welcome"
-      className="min-h-screen flex items-center justify-center pt-20 relative"
+      className="min-h-screen flex items-center justify-center relative"
     >
       <ParticleBackground />
       <div className="container mx-auto px-6 relative z-20">
@@ -55,7 +55,7 @@ export function Welcome({ isContactOpen, setIsContactOpen }: WelcomeProps) {
                   className="px-6 sm:px-8 py-3 w-full sm:w-auto"
                   onClick={() => document.querySelector('#experience')?.scrollIntoView({ behavior: 'smooth' })}
                 >
-                  View My Work
+                  View My Work Experience
                 </Button>
                 <Button
                   size="lg"
