@@ -135,9 +135,6 @@ export function Experience() {
             <Accordion type="multiple" defaultValue={[]} className="space-y-0">
               {experiences.map((exp) => (
                 <div key={exp.id} className="timeline-item">
-                  {/* Timeline dot */}
-                  <div className="timeline-dot" />
-
                   {/* Timeline card */}
                   <AccordionItem
                     value={exp.id}

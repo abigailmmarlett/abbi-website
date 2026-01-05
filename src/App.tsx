@@ -213,25 +213,61 @@ function App() {
       </main>
 
       {/* Footer */}
-      <footer className="py-12 px-4 relative z-20 border-t" style={{ backgroundColor: 'oklch(29.3% 0.066 243.157)', borderColor: 'oklch(29.3% 0.066 243.157)' }}>
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="mb-6 text-sm text-white">© 2025 Abigail Marlett. All rights reserved.</p>
-          <div className="flex flex-col sm:flex-row justify-center gap-6 text-sm flex-wrap">
-            <a href="mailto:abigailmarlett@gmail.com" className="text-white hover:text-blue-100 transition-colors">
-              abigailmarlett@gmail.com
-            </a>
-            <span className="hidden sm:inline text-white/60">•</span>
-            <a href="tel:+18287195574" className="text-white hover:text-blue-100 transition-colors">
-              (828) 719-5574
-            </a>
-            <span className="hidden sm:inline text-white/60">•</span>
-            <a href="https://www.linkedin.com/in/abigail-marlett" target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-100 transition-colors">
-              LinkedIn
-            </a>
-            <span className="hidden sm:inline text-white/60">•</span>
-            <a href="https://github.com/abigailmmarlett" target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-100 transition-colors">
-              GitHub
-            </a>
+      <footer className="py-12 px-4 relative z-20" style={{ backgroundColor: 'oklch(29.3% 0.066 243.157)' }}>
+        <div className="max-w-6xl mx-auto">
+          {/* Main Footer Content */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 text-center md:text-left">
+            {/* Left Column - Contact Section */}
+            <div className="flex flex-col items-center md:items-start">
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 justify-center md:justify-start">
+                  <Mail size={18} className="text-gray-300 flex-shrink-0" />
+                  <a href="mailto:abigailmarlett@gmail.com" className="text-gray-300 hover:text-cyan-200 transition-colors text-sm">
+                    abigailmarlett@gmail.com
+                  </a>
+                </div>
+                <div className="flex items-center gap-3 justify-center md:justify-start">
+                  <Phone size={18} className="text-gray-300 flex-shrink-0" />
+                  <a href="tel:+18287195574" className="text-gray-300 hover:text-cyan-200 transition-colors text-sm">
+                    (828) 719-5574
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column - Social Icons */}
+            <div className="flex flex-col items-center md:items-end">
+              <div className="flex flex-col gap-4">
+                <a
+                  href="https://www.linkedin.com/in/abigail-marlett"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 text-gray-300 hover:text-cyan-200 transition-colors justify-center md:justify-end"
+                >
+                  <Linkedin size={20} />
+                  <span className="text-sm">LinkedIn</span>
+                </a>
+                <a
+                  href="https://github.com/abigailmmarlett"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 text-gray-300 hover:text-cyan-200 transition-colors justify-center md:justify-end"
+                >
+                  <Github size={20} />
+                  <span className="text-sm">GitHub</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Footer - Divider */}
+          <div className="border-t border-white/20 pt-8">
+            <div className="flex flex-col items-center justify-center gap-4">
+              <p className="text-gray-300 text-sm flex items-center gap-2">
+                Thanks for visiting!
+              </p>
+              <p className="text-gray-400 text-xs">© 2025 Abigail Marlett. All rights reserved.</p>
+            </div>
           </div>
         </div>
       </footer>
