@@ -14,7 +14,7 @@ type SectionId = 'welcome' | 'experience' | 'education' | 'projects' | 'hobbies'
 
 // Feature toggles
 const FEATURES = {
-  showProjects: false,
+  showProjects: true,
 }
 
 const allSections: { id: SectionId; label: string }[] = [
