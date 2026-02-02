@@ -117,13 +117,19 @@ export function Experience() {
   }, []);
 
   return (
-    <section id="experience" className="py-20">
-      <div className="container mx-auto px-6">
+    <section id="experience" className="py-20 relative overflow-hidden bg-gradient-to-b from-background via-background-alt to-background">
+      {/* Decorative background elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="orb absolute top-1/4 right-1/4 w-96 h-96 bg-premium/5" style={{ animationDelay: '1s' }} />
+        <div className="orb absolute bottom-1/4 left-1/3 w-80 h-80 bg-primary/5" style={{ animationDelay: '3s' }} />
+      </div>
+
+      <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground text-center mb-4">
-            Work Experience
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-4 animate-fade-in">
+            WORK EXPERIENCE
           </h2>
-          <p className="text-muted-foreground text-center mb-16 max-w-2xl mx-auto">
+          <p className="text-foreground-muted text-center mb-16 max-w-2xl mx-auto animate-slide-up text-lg" style={{ animationDelay: '0.1s' }}>
             A journey through my professional career, building impactful solutions
           </p>
 
@@ -138,36 +144,36 @@ export function Experience() {
                   {/* Timeline card */}
                   <AccordionItem
                     value={exp.id}
-                    className="timeline-card border-0 shadow-sm hover:shadow-lg"
+                    className="timeline-card border-0 card-interactive spotlight"
                   >
                     <AccordionTrigger className="px-0 py-0 hover:no-underline group">
                       <div className="flex flex-col md:flex-row md:items-center justify-between w-full text-left gap-4">
                         <div>
                           {exp.roles ? (
                             <>
-                              <h3 className="text-lg font-semibold text-foreground mb-0.5">
+                              <h3 className="text-xl font-semibold text-foreground mb-1 group-hover:text-primary transition-colors duration-300">
                                 {exp.roles[0].title}
                               </h3>
-                              <p className="text-xs text-muted-foreground mb-2">
+                              <p className="text-xs text-foreground-muted mb-2 font-medium">
                                 {exp.roles.length > 1 ? `${exp.roles.length} roles` : '1 role'}
                               </p>
                             </>
                           ) : (
                             <>
-                              <h3 className="text-lg font-semibold text-foreground mb-2">
+                              <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
                                 {exp.role}
                               </h3>
                             </>
                           )}
-                          <p className="text-accent font-medium">{exp.company}</p>
+                          <p className="text-primary font-semibold text-lg">{exp.company}</p>
                         </div>
-                        <div className="flex flex-col md:items-end gap-2 text-sm text-muted-foreground">
-                          <span className="flex items-center gap-1">
-                            <MapPin size={14} />
+                        <div className="flex flex-col md:items-end gap-2 text-sm text-foreground-muted">
+                          <span className="flex items-center gap-2">
+                            <MapPin size={16} className="text-accent" />
                             {exp.location}
                           </span>
-                          <span className="flex items-center gap-1">
-                            <Calendar size={14} />
+                          <span className="flex items-center gap-2">
+                            <Calendar size={16} className="text-accent" />
                             {exp.period}
                           </span>
                         </div>
@@ -182,14 +188,14 @@ export function Experience() {
                                 <h4 className="text-base font-semibold text-foreground italic mb-1">{role.title}</h4>
                                 <p className="text-xs text-muted-foreground">{role.period}</p>
                               </div>
-                              <ul className="space-y-3">
+                              <ul className="space-y-4">
                                 {role.achievements.map((achievement, index) => (
                                   <li
                                     key={index}
-                                    className="text-muted-foreground flex items-start gap-3 text-sm leading-relaxed"
+                                    className="text-foreground-muted flex items-start gap-3 text-sm leading-relaxed group"
                                   >
-                                    <span className="text-accent flex-shrink-0 mt-1">●</span>
-                                    <span>{achievement}</span>
+                                    <span className="text-accent flex-shrink-0 mt-1.5 text-lg group-hover:scale-125 transition-transform duration-300">●</span>
+                                    <span className="group-hover:text-foreground transition-colors duration-300">{achievement}</span>
                                   </li>
                                 ))}
                               </ul>
@@ -200,24 +206,24 @@ export function Experience() {
                           ))}
                         </div>
                       ) : (
-                        <ul className="space-y-3 mb-6">
+                        <ul className="space-y-4 mb-6">
                           {exp.achievements.map((achievement, index) => (
                             <li
                               key={index}
-                              className="text-muted-foreground flex items-start gap-3 text-sm leading-relaxed"
+                              className="text-foreground-muted flex items-start gap-3 text-sm leading-relaxed group"
                             >
-                              <span className="text-accent flex-shrink-0 mt-1">●</span>
-                              <span>{achievement}</span>
+                              <span className="text-accent flex-shrink-0 mt-1.5 text-lg group-hover:scale-125 transition-transform duration-300">●</span>
+                              <span className="group-hover:text-foreground transition-colors duration-300">{achievement}</span>
                             </li>
                           ))}
                         </ul>
                       )}
-                      <div className="flex flex-wrap gap-2 pt-6 border-t border-gray-200">
+                      <div className="flex flex-wrap gap-2 pt-6 border-t border-border">
                         {exp.techStack.map((tech) => (
                           <Badge
                             key={tech}
                             variant="secondary"
-                            className="bg-blue-50 text-primary hover:bg-blue-100"
+                            className="glass-light text-primary hover:glass-premium hover:scale-105 transition-all duration-300 border border-primary/20 hover:border-primary/40 font-medium"
                           >
                             {tech}
                           </Badge>

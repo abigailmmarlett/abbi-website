@@ -181,7 +181,7 @@ function App() {
         </div>
 
         <section >
-          <div className="container mx-auto px-6">
+          <div className="container mx-auto px-6 max-w-5xl">
             <TechStack />
           </div>
         </section>
@@ -214,7 +214,7 @@ function App() {
 
       {/* Footer */}
       <footer className="py-12 px-4 relative z-20" style={{ backgroundColor: 'oklch(29.3% 0.066 243.157)' }}>
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           {/* Main Footer Content */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 text-center md:text-left">
             {/* Left Column - Contact Section */}

@@ -11,22 +11,43 @@ export default {
         'display': ['Andada Pro', 'serif'],
       },
       colors: {
+        /* Modern Psychology-Based Palette */
         'primary': 'hsl(var(--primary))',
+        'primary-dark': 'hsl(var(--primary-dark))',
+        'primary-light': 'hsl(var(--primary-light))',
         'primary-foreground': 'hsl(var(--primary-foreground))',
+
+        'accent': 'hsl(var(--accent))',
+        'accent-dark': 'hsl(var(--accent-dark))',
+        'accent-light': 'hsl(var(--accent-light))',
+        'accent-foreground': 'hsl(var(--accent-foreground))',
+
+        'success': 'hsl(var(--success))',
+        'success-light': 'hsl(var(--success-light))',
+        'warning': 'hsl(var(--warning))',
+        'premium': 'hsl(var(--premium))',
+        'premium-light': 'hsl(var(--premium-light))',
+
+        'background': 'hsl(var(--background))',
+        'background-alt': 'hsl(var(--background-alt))',
+        'surface': 'hsl(var(--surface))',
+        'foreground': 'hsl(var(--foreground))',
+        'foreground-muted': 'hsl(var(--foreground-muted))',
+
         'secondary': 'hsl(var(--secondary))',
         'secondary-foreground': 'hsl(var(--secondary-foreground))',
-        'foreground': 'hsl(var(--foreground))',
-        'background': 'hsl(var(--background))',
+
+        'border': 'hsl(var(--border))',
+        'border-strong': 'hsl(var(--border-strong))',
+
         'muted': 'hsl(var(--muted))',
         'muted-foreground': 'hsl(var(--muted-foreground))',
-        'accent': '#4B9CD3',
-        'accent-foreground': '#ffffff',
+
         /* Legacy OKLCH colors */
-        'cream': 'oklch(86.9% 0.005 56.366)',         /* warm beige */
-        'accentMauve': 'oklch(28.4% 0.109 3.907)',    /* dark reddish/mauve */
-        'accentBlue': 'oklch(90.1% 0.058 230.902)',   /* light cool blue */
-        'accentRose': 'oklch(60% 0.1 15)',            /* rose */
-        'accentNew': 'oklch(60.9% 0.126 221.723)',   /* new accent color */
+        'cream': 'oklch(92% 0.02 85)',
+        'accentMauve': 'oklch(45% 0.12 340)',
+        'accentBlue': 'oklch(75% 0.10 240)',
+        'accentRose': 'oklch(70% 0.13 15)',
       },
     },
   },

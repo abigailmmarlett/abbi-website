@@ -21,9 +21,11 @@
     "vite": "^7.3.0"
   },
   "dependencies": {
+    "@types/react-curved-text": "^2.0.3",
     "gsap": "^3.14.2",
     "lucide-react": "^0.562.0",
     "react": "^19.2.3",
+    "react-curved-text": "^3.0.1",
     "react-dom": "^19.2.3"
   }
 }

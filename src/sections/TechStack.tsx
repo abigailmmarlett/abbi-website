@@ -221,17 +221,34 @@ export function TechStack() {
   }, [])
 
   return (
-    <div ref={containerRef} className="flex flex-wrap gap-6 justify-center">
+    <div ref={containerRef} className="flex  pt-12 flex-wrap gap-6 sm:gap-8 justify-center px-4">
       {techStack.map((tech, index) => (
         <div
           key={index}
-          className="tech-item flex flex-col items-center gap-3 cursor-pointer"
+          className="tech-item flex flex-col items-center gap-3 cursor-pointer group"
           title={tech.name}
         >
-          <div className="p-2 sm:p-4 rounded-xl bg-blue-50 border border-blue-200 hover:border-blue-400 hover:bg-blue-100 transition-all" style={{ color: 'hsl(var(--primary))' }}>
-            {tech.icon}
+          <div className="relative p-3 sm:p-5 rounded-2xl glass-light border border-border hover:border-primary/40 transition-all duration-500 hover:shadow-xl group-hover:scale-110" style={{ color: 'hsl(var(--primary))' }}>
+            {/* Background glow effect on hover */}
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/0 to-accent/0 group-hover:from-primary/10 group-hover:to-accent/10 transition-all duration-500" />
+
+            {/* Icon shimmer effect */}
+            <div className="absolute inset-0 rounded-2xl overflow-hidden">
+              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+            </div>
+
+            {/* Icon */}
+            <div className="relative z-10 group-hover:rotate-6 transition-transform duration-300">
+              {tech.icon}
+            </div>
+
+            {/* Orbital ring on hover */}
+            <div className="absolute inset-0 rounded-2xl border-2 border-primary/0 group-hover:border-primary/20 scale-110 opacity-0 group-hover:opacity-100 transition-all duration-500" />
           </div>
-          <span className="text-sm font-medium text-center max-w-[80px]" style={{ color: 'hsl(var(--muted-foreground))' }}>{tech.name}</span>
+
+          <span className="text-sm font-medium text-center max-w-[100px] text-foreground-muted group-hover:text-primary transition-colors duration-300">
+            {tech.name}
+          </span>
         </div>
       ))}
     </div>

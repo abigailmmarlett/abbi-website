@@ -51,47 +51,49 @@ export function Hobbies() {
   };
 
   return (
-    <section id="outside-work" className="pt-4 pb-12">
-      <div className="container mx-auto px-6">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground text-center mb-4">
-            Out of Office
-          </h2>
-          <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
-            You can find me...
-          </p>
+    <section id="outside-work" className="py-20 relative overflow-hidden bg-gradient-to-b from-background via-background-alt to-background">
+      <div className="relative z-10">
+        <div className="container mx-auto px-6 mb-12">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-4 animate-fade-in">
+              OUT OF OFFICE
+            </h2>
+            <p className="text-muted-foreground text-center max-w-2xl mx-auto">
+              You can find me...
+            </p>
+          </div>
+        </div>
 
-          <div className="relative">
-            <div className="relative overflow-hidden rounded-2xl shadow-xl">
-              {/* Main Image */}
-              <div className="relative w-full aspect-video">
-                <img
-                  src={hobbies[currentIndex].image}
-                  alt={hobbies[currentIndex].caption}
-                  className="w-full h-full object-cover transition-opacity duration-500"
-                />
+        <div className="relative w-full">
+          <div className="relative overflow-hidden rounded-2xl shadow-xl">
+            {/* Main Image */}
+            <div className="relative w-full aspect-video">
+              <img
+                src={hobbies[currentIndex].image}
+                alt={hobbies[currentIndex].caption}
+                className="w-full h-full object-cover transition-opacity duration-500"
+              />
 
-                {/* Navigation Arrows */}
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm hover:bg-background text-foreground rounded-full shadow-lg"
-                  onClick={prevSlide}
-                >
-                  <ChevronLeft size={24} />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm hover:bg-background text-foreground rounded-full shadow-lg"
-                  onClick={nextSlide}
-                >
-                  <ChevronRight size={24} />
-                </Button>
-              </div>
+              {/* Navigation Arrows */}
+              <button
+                onClick={prevSlide}
+                className="absolute left-6 top-1/2 -translate-y-1/2 z-30 p-3 bg-black/60 hover:bg-black/80 text-white rounded-full shadow-2xl transition-all duration-200 hover:scale-110 hover:shadow-xl"
+                aria-label="Previous slide"
+              >
+                <ChevronLeft size={32} />
+              </button>
+              <button
+                onClick={nextSlide}
+                className="absolute right-6 top-1/2 -translate-y-1/2 z-30 p-3 bg-black/60 hover:bg-black/80 text-white rounded-full shadow-2xl transition-all duration-200 hover:scale-110 hover:shadow-xl"
+                aria-label="Next slide"
+              >
+                <ChevronRight size={32} />
+              </button>
+            </div>
 
-              {/* Content Below Image */}
-              <div className="p-8 bg-background">
+            {/* Content Below Image */}
+            <div className="p-8 bg-background">
+              <div className="max-w-5xl mx-auto">
                 <h3 className="text-2xl md:text-3xl font-display font-bold text-foreground mb-3">
                   {hobbies[currentIndex].caption}
                 </h3>
@@ -100,20 +102,20 @@ export function Hobbies() {
                 </p>
               </div>
             </div>
+          </div>
 
-            {/* Dots Indicator */}
-            <div className="flex items-center justify-center gap-2 mt-6">
-              {hobbies.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => goToSlide(index)}
-                  className={`h-2 rounded-full transition-all duration-300 ${index === currentIndex
-                    ? 'w-8 bg-primary'
-                    : 'w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50'
-                    }`}
-                />
-              ))}
-            </div>
+          {/* Dots Indicator */}
+          <div className="flex items-center justify-center gap-2 mt-6">
+            {hobbies.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`h-2 rounded-full transition-all duration-300 ${index === currentIndex
+                  ? 'w-8 bg-primary'
+                  : 'w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50'
+                  }`}
+              />
+            ))}
           </div>
         </div>
       </div>
