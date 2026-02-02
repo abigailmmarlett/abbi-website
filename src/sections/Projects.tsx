@@ -108,7 +108,7 @@ export function Projects() {
             ref={imagesContainerRef}
             className="flex-1 overflow-y-auto overflow-x-hidden relative"
           >
-            {projects.map((project, index) => (
+            {projects.map((project) => (
               <div key={project.id}>
                 {/* Image or Iframe */}
                 <div className="w-full h-screen flex-shrink-0 relative bg-black">

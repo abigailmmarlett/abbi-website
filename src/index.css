@@ -463,7 +463,6 @@ html {
 
 body {
   font-family: 'Andada Pro', serif;
-  @apply transition-colors duration-300;
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
   font-feature-settings: "kern" 1, "liga" 1;

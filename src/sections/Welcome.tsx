@@ -8,7 +8,7 @@ interface WelcomeProps {
   setIsContactOpen: (value: boolean) => void;
 }
 
-export function Welcome({ setIsContactOpen }: WelcomeProps) {
+export function Welcome({ }: WelcomeProps) {
   const { displayedText } = useTypingAnimation('Full-Stack Software Engineer', 50, 400);
 
   return (
