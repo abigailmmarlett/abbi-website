@@ -22,9 +22,9 @@ const CircularTextComponent = () => {
                     textProps={{
                         style: {
                             fontSize: 52,
-                            fontWeight: '700',
+                            fontWeight: '600',
                             letterSpacing: '1px',
-                            fill: 'url(#textGradient)',
+                            fill: '#142652',
                             filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.15))'
                         }
                     }}
