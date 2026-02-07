@@ -1,6 +1,6 @@
 import { Mail, Phone, Download } from 'lucide-react';
 import { Linkedin, Github } from 'lucide-react';
-import { useTypingAnimation } from '../hooks/useTypingAnimation';
+// import { useTypingAnimation } from '../hooks/useTypingAnimation';
 import ParticleBackground from '../components/ParticleBackground';
 import CircularTextComponent from '../components/ui/circular-text';
 
@@ -9,7 +9,7 @@ interface WelcomeProps {
 }
 
 export function Welcome({ }: WelcomeProps) {
-  const { displayedText } = useTypingAnimation('Full-Stack Software Engineer', 50, 400);
+  // const { displayedText } = useTypingAnimation('Full-Stack Software Engineer', 50, 400);
 
   return (
     <section
@@ -82,7 +82,7 @@ export function Welcome({ }: WelcomeProps) {
                 </h1>
 
                 {/* Subtitle with typing animation */}
-                <p
+                {/* <p
                   className="text-base sm:text-lg md:text-xl lg:text-2xl font-light mb-6 sm:mb-8 animate-slide-up min-h-[2rem]"
                   style={{
                     animationDelay: '0.2s',
@@ -95,7 +95,7 @@ export function Welcome({ }: WelcomeProps) {
                     className="inline-block w-0.5 h-6 ml-1 animate-pulse"
                     style={{ backgroundColor: 'rgba(100, 200, 255, 0.8)' }}
                   />
-                </p>
+                </p> */}
 
                 {/* Social Media Links with neon glow effects */}
                 <div className=" pb-14 flex gap-2 sm:gap-3 md:gap-4 mt-6 sm:mt-8 justify-start animate-slide-up" style={{ animationDelay: '0.4s' }}>
