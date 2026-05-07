@@ -44,7 +44,7 @@ export function Education() {
       {/* Full-width Hero Section with Grad Cap Background */}
       <div className="relative z-10">
         <div
-          className="relative overflow-hidden shadow-2xl min-h-[500px] md:min-h-[600px] animate-fade-in group w-full"
+          className="relative overflow-hidden shadow-2xl min-h-[500px] md:min-h-[600px] lg:min-h-[650px] animate-fade-in group w-full"
           style={{
             backgroundImage: 'url(/images/new-grad-cap.png)',
             backgroundSize: 'cover',
@@ -79,7 +79,7 @@ export function Education() {
                     </p>
                   </div>
 
-                  <div className="grid grid-cols-3 gap-4 mt-5">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-5">
                     <div className="bg-white/5 backdrop-blur-sm rounded-xl p-3 border border-white/10 hover:border-white/30 transition-all duration-300 hover:scale-105">
                       <p className="text-xs text-white font-semibold opacity-80 mb-1.5 uppercase tracking-wide">Major</p>
                       <p className="text-sm font-bold text-white">{education.major}</p>

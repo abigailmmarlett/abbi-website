@@ -255,6 +255,35 @@
   animation: reveal 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
+/* Name clip-path wipe reveal */
+@keyframes textWipe {
+  from { clip-path: inset(0 100% 0 0); opacity: 0; }
+  to   { clip-path: inset(0 0% 0 0);   opacity: 1; }
+}
+.animate-text-wipe {
+  opacity: 0;
+  animation: textWipe 1.2s cubic-bezier(0.77, 0, 0.175, 1) 0.3s forwards;
+}
+
+/* Marquee infinite horizontal scroll */
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  white-space: nowrap;
+  animation: marqueeScroll 35s linear infinite;
+}
+.marquee-content {
+  flex-shrink: 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+}
+
 /* Subtle animations only */
 @keyframes float-slow {
   0%, 100% { transform: translateY(0px) translateX(0px); }
@@ -807,6 +836,21 @@ a:hover {
     margin-bottom: 0;
     width: 85%;
     max-width: 400px;
+  }
+}
+
+/* Tablet timeline layout: reduce padding so cards aren't cramped at 769–1023px */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .timeline-item:nth-child(odd) {
+    padding-right: 2rem;
+  }
+
+  .timeline-item:nth-child(even) {
+    padding-left: 2rem;
+  }
+
+  .timeline-card {
+    max-width: 380px;
   }
 }
 

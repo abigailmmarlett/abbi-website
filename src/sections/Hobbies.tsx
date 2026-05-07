@@ -76,14 +76,14 @@ export function Hobbies() {
               {/* Navigation Arrows */}
               <button
                 onClick={prevSlide}
-                className="absolute left-6 top-1/2 -translate-y-1/2 z-30 p-3 bg-black/60 hover:bg-black/80 text-white rounded-full shadow-2xl transition-all duration-200 hover:scale-110 hover:shadow-xl"
+                className="absolute left-6 top-1/2 -translate-y-1/2 z-30 p-3 min-w-[44px] min-h-[44px] flex items-center justify-center bg-black/60 hover:bg-black/80 text-white rounded-full shadow-2xl transition-all duration-200 hover:scale-110 hover:shadow-xl"
                 aria-label="Previous slide"
               >
                 <ChevronLeft size={32} />
               </button>
               <button
                 onClick={nextSlide}
-                className="absolute right-6 top-1/2 -translate-y-1/2 z-30 p-3 bg-black/60 hover:bg-black/80 text-white rounded-full shadow-2xl transition-all duration-200 hover:scale-110 hover:shadow-xl"
+                className="absolute right-6 top-1/2 -translate-y-1/2 z-30 p-3 min-w-[44px] min-h-[44px] flex items-center justify-center bg-black/60 hover:bg-black/80 text-white rounded-full shadow-2xl transition-all duration-200 hover:scale-110 hover:shadow-xl"
                 aria-label="Next slide"
               >
                 <ChevronRight size={32} />

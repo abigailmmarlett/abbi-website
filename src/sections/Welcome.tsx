@@ -1,237 +1,176 @@
 import { Mail, Phone, Download } from 'lucide-react';
 import { Linkedin, Github } from 'lucide-react';
-// import { useTypingAnimation } from '../hooks/useTypingAnimation';
-import ParticleBackground from '../components/ParticleBackground';
-import CircularTextComponent from '../components/ui/circular-text';
 
 interface WelcomeProps {
   setIsContactOpen: (value: boolean) => void;
 }
 
-export function Welcome({ }: WelcomeProps) {
-  // const { displayedText } = useTypingAnimation('Full-Stack Software Engineer', 50, 400);
+const MARQUEE_TEXT = 'Full-Stack · Backend · Frontend · AWS · TypeScript · React · .NET · SQL Server · Python · Docker · Kubernetes · ';
 
+export function Welcome({ }: WelcomeProps) {
   return (
     <section
       id="welcome"
-      className="min-h-screen relative overflow-hidden"
+      className="min-h-screen relative overflow-hidden flex flex-col"
       style={{
-        background: 'linear-gradient(135deg, #001a4d 0%, #003366 50%, #004080 100%)',
-        boxShadow: 'inset 0 0 100px rgba(0, 0, 0, 0.5)'
+        background: 'linear-gradient(160deg, #010d1e 0%, #001a3d 60%, #002454 100%)',
       }}
     >
-      {/* Animated gradient orbs for depth - futuristic neon glow */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div
-          className="orb absolute top-1/4 left-1/4 w-96 h-96"
-          style={{
-            background: 'radial-gradient(circle, rgba(100, 200, 255, 0.15) 0%, transparent 70%)',
-            filter: 'blur(40px)',
-            animationDelay: '0s'
-          }}
-        />
-        <div
-          className="orb absolute bottom-1/3 right-1/4 w-[500px] h-[500px]"
-          style={{
-            background: 'radial-gradient(circle, rgba(75, 150, 255, 0.1) 0%, transparent 70%)',
-            filter: 'blur(60px)',
-            animationDelay: '2s'
-          }}
-        />
-        <div
-          className="orb absolute top-1/2 right-1/3 w-64 h-64"
-          style={{
-            background: 'radial-gradient(circle, rgba(100, 200, 255, 0.12) 0%, transparent 70%)',
-            filter: 'blur(50px)',
-            animationDelay: '4s'
-          }}
-        />
-      </div>
+      {/* Subtle grid texture */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
+        }}
+      />
 
-      <ParticleBackground />
+      {/* Main content */}
+      <div className="relative z-10 flex-1 flex items-center">
+        <div className="w-full max-w-7xl mx-auto px-6 lg:px-16 py-24">
+          <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-20">
 
-      {/* Circular Component - large and going off page, visible on all views */}
-      <div className="absolute top-1/2 w-[1800px] h-[1800px] animate-float-gentle flex items-center justify-center z-10" style={{ left: '20%', transform: 'translateY(-50%)' }}>
-        <CircularTextComponent />
-      </div>
+            {/* Left: text */}
+            <div className="flex-1 text-left">
+              <h1
+                className="animate-text-wipe font-display font-bold text-white leading-none tracking-tight mb-6"
+                style={{ fontSize: 'clamp(3.5rem, 8vw, 7rem)' }}
+              >
+                ABIGAIL<br />MARLETT
+              </h1>
 
-      {/* Content in lower left */}
-      <div className="relative z-20 min-h-screen flex flex-col justify-end p-4 sm:p-6 md:p-8 lg:p-12">
-        <div className="max-w-4xl">
-          {/* Main heading layout */}
-          <div className="mb-8">
-            <div className="flex flex-col lg:flex-row lg:items-center lg:gap-6 animate-fade-in">
+              {/* Accent line */}
+              <div
+                className="w-16 h-0.5 bg-cyan-400 mb-8 animate-fade-in"
+                style={{ animationDelay: '1.4s' }}
+              />
 
-              {/* Name and subtitle section */}
-              <div className="text-left">
-                <h1
-                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-bold mb-4 sm:mb-6 animate-fade-in relative tracking-wider"
+              {/* Social buttons */}
+              <div
+                className="flex gap-3 flex-wrap animate-slide-up"
+                style={{ animationDelay: '1.6s' }}
+              >
+                <a
+                  href="mailto:abigailmarlett@gmail.com"
+                  title="Email"
+                  className="group relative p-3 rounded-full transition-all duration-300 hover:scale-110"
                   style={{
-                    color: '#ffffff',
-                    textShadow: '0 0 20px rgba(100, 200, 255, 0.6), 0 0 40px rgba(75, 150, 255, 0.3)',
-                    letterSpacing: '0.05em'
+                    background: 'rgba(100, 200, 255, 0.12)',
+                    border: '1.5px solid rgba(100, 200, 255, 0.25)',
                   }}
                 >
-                  ABIGAIL MARLETT
-                  <span
-                    className="absolute -inset-4 blur-3xl -z-10 animate-pulse-attention"
-                    style={{
-                      background: 'radial-gradient(ellipse at center, rgba(100, 200, 255, 0.2) 0%, transparent 70%)',
-                    }}
-                  />
-                </h1>
-
-                {/* Subtitle with typing animation */}
-                {/* <p
-                  className="text-base sm:text-lg md:text-xl lg:text-2xl font-light mb-6 sm:mb-8 animate-slide-up min-h-[2rem]"
+                  <Mail size={18} style={{ color: '#ffffff' }} />
+                </a>
+                <a
+                  href="tel:+18287195574"
+                  title="Phone"
+                  className="group relative p-3 rounded-full transition-all duration-300 hover:scale-110"
                   style={{
-                    animationDelay: '0.2s',
-                    color: '#e0e0ff',
-                    textShadow: '0 0 10px rgba(100, 200, 255, 0.4)'
+                    background: 'rgba(100, 200, 255, 0.12)',
+                    border: '1.5px solid rgba(100, 200, 255, 0.25)',
                   }}
                 >
-                  {displayedText}
-                  <span
-                    className="inline-block w-0.5 h-6 ml-1 animate-pulse"
-                    style={{ backgroundColor: 'rgba(100, 200, 255, 0.8)' }}
-                  />
-                </p> */}
+                  <Phone size={18} style={{ color: '#ffffff' }} />
+                </a>
+                <a
+                  href="https://linkedin.com/in/abigail-marlett"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="LinkedIn"
+                  className="group relative p-3 rounded-full transition-all duration-300 hover:scale-110"
+                  style={{
+                    background: 'rgba(100, 200, 255, 0.12)',
+                    border: '1.5px solid rgba(100, 200, 255, 0.25)',
+                  }}
+                >
+                  <Linkedin size={18} style={{ color: '#ffffff' }} />
+                </a>
+                <a
+                  href="https://github.com/abigailmmarlett"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="GitHub"
+                  className="group relative p-3 rounded-full transition-all duration-300 hover:scale-110"
+                  style={{
+                    background: 'rgba(100, 200, 255, 0.12)',
+                    border: '1.5px solid rgba(100, 200, 255, 0.25)',
+                  }}
+                >
+                  <Github size={18} style={{ color: '#ffffff' }} />
+                </a>
+                <a
+                  href="/amarlett-resume.pdf"
+                  download
+                  title="Download Resume"
+                  className="group relative p-3 rounded-full transition-all duration-300 hover:scale-110"
+                  style={{
+                    background: 'rgba(100, 200, 255, 0.12)',
+                    border: '1.5px solid rgba(100, 200, 255, 0.25)',
+                  }}
+                >
+                  <Download size={18} style={{ color: '#ffffff' }} />
+                </a>
+              </div>
+            </div>
 
-                {/* Social Media Links with neon glow effects */}
-                <div className=" pb-14 flex gap-2 sm:gap-3 md:gap-4 mt-6 sm:mt-8 justify-start animate-slide-up" style={{ animationDelay: '0.4s' }}>
-                  <a
-                    href="mailto:abigailmarlett@gmail.com"
-                    title="Email"
-                    className="group relative p-2.5 sm:p-3 md:p-3.5 lg:p-4 rounded-full transition-all duration-500 hover:scale-110 hover:rotate-6"
-                    style={{
-                      background: 'rgba(100, 200, 255, 0.15)',
-                      border: '1.5px solid rgba(100, 200, 255, 0.3)',
-                      boxShadow: '0 0 15px rgba(100, 200, 255, 0.2)',
-                    }}
-                  >
-                    <Mail size={16} className="sm:w-[18px] sm:h-[18px] md:w-[20px] md:h-[20px] relative z-10 transition-colors duration-300" style={{ color: '#ffffff' }} />
-                    <div
-                      className="absolute inset-0 rounded-full transition-all duration-500 opacity-0 group-hover:opacity-100"
-                      style={{
-                        background: 'radial-gradient(circle, rgba(100, 200, 255, 0.3), transparent 70%)',
-                        boxShadow: '0 0 30px rgba(100, 200, 255, 0.5)'
-                      }}
-                    />
-                  </a>
-                  <a
-                    href="tel:+18287195574"
-                    title="Phone"
-                    className="group relative p-2.5 sm:p-3 md:p-3.5 lg:p-4 rounded-full transition-all duration-500 hover:scale-110 hover:rotate-6"
-                    style={{
-                      background: 'rgba(100, 200, 255, 0.15)',
-                      border: '1.5px solid rgba(100, 200, 255, 0.3)',
-                      boxShadow: '0 0 15px rgba(100, 200, 255, 0.2)',
-                    }}
-                  >
-                    <Phone size={16} className="sm:w-[18px] sm:h-[18px] md:w-[20px] md:h-[20px] relative z-10 transition-colors duration-300" style={{ color: '#ffffff' }} />
-                    <div
-                      className="absolute inset-0 rounded-full transition-all duration-500 opacity-0 group-hover:opacity-100"
-                      style={{
-                        background: 'radial-gradient(circle, rgba(100, 200, 255, 0.3), transparent 70%)',
-                        boxShadow: '0 0 30px rgba(100, 200, 255, 0.5)'
-                      }}
-                    />
-                  </a>
-                  <a
-                    href="https://linkedin.com/in/abigail-marlett"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title="LinkedIn"
-                    className="group relative p-2.5 sm:p-3 md:p-3.5 lg:p-4 rounded-full transition-all duration-500 hover:scale-110 hover:rotate-6"
-                    style={{
-                      background: 'rgba(100, 200, 255, 0.15)',
-                      border: '1.5px solid rgba(100, 200, 255, 0.3)',
-                      boxShadow: '0 0 15px rgba(100, 200, 255, 0.2)',
-                    }}
-                  >
-                    <Linkedin size={16} className="sm:w-[18px] sm:h-[18px] md:w-[20px] md:h-[20px] relative z-10 transition-colors duration-300" style={{ color: '#ffffff' }} />
-                    <div
-                      className="absolute inset-0 rounded-full transition-all duration-500 opacity-0 group-hover:opacity-100"
-                      style={{
-                        background: 'radial-gradient(circle, rgba(100, 200, 255, 0.3), transparent 70%)',
-                        boxShadow: '0 0 30px rgba(100, 200, 255, 0.5)'
-                      }}
-                    />
-                  </a>
-                  <a
-                    href="https://github.com/abigailmmarlett"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title="GitHub"
-                    className="group relative p-2.5 sm:p-3 md:p-3.5 lg:p-4 rounded-full transition-all duration-500 hover:scale-110 hover:rotate-6"
-                    style={{
-                      background: 'rgba(100, 200, 255, 0.15)',
-                      border: '1.5px solid rgba(100, 200, 255, 0.3)',
-                      boxShadow: '0 0 15px rgba(100, 200, 255, 0.2)',
-                    }}
-                  >
-                    <Github size={16} className="sm:w-[18px] sm:h-[18px] md:w-[20px] md:h-[20px] relative z-10 transition-colors duration-300" style={{ color: '#ffffff' }} />
-                    <div
-                      className="absolute inset-0 rounded-full transition-all duration-500 opacity-0 group-hover:opacity-100"
-                      style={{
-                        background: 'radial-gradient(circle, rgba(100, 200, 255, 0.3), transparent 70%)',
-                        boxShadow: '0 0 30px rgba(100, 200, 255, 0.5)'
-                      }}
-                    />
-                  </a>
-                  <a
-                    href="/amarlett-resume.pdf"
-                    download
-                    title="Download Resume"
-                    className="group relative p-2.5 sm:p-3 md:p-3.5 lg:p-4 rounded-full transition-all duration-500 hover:scale-110 hover:rotate-6"
-                    style={{
-                      background: 'rgba(100, 200, 255, 0.15)',
-                      border: '1.5px solid rgba(100, 200, 255, 0.3)',
-                      boxShadow: '0 0 15px rgba(100, 200, 255, 0.2)',
-                    }}
-                  >
-                    <Download size={16} className="sm:w-[18px] sm:h-[18px] md:w-[20px] md:h-[20px] relative z-10 transition-colors duration-300" style={{ color: '#ffffff' }} />
-                    <div
-                      className="absolute inset-0 rounded-full transition-all duration-500 opacity-0 group-hover:opacity-100"
-                      style={{
-                        background: 'radial-gradient(circle, rgba(100, 200, 255, 0.3), transparent 70%)',
-                        boxShadow: '0 0 30px rgba(100, 200, 255, 0.5)'
-                      }}
-                    />
-                  </a>
-                </div>
+            {/* Right: headshot */}
+            <div
+              className="flex-shrink-0 animate-fade-in"
+              style={{ animationDelay: '0.6s' }}
+            >
+              <div className="relative">
+                <img
+                  src="/images/headshot.JPG"
+                  alt="Abigail Marlett"
+                  className="w-56 h-64 sm:w-64 sm:h-80 lg:w-80 lg:h-96 xl:w-96 xl:h-[480px] object-cover rounded-2xl"
+                  style={{
+                    objectPosition: 'center top',
+                    boxShadow: '0 30px 70px rgba(0, 0, 0, 0.6)',
+                  }}
+                />
+                {/* Offset accent border */}
+                <div
+                  className="absolute -bottom-3 -right-3 w-full h-full rounded-2xl -z-10"
+                  style={{ border: '1.5px solid rgba(100, 200, 255, 0.25)' }}
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Scroll indicator - centered at bottom */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce-in" style={{ animationDelay: '0.8s' }}>
+      {/* Marquee strip */}
+      <div className="relative z-10 overflow-hidden border-y border-white/10 py-4">
+        <div className="marquee-track">
+          <span className="marquee-content">{MARQUEE_TEXT}</span>
+          <span className="marquee-content" aria-hidden="true">{MARQUEE_TEXT}</span>
+        </div>
+      </div>
+
+      {/* Scroll indicator */}
+      <div
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 animate-bounce-in"
+        style={{ animationDelay: '2s' }}
+      >
         <div className="flex flex-col items-center gap-2">
           <span
-            className="text-sm font-light tracking-wider uppercase"
-            style={{
-              color: 'rgba(255, 255, 255, 0.7)',
-              textShadow: '0 0 10px rgba(100, 200, 255, 0.3)'
-            }}
+            className="text-xs font-light tracking-widest uppercase"
+            style={{ color: 'rgba(255, 255, 255, 0.5)' }}
           >
             Scroll to explore
           </span>
           <svg
-            className="w-6 h-6 animate-bounce"
+            className="w-5 h-5 animate-bounce"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
-            style={{
-              color: 'rgba(255, 255, 255, 0.7)',
-              filter: 'drop-shadow(0 0 8px rgba(100, 200, 255, 0.4))'
-            }}
+            style={{ color: 'rgba(255, 255, 255, 0.5)' }}
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth={2}
+              strokeWidth={1.5}
               d="M19 14l-7 7m0 0l-7-7m7 7V3"
             />
           </svg>

@@ -102,16 +102,16 @@ export function Projects() {
           }}
         />
         {/* Content Container */}
-        <div className="flex flex-1 h-screen">
+        <div className="flex flex-col lg:flex-row lg:h-screen">
           {/* Left Column - Vertically Scrollable Images */}
           <div
             ref={imagesContainerRef}
-            className="flex-1 overflow-y-auto overflow-x-hidden relative"
+            className="w-full h-64 sm:h-80 md:h-96 lg:flex-1 lg:h-auto overflow-hidden lg:overflow-y-auto relative"
           >
             {projects.map((project) => (
               <div key={project.id}>
                 {/* Image or Iframe */}
-                <div className="w-full h-screen flex-shrink-0 relative bg-black">
+                <div className="w-full h-full lg:h-screen flex-shrink-0 relative bg-black">
                   {activeIframeId === project.id && project.iframeUrl ? (
                     <iframe
                       src={project.iframeUrl}
@@ -152,7 +152,7 @@ export function Projects() {
           </div>
 
           {/* Right Column - Static Text with Fade */}
-          <div className="w-full lg:w-1/2 bg-black/30 backdrop-blur-sm border-l border-white/10 flex flex-col p-8 md:p-12 overflow-y-auto relative z-10">
+          <div className="w-full lg:w-1/2 bg-black/30 backdrop-blur-sm lg:border-l border-white/10 flex flex-col p-8 md:p-12 lg:overflow-y-auto relative z-10">
             <div className="flex-1 flex flex-col justify-center">
               <div className="max-w-xl">
                 {/* Project Counter */}
