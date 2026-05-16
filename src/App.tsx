@@ -2,58 +2,40 @@ import { useEffect, useState } from 'react'
 import { Menu, X, Mail, Phone, Linkedin, Github } from 'lucide-react'
 import { Intro } from './sections/Intro'
 import { Welcome } from './sections/Welcome'
+import { About } from './sections/About'
 import { TechStack } from './sections/TechStack'
 import { Experience } from './sections/Experience'
-import { Education } from './sections/Education'
 import { Projects } from './sections/Projects'
 import { Hobbies } from './sections/Hobbies'
-import { SectionDivider } from './components/SectionDivider'
 import { Modal } from './components/ui/modal'
 
-type SectionId = 'welcome' | 'experience' | 'education' | 'projects' | 'hobbies'
+type SectionId = 'welcome' | 'about' | 'projects' | 'experience'
 
-// Feature toggles
-const FEATURES = {
-  showProjects: true,
-}
-
-const allSections: { id: SectionId; label: string }[] = [
-  { id: 'welcome', label: 'Welcome' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'education', label: 'Education' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'hobbies', label: 'OOO' },
+const navItems: { id: SectionId; label: string }[] = [
+  { id: 'projects', label: 'work' },
+  { id: 'about', label: 'about' },
+  { id: 'experience', label: 'resume' },
 ]
-
-const sections = allSections.filter(section => {
-  if (section.id === 'projects') return FEATURES.showProjects
-  return true
-})
 
 function App() {
   const [activeSection, setActiveSection] = useState<SectionId>('welcome')
   const [showIntro, setShowIntro] = useState(true)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isContactOpen, setIsContactOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      const sectionElements = sections.map(section => ({
-        id: section.id,
-        element: document.getElementById(section.id)
-      }))
-
+      const allIds: SectionId[] = ['welcome', 'about', 'projects', 'experience']
       const scrollPosition = window.scrollY + 100
 
-      for (const section of sectionElements) {
-        if (section.element) {
-          const { top, bottom } = section.element.getBoundingClientRect()
-          const elementTop = top + window.scrollY
-          const elementBottom = bottom + window.scrollY
-
-          if (scrollPosition >= elementTop && scrollPosition < elementBottom) {
-            setActiveSection(section.id)
+      for (const id of allIds) {
+        const el = document.getElementById(id)
+        if (el) {
+          const { top, bottom } = el.getBoundingClientRect()
+          const elTop = top + window.scrollY
+          const elBottom = bottom + window.scrollY
+          if (scrollPosition >= elTop && scrollPosition < elBottom) {
+            setActiveSection(id)
             break
           }
         }
@@ -64,15 +46,6 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
-    }
-
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
-
   const scrollToSection = (sectionId: SectionId) => {
     const element = document.getElementById(sectionId)
     if (element) {
@@ -81,131 +54,163 @@ function App() {
     setMobileMenuOpen(false)
   }
 
+  const navButtonStyle = (id: SectionId) => ({
+    fontFamily: '"DM Sans", sans-serif',
+    fontSize: '0.875rem',
+    fontWeight: 500,
+    color: '#5A4F6E',
+    background: 'none',
+    border: 'none',
+    cursor: 'pointer',
+    paddingBottom: activeSection === id ? '4px' : '0',
+    borderBottom: activeSection === id ? '2px solid #E89A85' : '2px solid transparent',
+    transition: 'border-color 0.2s ease, color 0.2s ease',
+  } as React.CSSProperties)
+
   return (
-    <div className="w-full relative" style={{ backgroundColor: 'hsl(var(--background))' }}>
-      {/* Mouse Shadow Effect */}
-      <div
-        className="pointer-events-none fixed"
-        style={{
-          left: `${mousePosition.x}px`,
-          top: `${mousePosition.y}px`,
-          width: '300px',
-          height: '300px',
-          transform: 'translate(-50%, -50%)',
-          background: 'radial-gradient(circle, rgba(75, 156, 211, 0.15) 0%, rgba(75, 156, 211, 0.05) 40%, transparent 70%)',
-          zIndex: 1,
-          transition: 'opacity 0.1s ease-out',
-          filter: 'blur(40px)',
-        }}
-      />
+    <div className="w-full relative" style={{ backgroundColor: '#FAF6F2' }}>
       {/* Intro overlay */}
       {showIntro && <Intro onComplete={() => setShowIntro(false)} />}
+
       {/* Navigation */}
       {!showIntro && (
-        <nav className="fixed top-0 w-full z-[100] bg-white border-b border-gray-200">
+        <nav
+          className="fixed top-0 w-full z-[100]"
+          style={{
+            background: 'rgba(250,246,242,0.92)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            borderBottom: '1px solid rgba(42,36,56,0.08)',
+          }}
+        >
           <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
             <button
               onClick={() => scrollToSection('welcome')}
-              className="text-lg font-bold text-gray-900 hover:text-gray-700 transition-colors"
+              style={{
+                fontFamily: '"Cormorant Garamond", Georgia, serif',
+                fontStyle: 'italic',
+                fontSize: '1.35rem',
+                fontWeight: 600,
+                color: '#E89A85',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+              }}
             >
-              AM
+              Abigail.
             </button>
 
-            {/* Desktop Navigation */}
+            {/* Desktop nav */}
             <div className="hidden md:flex items-center gap-8">
-              {sections.map(section => (
+              {navItems.map(item => (
                 <button
-                  key={section.id}
-                  onClick={() => scrollToSection(section.id)}
-                  className={`text-sm font-medium text-gray-700 transition-colors ${activeSection === section.id
-                    ? 'border-b-2 border-cyan-700 pb-1'
-                    : ''
-                    }`}
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  style={navButtonStyle(item.id)}
                 >
-                  {section.label}
+                  {item.label}
                 </button>
               ))}
-              {/* <button
+              <button
                 onClick={() => setIsContactOpen(true)}
-                className="ml-4 px-5 py-2 bg-cyan-700 text-white text-sm font-medium rounded-md hover:bg-cyan-800 transition-colors"
+                style={{
+                  fontFamily: '"DM Sans", sans-serif',
+                  fontSize: '0.875rem',
+                  fontWeight: 500,
+                  color: '#5A4F6E',
+                  background: 'none',
+                  border: 'none',
+                  borderBottom: '2px solid transparent',
+                  cursor: 'pointer',
+                  paddingBottom: '0',
+                  transition: 'color 0.2s ease',
+                }}
               >
-                Contact Me
-              </button> */}
+                contact
+              </button>
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 text-gray-700 hover:text-gray-900"
+              className="md:hidden p-2"
+              style={{ color: '#5A4F6E' }}
             >
-              {mobileMenuOpen ? (
-                <X size={24} />
-              ) : (
-                <Menu size={24} />
-              )}
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
 
-          {/* Mobile Navigation Menu */}
+          {/* Mobile menu */}
           {mobileMenuOpen && (
-            <div className="md:hidden border-t border-gray-200 bg-white">
+            <div
+              className="md:hidden"
+              style={{
+                borderTop: '1px solid rgba(42,36,56,0.08)',
+                background: 'rgba(250,246,242,0.97)',
+              }}
+            >
               <div className="px-6 py-4 space-y-3">
-                {sections.map(section => (
+                {navItems.map(item => (
                   <button
-                    key={section.id}
-                    onClick={() => scrollToSection(section.id)}
-                    className="block w-full text-left text-sm font-medium text-gray-700"
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className="block w-full text-left"
+                    style={{
+                      fontFamily: '"DM Sans", sans-serif',
+                      fontSize: '0.875rem',
+                      fontWeight: 500,
+                      color: '#5A4F6E',
+                      background: 'none',
+                      border: 'none',
+                      cursor: 'pointer',
+                    }}
                   >
-                    {section.label}
+                    {item.label}
                   </button>
                 ))}
-                {/* <button
-                  onClick={() => {
-                    setIsContactOpen(true);
-                    setMobileMenuOpen(false);
+                <button
+                  onClick={() => { setIsContactOpen(true); setMobileMenuOpen(false); }}
+                  className="block w-full text-left"
+                  style={{
+                    fontFamily: '"DM Sans", sans-serif',
+                    fontSize: '0.875rem',
+                    fontWeight: 500,
+                    color: '#5A4F6E',
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
                   }}
-                  className="block w-full px-5 py-2 mt-2 bg-cyan-700 text-white text-sm font-medium rounded-md hover:bg-cyan-800 transition-colors text-center"
                 >
-                  Contact
-                </button> */}
+                  contact
+                </button>
               </div>
             </div>
           )}
         </nav>
       )}
 
-      {/* Main Content */}
+      {/* Main content */}
       <main className="relative z-20">
         <div id="welcome">
-          <Welcome setIsContactOpen={setIsContactOpen} />
+          <Welcome
+            onWorkClick={() => scrollToSection('projects')}
+            onContactClick={() => setIsContactOpen(true)}
+          />
         </div>
 
-        <section >
-          <div className="container mx-auto px-6 max-w-5xl">
-            <TechStack />
-          </div>
-        </section>
+        <div id="about">
+          <About />
+        </div>
 
-        <SectionDivider />
+        <TechStack />
+
+        <div id="projects">
+          <Projects />
+        </div>
 
         <div id="experience">
           <Experience />
         </div>
-
-        <div id="education">
-          <Education />
-        </div>
-
-        {FEATURES.showProjects && (
-          <>
-            <SectionDivider />
-            <div id="projects">
-              <Projects />
-            </div>
-          </>
-        )}
-
-        <SectionDivider />
 
         <div id="hobbies">
           <Hobbies />
@@ -213,130 +218,113 @@ function App() {
       </main>
 
       {/* Footer */}
-      <footer className="py-12 px-4 relative z-20" style={{ backgroundColor: 'oklch(29.3% 0.066 243.157)' }}>
+      <footer
+        className="py-12 px-4 relative z-20"
+        style={{ backgroundColor: '#2A2438' }}
+      >
         <div className="max-w-5xl mx-auto">
-          {/* Main Footer Content */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 text-center md:text-left">
-            {/* Left Column - Contact Section */}
             <div className="flex flex-col items-center md:items-start">
               <div className="space-y-4">
                 <div className="flex items-center gap-3 justify-center md:justify-start">
-                  <Mail size={18} className="text-gray-300 flex-shrink-0" />
-                  <a href="mailto:abigailmarlett@gmail.com" className="text-gray-300 hover:text-cyan-200 transition-colors text-sm">
+                  <Mail size={18} style={{ color: '#D8CCE8', flexShrink: 0 }} />
+                  <a
+                    href="mailto:abigailmarlett@gmail.com"
+                    style={{ color: '#D8CCE8', fontSize: '0.875rem', fontFamily: '"DM Sans", sans-serif' }}
+                    className="hover:text-[#F8C8B5] transition-colors"
+                  >
                     abigailmarlett@gmail.com
                   </a>
                 </div>
                 <div className="flex items-center gap-3 justify-center md:justify-start">
-                  <Phone size={18} className="text-gray-300 flex-shrink-0" />
-                  <a href="tel:+18287195574" className="text-gray-300 hover:text-cyan-200 transition-colors text-sm">
+                  <Phone size={18} style={{ color: '#D8CCE8', flexShrink: 0 }} />
+                  <a
+                    href="tel:+18287195574"
+                    style={{ color: '#D8CCE8', fontSize: '0.875rem', fontFamily: '"DM Sans", sans-serif' }}
+                    className="hover:text-[#F8C8B5] transition-colors"
+                  >
                     (828) 719-5574
                   </a>
                 </div>
               </div>
             </div>
 
-            {/* Right Column - Social Icons */}
             <div className="flex flex-col items-center md:items-end">
               <div className="flex flex-col gap-4">
                 <a
                   href="https://www.linkedin.com/in/abigail-marlett"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-gray-300 hover:text-cyan-200 transition-colors justify-center md:justify-end"
+                  className="flex items-center gap-3 justify-center md:justify-end hover:text-[#F8C8B5] transition-colors"
+                  style={{ color: '#D8CCE8', fontFamily: '"DM Sans", sans-serif' }}
                 >
                   <Linkedin size={20} />
-                  <span className="text-sm">LinkedIn</span>
+                  <span style={{ fontSize: '0.875rem' }}>LinkedIn</span>
                 </a>
                 <a
                   href="https://github.com/abigailmmarlett"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-gray-300 hover:text-cyan-200 transition-colors justify-center md:justify-end"
+                  className="flex items-center gap-3 justify-center md:justify-end hover:text-[#F8C8B5] transition-colors"
+                  style={{ color: '#D8CCE8', fontFamily: '"DM Sans", sans-serif' }}
                 >
                   <Github size={20} />
-                  <span className="text-sm">GitHub</span>
+                  <span style={{ fontSize: '0.875rem' }}>GitHub</span>
                 </a>
               </div>
             </div>
           </div>
 
-          {/* Bottom Footer - Divider */}
-          <div className="border-t border-white/20 pt-8">
+          <div style={{ borderTop: '1px solid rgba(255,255,255,0.12)', paddingTop: '2rem' }}>
             <div className="flex flex-col items-center justify-center gap-4">
-              <p className="text-gray-300 text-sm flex items-center gap-2">
+              <p style={{ color: '#D8CCE8', fontSize: '0.875rem', fontFamily: '"DM Sans", sans-serif' }}>
                 Thanks for visiting!
               </p>
-              <p className="text-gray-400 text-xs">© 2025 Abigail Marlett. All rights reserved.</p>
+              <p style={{ color: 'rgba(216,204,232,0.6)', fontSize: '0.75rem', fontFamily: '"DM Sans", sans-serif' }}>
+                © 2025 Abigail Marlett. All rights reserved.
+              </p>
             </div>
           </div>
         </div>
       </footer>
 
-      {/* Contact Modal */}
+      {/* Contact modal */}
       <Modal
         isOpen={isContactOpen}
         onClose={() => setIsContactOpen(false)}
         title="Get in Touch"
       >
         <div className="space-y-6">
-          <div>
-            <p className="text-sm text-gray-600 mb-4">
-              Say hey! Feel free to reach out to me through any of these channels:
-            </p>
-          </div>
-
+          <p className="text-sm mb-4" style={{ color: '#5A4F6E', fontFamily: '"DM Sans", sans-serif' }}>
+            Say hey! Feel free to reach out through any of these channels:
+          </p>
           <div className="space-y-4">
-            {/* Email */}
-            <a
-              href="mailto:abigailmarlett@gmail.com"
-              className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-blue-50 transition-colors text-gray-900 hover:text-blue-600 border border-gray-200"
-            >
-              <Mail size={20} className="flex-shrink-0" />
-              <div>
-                <p className="text-sm font-medium">Email</p>
-                <p className="text-sm">abigailmarlett@gmail.com</p>
-              </div>
-            </a>
-
-            {/* Phone */}
-            <a
-              href="tel:+18287195574"
-              className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-blue-50 transition-colors text-gray-900 hover:text-blue-600 border border-gray-200"
-            >
-              <Phone size={20} className="flex-shrink-0" />
-              <div>
-                <p className="text-sm font-medium">Phone</p>
-                <p className="text-sm">(828) 719-5574</p>
-              </div>
-            </a>
-
-            {/* LinkedIn */}
-            <a
-              href="https://linkedin.com/in/abigail-marlett"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-blue-50 transition-colors text-gray-900 hover:text-blue-600 border border-gray-200"
-            >
-              <Linkedin size={20} className="flex-shrink-0" />
-              <div>
-                <p className="text-sm font-medium">LinkedIn</p>
-                <p className="text-sm">abigail-marlett</p>
-              </div>
-            </a>
-
-            {/* GitHub */}
-            <a
-              href="https://github.com/abigailmmarlett"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-blue-50 transition-colors text-gray-900 hover:text-blue-600 border border-gray-200"
-            >
-              <Github size={20} className="flex-shrink-0" />
-              <div>
-                <p className="text-sm font-medium">GitHub</p>
-                <p className="text-sm">abigailmmarlett</p>
-              </div>
-            </a>
+            {[
+              { href: 'mailto:abigailmarlett@gmail.com', icon: <Mail size={20} style={{ flexShrink: 0, color: '#E89A85' }} />, label: 'Email', value: 'abigailmarlett@gmail.com' },
+              { href: 'tel:+18287195574', icon: <Phone size={20} style={{ flexShrink: 0, color: '#E89A85' }} />, label: 'Phone', value: '(828) 719-5574' },
+              { href: 'https://linkedin.com/in/abigail-marlett', icon: <Linkedin size={20} style={{ flexShrink: 0, color: '#E89A85' }} />, label: 'LinkedIn', value: 'abigail-marlett', external: true },
+              { href: 'https://github.com/abigailmmarlett', icon: <Github size={20} style={{ flexShrink: 0, color: '#E89A85' }} />, label: 'GitHub', value: 'abigailmmarlett', external: true },
+            ].map(item => (
+              <a
+                key={item.label}
+                href={item.href}
+                target={item.external ? '_blank' : undefined}
+                rel={item.external ? 'noopener noreferrer' : undefined}
+                className="flex items-center gap-3 p-4 rounded-2xl transition-colors"
+                style={{
+                  background: 'rgba(248,200,181,0.1)',
+                  border: '1px solid rgba(232,154,133,0.2)',
+                  color: '#2A2438',
+                  fontFamily: '"DM Sans", sans-serif',
+                }}
+              >
+                {item.icon}
+                <div>
+                  <p style={{ fontSize: '0.875rem', fontWeight: 500 }}>{item.label}</p>
+                  <p style={{ fontSize: '0.875rem', color: '#5A4F6E' }}>{item.value}</p>
+                </div>
+              </a>
+            ))}
           </div>
         </div>
       </Modal>

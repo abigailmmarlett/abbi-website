@@ -1,284 +1,216 @@
-import { useRef, useEffect, useState } from 'react'
-import { ExternalLink, Github, ArrowRight } from 'lucide-react'
+import { ExternalLink } from 'lucide-react'
 
 interface Project {
   id: string
   title: string
-  fullDescription: string
-  problem: string
-  solution: string
-  technologies: string[]
-  image: string
+  description: string
+  category: string
+  year: string
+  cardColor: string
   link?: string
-  codeLink?: string
-  iframeUrl?: string
-  previewImage?: string
 }
+
+const FlowerIllustration = ({ size = 120 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 120 120">
+    {[0, 45, 90, 135, 180, 225, 270, 315].map(deg => (
+      <ellipse
+        key={deg}
+        cx="60" cy="22" rx="10" ry="22"
+        fill="#F5E6A8"
+        transform={`rotate(${deg} 60 60)`}
+      />
+    ))}
+    <circle cx="60" cy="60" r="18" fill="#9B86C2" />
+    <circle cx="60" cy="60" r="10" fill="#E89A85" />
+  </svg>
+);
 
 const projects: Project[] = [
   {
     id: 'kelsey-day',
-    title: "Kelsey Day Book Tour Website",
-    fullDescription: "A modern, responsive website designed to promote author Kelsey Day's upcoming book tour and engage with readers.",
-    problem: "Author needed a professional online presence to showcase her book, announce tour dates, and connect with readers",
-    solution: "Built a polished, responsive website with engaging tour date showcase, book information, and seamless contact integration. Optimized for performance and deployed on Netlify for reliability.",
-    technologies: ["React", "TypeScript", "Node.js", "Vite", "Netlify"],
-    image: "/images/spiral-key-photo.jpg",
-    previewImage: "/images/spiral-key-photo.jpg",
-    link: "https://kelseyday.netlify.app/#home",
-    iframeUrl: "https://kelseyday.netlify.app/#home",
-  }
+    title: 'Kelsey Day Book Tour Website',
+    description: 'A modern, responsive website to promote an author\'s book tour and connect with readers.',
+    category: 'Full-Stack · Web',
+    year: '2025',
+    cardColor: '#D8CCE8',
+    link: 'https://kelseyday.netlify.app/#home',
+  },
+  {
+    id: 'cherry-oven',
+    title: 'The Cherry Oven',
+    description: 'Online ordering platform for a local bakery, letting customers browse and order baked goods.',
+    category: 'Frontend · Web',
+    year: '2026',
+    cardColor: '#F8C8B5',
+    link: 'https://cherryoven.netlify.app/',
+  },
+  {
+    id: 'cue',
+    title: 'Cue',
+    description: 'React Native app for building and managing workout sequences — organize exercises into sections, tag routines, and save to a personal library.',
+    category: 'Mobile · React Native',
+    year: '2026',
+    cardColor: '#C7D9C0',
+  },
 ]
 
 export function Projects() {
-  const [activeProjectIndex, setActiveProjectIndex] = useState(0)
-  const [textOpacity, setTextOpacity] = useState(1)
-  const [activeIframeId, setActiveIframeId] = useState<string | null>(null)
-  const imagesContainerRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const container = imagesContainerRef.current
-    if (!container) return
-
-    const handleScroll = () => {
-      // Get the height of each image (they should all be equal height)
-      const imageHeight = container.offsetHeight
-      const scrollPosition = container.scrollTop
-
-      // Determine which image is most in view
-      const threshold = imageHeight * 0.5
-      const newIndex = Math.floor((scrollPosition + threshold) / imageHeight)
-      const clampedIndex = Math.max(0, Math.min(projects.length - 1, newIndex))
-
-      setActiveProjectIndex(clampedIndex)
-      // Reset iframe view when scrolling to a different project
-      setActiveIframeId(null)
-
-      // Calculate text opacity based on scroll position
-      // This creates a smooth fade as you scroll between images
-      const scrollRemainder = scrollPosition % imageHeight
-      const fadePoint = imageHeight * 0.25
-
-      // Text fades out in the first 25% of scroll, fades in during middle, fades out at end
-      let opacity = 1
-      if (scrollRemainder < fadePoint) {
-        // Fading in as you reach the image
-        opacity = scrollRemainder / fadePoint
-      } else if (scrollRemainder > imageHeight - fadePoint) {
-        // Fading out as you leave the image
-        opacity = (imageHeight - scrollRemainder) / fadePoint
-      }
-
-      setTextOpacity(Math.max(0.1, Math.min(1, opacity)))
-    }
-
-    container.addEventListener('scroll', handleScroll, { passive: true })
-    return () => container.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  const activeProject = projects[activeProjectIndex]
-
   return (
-    <div>
+    <section
+      id="projects"
+      className="py-20 px-6 lg:px-16"
+      style={{ background: '#FAF6F2' }}
+    >
+      <div className="max-w-5xl mx-auto">
 
-
-      {/* Section Title */}
-      <div className="py-12 text-center relative z-20">
-        <h2 className="text-3xl md:text-4xl font-display font-bold animate-fade-in">
-          PERSONAL PROJECTS
-        </h2>
-      </div>
-
-      <section id="projects" className="relative flex flex-col overflow-hidden"
-        style={{
-          background: 'linear-gradient(135deg, #0891b2 0%, #0e7490 100%)'
-        }}
-      >
-        {/* Subtle grid pattern overlay */}
-        <div className="absolute inset-0 opacity-5 pointer-events-none"
-          style={{
-            backgroundImage: 'linear-gradient(0deg, transparent 24%, rgba(255,255,255,.05) 25%, rgba(255,255,255,.05) 26%, transparent 27%, transparent 74%, rgba(255,255,255,.05) 75%, rgba(255,255,255,.05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255,255,255,.05) 25%, rgba(255,255,255,.05) 26%, transparent 27%, transparent 74%, rgba(255,255,255,.05) 75%, rgba(255,255,255,.05) 76%, transparent 77%, transparent)',
-            backgroundSize: '50px 50px'
-          }}
-        />
-        {/* Content Container */}
-        <div className="flex flex-col lg:flex-row lg:h-screen">
-          {/* Left Column - Vertically Scrollable Images */}
-          <div
-            ref={imagesContainerRef}
-            className="w-full h-64 sm:h-80 md:h-96 lg:flex-1 lg:h-auto overflow-hidden lg:overflow-y-auto relative"
+        {/* Section header */}
+        <div className="flex items-center justify-between mb-6">
+          <p
+            style={{
+              fontSize: 11,
+              letterSpacing: '0.2em',
+              textTransform: 'uppercase',
+              color: '#E89A85',
+              fontFamily: '"DM Sans", sans-serif',
+              fontWeight: 600,
+            }}
           >
-            {projects.map((project) => (
-              <div key={project.id}>
-                {/* Image or Iframe */}
-                <div className="w-full h-full lg:h-screen flex-shrink-0 relative bg-black">
-                  {activeIframeId === project.id && project.iframeUrl ? (
-                    <iframe
-                      src={project.iframeUrl}
-                      title={project.title}
-                      className="w-full h-full border-0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    />
-                  ) : (
-                    <>
-                      <img
-                        src={project.previewImage || project.image}
-                        alt={project.title}
-                        className="w-full h-full object-cover"
-                        style={project.id === 'kelsey-day' ? { filter: 'blur(8px)' } : {}}
-                      />
+            + 01 — SELECTED WORK
+          </p>
+          <a
+            href="#"
+            style={{
+              fontSize: 13,
+              color: '#5A4F6E',
+              fontFamily: '"DM Sans", sans-serif',
+              textDecoration: 'none',
+            }}
+            className="hover:text-[#E89A85] transition-colors"
+          >
+            full archive →
+          </a>
+        </div>
 
-                      {/* Gradient overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent" />
+        {/* Title */}
+        <h2
+          style={{
+            fontFamily: '"Cormorant Garamond", Georgia, serif',
+            fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
+            fontWeight: 600,
+            color: '#2A2438',
+            lineHeight: 1.15,
+            marginBottom: 48,
+          }}
+          className="animate-fade-in"
+        >
+          Things I've made{' '}
+          <span
+            style={{
+              fontFamily: '"Dancing Script", cursive',
+              color: '#E89A85',
+              fontWeight: 600,
+            }}
+          >
+            recently.
+          </span>
+        </h2>
 
-                      {/* Preview button - only show if project has iframe */}
-                      {project.iframeUrl && (
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <button
-                            onClick={() => setActiveIframeId(project.id)}
-                            className="flex items-center gap-2 px-6 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-medium rounded-lg transition-all duration-300 hover:gap-3 hover:shadow-lg hover:shadow-cyan-500/50"
-                          >
-                            View Interactive Demo
-                            <ArrowRight size={18} />
-                          </button>
-                        </div>
-                      )}
-                    </>
-                  )}
-                </div>
-
-              </div>
-            ))}
-          </div>
-
-          {/* Right Column - Static Text with Fade */}
-          <div className="w-full lg:w-1/2 bg-black/30 backdrop-blur-sm lg:border-l border-white/10 flex flex-col p-8 md:p-12 lg:overflow-y-auto relative z-10">
-            <div className="flex-1 flex flex-col justify-center">
-              <div className="max-w-xl">
-                {/* Project Counter */}
-                <div className="mb-8 transition-opacity duration-300 ease-in-out"
-                  style={{
-                    opacity: textOpacity,
-                  }}
-                >
-                  <span className="text-xs font-semibold text-cyan-400 uppercase tracking-widest">
-                    Project {activeProjectIndex + 1} of {projects.length}
-                  </span>
-                </div>
-
-                {/* Title - Fades with scroll */}
-                <h2
-                  className="text-4xl md:text-5xl font-bold text-white mb-4 transition-opacity duration-300 ease-in-out"
-                  style={{
-                    opacity: textOpacity,
-                  }}
-                >
-                  {activeProject.title}
-                </h2>
-
-                {/* Description - Fades with scroll */}
-                <p
-                  className="text-lg text-white/80 leading-relaxed mb-10 transition-opacity duration-300 ease-in-out"
-                  style={{
-                    opacity: textOpacity,
-                  }}
-                >
-                  {activeProject.fullDescription}
-                </p>
-
-                {/* Problem & Solution */}
-                <div className="space-y-8 mb-10 transition-opacity duration-300 ease-in-out"
-                  style={{
-                    opacity: textOpacity,
-                  }}
-                >
-                  <div>
-                    <p className="text-lg text-white/80 leading-relaxed mb-10 transition-opacity duration-300 ease-in-out">
-                      {activeProject.solution}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Divider */}
-                <div className="h-px bg-white/10 mb-8 transition-opacity duration-300 ease-in-out"
-                  style={{
-                    opacity: textOpacity,
-                  }}
-                />
-
-                {/* Technologies */}
+        {/* Card grid */}
+        <div className="flex flex-wrap gap-8">
+          {projects.map(project => (
+            <div key={project.id} style={{ width: 280, flexShrink: 0 }}>
+              {/* Card */}
+              <div
+                className="relative overflow-hidden transition-transform duration-300 hover:scale-[1.02]"
+                style={{
+                  backgroundColor: project.cardColor,
+                  borderRadius: 24,
+                  aspectRatio: '4/3',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                {/* Year badge */}
                 <div
-                  className="transition-opacity duration-300 ease-in-out"
                   style={{
-                    opacity: textOpacity,
+                    position: 'absolute',
+                    top: 14,
+                    right: 14,
+                    background: 'rgba(255,255,255,0.9)',
+                    borderRadius: 999,
+                    padding: '4px 12px',
+                    fontSize: 12,
+                    fontFamily: '"DM Sans", sans-serif',
+                    fontWeight: 600,
+                    color: '#2A2438',
                   }}
                 >
-                  <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-4">
-                    Technology Stack
-                  </h3>
-                  <div className="flex flex-wrap gap-2 mb-10">
-                    {activeProject.technologies.map((tech, idx) => (
-                      <span
-                        key={idx}
-                        className="px-3 py-1.5 text-xs font-medium text-white bg-white/10 rounded-full border border-white/20"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+                  {project.year}
                 </div>
+                <FlowerIllustration size={110} />
+              </div>
 
-                {/* Links */}
-                <div className="flex gap-3 transition-opacity duration-300 ease-in-out"
+              {/* Card metadata */}
+              <div className="mt-3">
+                <p
                   style={{
-                    opacity: textOpacity,
+                    fontSize: 11,
+                    letterSpacing: '0.15em',
+                    textTransform: 'uppercase',
+                    color: '#E89A85',
+                    fontFamily: '"DM Sans", sans-serif',
+                    fontWeight: 600,
+                    marginBottom: 6,
                   }}
                 >
-                  {activeProject.link && (
-                    <a
-                      href={activeProject.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-white bg-cyan-700 hover:bg-cyan-600 rounded-lg transition-all duration-300"
-                    >
-                      View Live
-                      <ExternalLink size={16} />
-                    </a>
-                  )}
-                  {activeProject.codeLink && (
-                    <a
-                      href={activeProject.codeLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-white border border-white/30 hover:border-white/60 rounded-lg transition-all duration-300"
-                    >
-                      View Code
-                      <Github size={16} />
-                    </a>
-                  )}
-                </div>
-
-                {/* Progress indicators */}
-                <div className="flex gap-2 mt-12">
-                  {projects.map((_, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => {
-                        if (imagesContainerRef.current) {
-                          imagesContainerRef.current.scrollTop = idx * imagesContainerRef.current.offsetHeight
-                        }
-                      }}
-                      className={`h-2 rounded-full transition-all duration-300 ${idx === activeProjectIndex ? 'bg-white w-8' : 'bg-white/40 w-2'
-                        }`}
-                      aria-label={`Go to project ${idx + 1}`}
-                    />
-                  ))}
-                </div>
+                  {project.category}
+                </p>
+                <h3
+                  style={{
+                    fontFamily: '"Cormorant Garamond", Georgia, serif',
+                    fontSize: '1.4rem',
+                    fontWeight: 600,
+                    color: '#2A2438',
+                    marginBottom: 6,
+                    lineHeight: 1.2,
+                  }}
+                >
+                  {project.title}
+                </h3>
+                <p
+                  style={{
+                    fontSize: '0.875rem',
+                    color: '#5A4F6E',
+                    fontFamily: '"DM Sans", sans-serif',
+                    lineHeight: 1.6,
+                    marginBottom: 10,
+                  }}
+                >
+                  {project.description}
+                </p>
+                {project.link && (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 hover:opacity-70 transition-opacity"
+                    style={{
+                      fontSize: 13,
+                      color: '#2A2438',
+                      fontFamily: '"DM Sans", sans-serif',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    View live <ExternalLink size={12} />
+                  </a>
+                )}
               </div>
             </div>
-          </div>
+          ))}
         </div>
-      </section>
-    </div>
-  )
+
+      </div>
+    </section>
+  );
 }

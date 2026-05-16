@@ -1,256 +1,95 @@
-import { JSX, useEffect, useRef } from 'react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import {
+  SiTypescript, SiJavascript, SiPython, SiReact,
+  SiDotnet, SiNodedotjs, SiDocker, SiKubernetes,
+  SiApachekafka, SiGit, SiTailwindcss,
+} from 'react-icons/si'
+import { FaAws } from 'react-icons/fa'
+import { Code2, Database, Cloud, BarChart2 } from 'lucide-react'
+import type { IconType } from 'react-icons'
+import type { LucideIcon } from 'lucide-react'
 
-gsap.registerPlugin(ScrollTrigger)
+type AnyIcon = IconType | LucideIcon
 
-interface TechItem {
-  name: string
-  icon: JSX.Element
-}
+const COLORS = ['#7FA876', '#E89A85', '#9B86C2'] as const
 
-const techStack: TechItem[] = [
-  {
-    name: "React",
-    icon: (
-      <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <circle cx="12" cy="12" r="3" />
-        <path d="M12 6c-3 0-6 1.5-6 4s3 4 6 4 6 1.5 6 4-3 4-6 4" />
-        <path d="M12 6c3 0 6 1.5 6 4s-3 4-6 4-6 1.5-6 4 3 4 6 4" />
-        <path d="M12 6v12" />
-      </svg>
-    ),
-  },
-  {
-    name: "TypeScript",
-    icon: (
-      <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
-        <rect x="2" y="2" width="20" height="20" rx="1" fill="#3178C6" />
-        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">TS</text>
-      </svg>
-    ),
-  },
-  {
-    name: "C#",
-    icon: (
-      <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
-        <circle cx="12" cy="12" r="10" fill="#239120" />
-        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">C#</text>
-      </svg>
-    ),
-  },
-  {
-    name: ".NET",
-    icon: (
-      <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
-        <rect x="2" y="2" width="20" height="20" fill="#512BD4" />
-        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">.NET</text>
-      </svg>
-    ),
-  },
-  {
-    name: "SQL Server",
-    icon: (
-      <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
-        <rect x="2" y="2" width="20" height="20" fill="#CC2927" />
-        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">SQL</text>
-      </svg>
-    ),
-  },
-  {
-    name: "AWS",
-    icon: (
-      <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
-        <rect x="2" y="2" width="20" height="20" fill="#FF9900" />
-        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">AWS</text>
-      </svg>
-    ),
-  },
-  {
-    name: "Tailwind CSS",
-    icon: (
-      <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
-        <rect x="2" y="2" width="20" height="20" fill="#4B9CD3" />
-        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">TW</text>
-      </svg>
-    ),
-  },
-  {
-    name: "Git",
-    icon: (
-      <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
-        <circle cx="12" cy="12" r="10" fill="#F1502F" />
-        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">Git</text>
-      </svg>
-    ),
-  },
-  {
-    name: "TFS",
-    icon: (
-      <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
-        <rect x="2" y="2" width="20" height="20" fill="#0078D4" />
-        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">TFS</text>
-      </svg>
-    ),
-  },
-  {
-    name: "Azure",
-    icon: (
-      <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
-        <rect x="2" y="2" width="20" height="20" fill="#0078D4" />
-        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">Az</text>
-      </svg>
-    ),
-  },
-  {
-    name: "Datadog",
-    icon: (
-      <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
-        <rect x="2" y="2" width="20" height="20" fill="#632CA6" />
-        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">DD</text>
-      </svg>
-    ),
-  },
-  {
-    name: "Entity Framework",
-    icon: (
-      <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
-        <rect x="2" y="2" width="20" height="20" fill="#512BD4" />
-        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="7" fontWeight="bold">EF</text>
-      </svg>
-    ),
-  },
-  {
-    name: "Python",
-    icon: (
-      <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
-        <rect x="2" y="2" width="20" height="20" fill="#3776AB" />
-        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">Py</text>
-      </svg>
-    ),
-  },
-  {
-    name: "Java",
-    icon: (
-      <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
-        <rect x="2" y="2" width="20" height="20" fill="#007396" />
-        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">Java</text>
-      </svg>
-    ),
-  },
-  {
-    name: "Docker",
-    icon: (
-      <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
-        <rect x="2" y="2" width="20" height="20" fill="#2496ED" />
-        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">DK</text>
-      </svg>
-    ),
-  },
-  {
-    name: "Kubernetes",
-    icon: (
-      <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
-        <rect x="2" y="2" width="20" height="20" fill="#326CE5" />
-        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">K8s</text>
-      </svg>
-    ),
-  },
-  {
-    name: "Kafka",
-    icon: (
-      <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
-        <rect x="2" y="2" width="20" height="20" fill="#000000" />
-        <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">Kf</text>
-      </svg>
-    ),
-  },
+const techItems: { name: string; Icon: AnyIcon }[] = [
+  { name: 'TypeScript',   Icon: SiTypescript },
+  { name: 'JavaScript',   Icon: SiJavascript },
+  { name: 'C#',           Icon: Code2 },
+  { name: 'Python',       Icon: SiPython },
+  { name: 'React',        Icon: SiReact },
+  { name: '.NET',         Icon: SiDotnet },
+  { name: 'Node.js',      Icon: SiNodedotjs },
+  { name: 'SQL Server',   Icon: Database },
+  { name: 'AWS',          Icon: FaAws },
+  { name: 'Azure',        Icon: Cloud },
+  { name: 'Docker',       Icon: SiDocker },
+  { name: 'Kubernetes',   Icon: SiKubernetes },
+  { name: 'Kafka',        Icon: SiApachekafka },
+  { name: 'Git',          Icon: SiGit },
+  { name: 'Power BI',     Icon: BarChart2 },
+  { name: 'Tailwind CSS', Icon: SiTailwindcss },
 ]
 
+const MarqueeItem = ({ name, Icon, color }: { name: string; Icon: AnyIcon; color: string }) => (
+  <>
+    <span
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 10,
+        padding: '0 16px',
+      }}
+    >
+      <Icon size={28} color={color} style={{ opacity: 0.85, flexShrink: 0 }} />
+      <span
+        style={{
+          fontFamily: '"Cormorant Garamond", Georgia, serif',
+          fontStyle: 'italic',
+          fontWeight: 500,
+          fontSize: 'clamp(1.8rem, 3.5vw, 2.75rem)',
+          color,
+        }}
+      >
+        {name}
+      </span>
+    </span>
+    <span style={{ color: '#F5E6A8', fontSize: '1rem', padding: '0 4px', lineHeight: 1 }}>
+      ✦
+    </span>
+  </>
+)
+
 export function TechStack() {
-  const containerRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (containerRef.current) {
-      const items = containerRef.current.querySelectorAll('.tech-item')
-
-      // Create a timeline for smooth sequential animation
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top bottom",
-          toggleActions: "play none none reverse"
-        }
-      })
-
-      tl.fromTo(
-        items,
-        {
-          opacity: 0,
-          scale: 0.5,
-          y: 50,
-        },
-        {
-          opacity: 1,
-          scale: 1,
-          y: 0,
-          duration: 0.5,
-          stagger: 0.08,
-          ease: "back.out(1.7)",
-        }
-      )
-
-      // Add hover animation
-      items.forEach((item) => {
-        item.addEventListener('mouseenter', () => {
-          gsap.to(item, {
-            scale: 1.15,
-            duration: 0.3,
-            ease: "power2.out",
-          })
-        })
-        item.addEventListener('mouseleave', () => {
-          gsap.to(item, {
-            scale: 1,
-            duration: 0.3,
-            ease: "power2.out",
-          })
-        })
-      })
-    }
-  }, [])
-
   return (
-    <div ref={containerRef} className="flex  pt-12 flex-wrap gap-6 sm:gap-8 justify-center px-4">
-      {techStack.map((tech, index) => (
-        <div
-          key={index}
-          className="tech-item flex flex-col items-center gap-3 cursor-pointer group"
-          title={tech.name}
-        >
-          <div className="relative p-3 sm:p-5 rounded-2xl glass-light border border-border hover:border-primary/40 transition-all duration-500 hover:shadow-xl group-hover:scale-110" style={{ color: 'hsl(var(--primary))' }}>
-            {/* Background glow effect on hover */}
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/0 to-accent/0 group-hover:from-primary/10 group-hover:to-accent/10 transition-all duration-500" />
-
-            {/* Icon shimmer effect */}
-            <div className="absolute inset-0 rounded-2xl overflow-hidden">
-              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/30 to-transparent" />
-            </div>
-
-            {/* Icon */}
-            <div className="relative z-10 group-hover:rotate-6 transition-transform duration-300">
-              {tech.icon}
-            </div>
-
-            {/* Orbital ring on hover */}
-            <div className="absolute inset-0 rounded-2xl border-2 border-primary/0 group-hover:border-primary/20 scale-110 opacity-0 group-hover:opacity-100 transition-all duration-500" />
-          </div>
-
-          <span className="text-sm font-medium text-center max-w-[100px] text-foreground-muted group-hover:text-primary transition-colors duration-300">
-            {tech.name}
-          </span>
-        </div>
-      ))}
-    </div>
+    <section
+      className="overflow-hidden py-6"
+      style={{
+        background: 'linear-gradient(160deg, rgba(250,246,242,0.6) 0%, rgba(199,217,192,0.45) 55%, rgba(199,217,192,0.65) 100%)',
+      }}
+    >
+      <div className="marquee-large-track">
+        <span className="marquee-large-content">
+          {techItems.map((item, i) => (
+            <MarqueeItem
+              key={i}
+              name={item.name}
+              Icon={item.Icon}
+              color={COLORS[i % COLORS.length]}
+            />
+          ))}
+        </span>
+        <span className="marquee-large-content" aria-hidden="true">
+          {techItems.map((item, i) => (
+            <MarqueeItem
+              key={i}
+              name={item.name}
+              Icon={item.Icon}
+              color={COLORS[i % COLORS.length]}
+            />
+          ))}
+        </span>
+      </div>
+    </section>
   )
 }
