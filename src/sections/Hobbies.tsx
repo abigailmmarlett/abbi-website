@@ -50,21 +50,63 @@ export function Hobbies() {
   };
 
   return (
-    <section id="outside-work" className="py-20 relative overflow-hidden bg-gradient-to-b from-background via-background-alt to-background">
+    <section id="outside-work" className="py-20 relative overflow-hidden" style={{ background: '#FAF6F2' }}>
       <div className="relative z-10">
+        {/* Section heading */}
         <div className="container mx-auto px-6 mb-12">
-          <div className="max-w-5xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-4 animate-fade-in">
-              OUT OF OFFICE
+          <div className="max-w-5xl mx-auto text-center">
+            <p
+              style={{
+                fontSize: 11,
+                letterSpacing: '0.2em',
+                textTransform: 'uppercase',
+                color: '#E89A85',
+                fontFamily: '"DM Sans", sans-serif',
+                fontWeight: 600,
+                marginBottom: 12,
+              }}
+            >
+              + 06 — OUTSIDE WORK
+            </p>
+            <h2
+              style={{
+                fontFamily: '"Cormorant Garamond", Georgia, serif',
+                fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
+                fontWeight: 600,
+                color: '#2A2438',
+                lineHeight: 1.1,
+                marginBottom: 12,
+              }}
+            >
+              out of{' '}
+              <span
+                style={{
+                  fontFamily: '"Dancing Script", cursive',
+                  color: '#E89A85',
+                  fontWeight: 600,
+                }}
+              >
+                the office
+              </span>
             </h2>
-            <p className="text-muted-foreground text-center max-w-2xl mx-auto">
-              You can find me...
+            <p
+              style={{
+                fontFamily: '"DM Sans", sans-serif',
+                fontSize: '1rem',
+                color: '#5A4F6E',
+                fontStyle: 'italic',
+              }}
+            >
+              you can find me...
             </p>
           </div>
         </div>
 
         <div className="relative w-full">
-          <div className="relative overflow-hidden rounded-2xl shadow-xl">
+          <div
+            className="relative overflow-hidden"
+            style={{ borderRadius: 24, boxShadow: '0 8px 40px rgba(42,36,56,0.1)' }}
+          >
             {/* Main Image */}
             <div className="relative w-full aspect-video">
               <img
@@ -76,27 +118,70 @@ export function Hobbies() {
               {/* Navigation Arrows */}
               <button
                 onClick={prevSlide}
-                className="absolute left-6 top-1/2 -translate-y-1/2 z-30 p-3 min-w-[44px] min-h-[44px] flex items-center justify-center bg-black/60 hover:bg-black/80 text-white rounded-full shadow-2xl transition-all duration-200 hover:scale-110 hover:shadow-xl"
+                className="absolute left-6 top-1/2 -translate-y-1/2 z-30 flex items-center justify-center transition-all duration-200 hover:scale-110"
+                style={{
+                  background: 'rgba(248,200,181,0.9)',
+                  border: '1.5px solid rgba(232,154,133,0.5)',
+                  color: '#2A2438',
+                  borderRadius: 999,
+                  padding: 10,
+                  minWidth: 44,
+                  minHeight: 44,
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 16px rgba(42,36,56,0.15)',
+                }}
                 aria-label="Previous slide"
               >
-                <ChevronLeft size={32} />
+                <ChevronLeft size={24} />
               </button>
               <button
                 onClick={nextSlide}
-                className="absolute right-6 top-1/2 -translate-y-1/2 z-30 p-3 min-w-[44px] min-h-[44px] flex items-center justify-center bg-black/60 hover:bg-black/80 text-white rounded-full shadow-2xl transition-all duration-200 hover:scale-110 hover:shadow-xl"
+                className="absolute right-6 top-1/2 -translate-y-1/2 z-30 flex items-center justify-center transition-all duration-200 hover:scale-110"
+                style={{
+                  background: 'rgba(248,200,181,0.9)',
+                  border: '1.5px solid rgba(232,154,133,0.5)',
+                  color: '#2A2438',
+                  borderRadius: 999,
+                  padding: 10,
+                  minWidth: 44,
+                  minHeight: 44,
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 16px rgba(42,36,56,0.15)',
+                }}
                 aria-label="Next slide"
               >
-                <ChevronRight size={32} />
+                <ChevronRight size={24} />
               </button>
             </div>
 
-            {/* Content Below Image */}
-            <div className="p-8 bg-background">
+            {/* Caption card below image */}
+            <div
+              style={{
+                background: '#ffffff',
+                padding: '2rem 2rem',
+                borderTop: '1px solid rgba(42,36,56,0.06)',
+              }}
+            >
               <div className="max-w-5xl mx-auto">
-                <h3 className="text-2xl md:text-3xl font-display font-bold text-foreground mb-3">
+                <h3
+                  style={{
+                    fontFamily: '"DM Serif Display", Georgia, serif',
+                    fontStyle: 'italic',
+                    fontSize: 'clamp(1.4rem, 2.5vw, 1.75rem)',
+                    color: '#2A2438',
+                    marginBottom: 10,
+                  }}
+                >
                   {hobbies[currentIndex].caption}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <p
+                  style={{
+                    fontFamily: '"DM Sans", sans-serif',
+                    fontSize: '0.95rem',
+                    color: '#5A4F6E',
+                    lineHeight: 1.7,
+                  }}
+                >
                   {hobbies[currentIndex].description}
                 </p>
               </div>
@@ -109,10 +194,16 @@ export function Hobbies() {
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`h-2 rounded-full transition-all duration-300 ${index === currentIndex
-                  ? 'w-8 bg-primary'
-                  : 'w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50'
-                  }`}
+                style={{
+                  height: 8,
+                  borderRadius: 999,
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  width: index === currentIndex ? 32 : 8,
+                  background: index === currentIndex ? '#E89A85' : 'rgba(232,154,133,0.3)',
+                }}
+                aria-label={`Go to slide ${index + 1}`}
               />
             ))}
           </div>

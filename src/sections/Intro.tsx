@@ -77,34 +77,35 @@ export function Intro({ onComplete }: IntroProps) {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 flex items-center justify-center z-50 transition-none depth-gradient"
+      className="fixed inset-0 flex items-center justify-center z-50 transition-none"
       style={{
         pointerEvents: 'auto',
+        backgroundColor: '#2A2438',
       }}
     >
       {/* Animated background elements with depth */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Base layer blobs */}
-        <div className="absolute top-1/4 -right-1/4 w-96 h-96 bg-accentRose/5 rounded-full blur-3xl animate-float-slow"></div>
-        <div className="absolute -bottom-1/4 -left-1/4 w-96 h-96 bg-accentBlue/5 rounded-full blur-3xl animate-float-medium"></div>
+        <div className="absolute top-1/4 -right-1/4 w-96 h-96 rounded-full blur-3xl animate-float-slow" style={{ background: 'rgba(248,200,181,0.08)' }}></div>
+        <div className="absolute -bottom-1/4 -left-1/4 w-96 h-96 rounded-full blur-3xl animate-float-medium" style={{ background: 'rgba(216,204,232,0.08)' }}></div>
 
         {/* Mid-layer glowing blobs */}
-        <div className="absolute top-1/3 left-1/4 w-80 h-80 bg-accentRose/8 rounded-full blur-2xl opacity-60" style={{ animation: 'subtle-depth 15s ease infinite' }}></div>
-        <div className="absolute bottom-1/4 right-1/3 w-72 h-72 bg-accentBlue/8 rounded-full blur-2xl opacity-60" style={{ animation: 'subtle-depth 18s ease infinite', animationDelay: '2s' }}></div>
+        <div className="absolute top-1/3 left-1/4 w-80 h-80 rounded-full blur-2xl opacity-60" style={{ background: 'rgba(248,200,181,0.12)' }}></div>
+        <div className="absolute bottom-1/4 right-1/3 w-72 h-72 rounded-full blur-2xl opacity-60" style={{ background: 'rgba(216,204,232,0.10)' }}></div>
 
-        {/* Additional depth layers */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-accentRose/5 to-accentBlue/5 rounded-full blur-3xl opacity-40" style={{ animation: 'subtle-depth 25s ease infinite' }}></div>
+        {/* Additional depth layer */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full blur-3xl opacity-40" style={{ background: 'linear-gradient(to right, rgba(248,200,181,0.06), rgba(216,204,232,0.06))' }}></div>
 
         {/* Vignette effect for depth */}
-        <div className="absolute inset-0 bg-radial-gradient opacity-40" style={{
-          background: 'radial-gradient(circle at center, transparent 0%, oklch(29.3% 0.066 243.157) 100%)'
+        <div className="absolute inset-0 opacity-40" style={{
+          background: 'radial-gradient(circle at center, transparent 0%, #2A2438 100%)'
         }}></div>
       </div>
 
       <div
         className="relative z-10 flex flex-col items-center justify-center gap-12"
         style={{
-          textShadow: '0 0 30px rgba(146, 94, 120, 0.5), 0 0 60px rgba(101, 142, 156, 0.3)'
+          textShadow: '0 0 30px rgba(232,154,133,0.4), 0 0 60px rgba(248,200,181,0.2)'
         }}
       >
         {/* Handwritten text with SVG */}
@@ -114,7 +115,7 @@ export function Intro({ onComplete }: IntroProps) {
           viewBox="0 0 650 220"
           className="max-w-full drop-shadow-lg"
           style={{
-            filter: 'drop-shadow(0 0 20px rgba(146, 94, 120, 0.6)) drop-shadow(0 0 40px rgba(101, 142, 156, 0.4))',
+            filter: 'drop-shadow(0 0 20px rgba(232,154,133,0.5)) drop-shadow(0 0 40px rgba(248,200,181,0.3))',
           }}
         >
           {/* Line 1: "oh !" */}
@@ -323,7 +324,7 @@ export function Intro({ onComplete }: IntroProps) {
           <button
             ref={arrowRef}
             onClick={handleArrowClick}
-            className="flex flex-col items-center gap-2 text-white hover:text-accentRose transition-colors cursor-pointer bg-none border-none p-0"
+            className="flex flex-col items-center gap-2 text-white hover:opacity-80 transition-opacity cursor-pointer bg-transparent border-none p-0"
           >
             <svg
               className="w-6 h-6 animate-bounce"
