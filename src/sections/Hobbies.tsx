@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const hobbies = [
   {
     id: 2,
     caption: "With my cat, Pip",
-    description: "Yes, named after the Python package installer.",
+    description: "Yes, named after the Python package installer. Mostly nocturnal, mostly judgmental, fully in charge.",
     image: '/images/pip.jpg',
   },
   {
@@ -34,178 +33,243 @@ const hobbies = [
   },
 ];
 
+const cardLayout = [
+  { top: 0,   left: 0,   rotate: '-3deg' },
+  { top: 10,  left: 250, rotate: '5deg'  },
+  { top: 155, left: 115, rotate: '-1deg' },
+  { top: 285, left: 10,  rotate: '4deg'  },
+  { top: 275, left: 255, rotate: '-6deg' },
+];
+
 export function Hobbies() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % hobbies.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + hobbies.length) % hobbies.length);
-  };
-
-  const goToSlide = (index: number) => {
-    setCurrentIndex(index);
-  };
+  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
     <section id="outside-work" className="py-20 relative overflow-hidden" style={{ background: '#FAF6F2' }}>
-      <div className="relative z-10">
-        {/* Section heading */}
-        <div className="container mx-auto px-6 mb-12">
-          <div className="max-w-5xl mx-auto text-center">
-            <p
-              style={{
-                fontSize: 11,
-                letterSpacing: '0.2em',
-                textTransform: 'uppercase',
-                color: '#E89A85',
-                fontFamily: '"DM Sans", sans-serif',
-                fontWeight: 600,
-                marginBottom: 12,
-              }}
-            >
-              + 06 — OUTSIDE WORK
-            </p>
-            <h2
-              style={{
-                fontFamily: '"Cormorant Garamond", Georgia, serif',
-                fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
-                fontWeight: 600,
-                color: '#2A2438',
-                lineHeight: 1.1,
-                marginBottom: 12,
-              }}
-            >
-              out of{' '}
-              <span
+      <div className="container mx-auto px-6">
+        <div className="max-w-5xl mx-auto">
+
+          {/* Desktop: two-column layout */}
+          <div className="flex flex-col md:flex-row md:items-start md:gap-16">
+
+            {/* Left column: heading + description */}
+            <div className="md:w-[45%] flex-shrink-0 mb-12 md:mb-0 md:sticky md:top-24">
+              <p
                 style={{
-                  fontFamily: '"Dancing Script", cursive',
+                  fontSize: 11,
+                  letterSpacing: '0.2em',
+                  textTransform: 'uppercase',
                   color: '#E89A85',
+                  fontFamily: '"DM Sans", sans-serif',
                   fontWeight: 600,
+                  marginBottom: 12,
                 }}
               >
-                the office
-              </span>
-            </h2>
-            <p
-              style={{
-                fontFamily: '"DM Sans", sans-serif',
-                fontSize: '1rem',
-                color: '#5A4F6E',
-                fontStyle: 'italic',
-              }}
-            >
-              you can find me...
-            </p>
-          </div>
-        </div>
-
-        <div className="relative w-full">
-          <div
-            className="relative overflow-hidden"
-            style={{ borderRadius: 24, boxShadow: '0 8px 40px rgba(42,36,56,0.1)' }}
-          >
-            {/* Main Image */}
-            <div className="relative w-full aspect-video">
-              <img
-                src={hobbies[currentIndex].image}
-                alt={hobbies[currentIndex].caption}
-                className="w-full h-full object-cover transition-opacity duration-500"
-              />
-
-              {/* Navigation Arrows */}
-              <button
-                onClick={prevSlide}
-                className="absolute left-6 top-1/2 -translate-y-1/2 z-30 flex items-center justify-center transition-all duration-200 hover:scale-110"
+                OUTSIDE WORK
+              </p>
+              <h2
                 style={{
-                  background: 'rgba(248,200,181,0.9)',
-                  border: '1.5px solid rgba(232,154,133,0.5)',
+                  fontFamily: '"Cormorant Garamond", Georgia, serif',
+                  fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
+                  fontWeight: 600,
                   color: '#2A2438',
-                  borderRadius: 999,
-                  padding: 10,
-                  minWidth: 44,
-                  minHeight: 44,
-                  cursor: 'pointer',
-                  boxShadow: '0 4px 16px rgba(42,36,56,0.15)',
+                  lineHeight: 1.1,
+                  marginBottom: 12,
                 }}
-                aria-label="Previous slide"
               >
-                <ChevronLeft size={24} />
-              </button>
-              <button
-                onClick={nextSlide}
-                className="absolute right-6 top-1/2 -translate-y-1/2 z-30 flex items-center justify-center transition-all duration-200 hover:scale-110"
+                out of{' '}
+                <span
+                  style={{
+                    fontFamily: '"Dancing Script", cursive',
+                    color: '#E89A85',
+                    fontWeight: 600,
+                  }}
+                >
+                  the office
+                </span>
+              </h2>
+              <p
                 style={{
-                  background: 'rgba(248,200,181,0.9)',
-                  border: '1.5px solid rgba(232,154,133,0.5)',
-                  color: '#2A2438',
-                  borderRadius: 999,
-                  padding: 10,
-                  minWidth: 44,
-                  minHeight: 44,
-                  cursor: 'pointer',
-                  boxShadow: '0 4px 16px rgba(42,36,56,0.15)',
+                  fontFamily: '"DM Sans", sans-serif',
+                  fontSize: '1rem',
+                  color: '#5A4F6E',
+                  fontStyle: 'italic',
+                  marginBottom: 32,
                 }}
-                aria-label="Next slide"
               >
-                <ChevronRight size={24} />
-              </button>
-            </div>
+                you can find me...
+              </p>
 
-            {/* Caption card below image */}
-            <div
-              style={{
-                background: '#ffffff',
-                padding: '2rem 2rem',
-                borderTop: '1px solid rgba(42,36,56,0.06)',
-              }}
-            >
-              <div className="max-w-5xl mx-auto">
+              {/* Active hobby description */}
+              <div key={activeIndex} className="animate-fade-in">
                 <h3
                   style={{
                     fontFamily: '"DM Serif Display", Georgia, serif',
                     fontStyle: 'italic',
-                    fontSize: 'clamp(1.4rem, 2.5vw, 1.75rem)',
+                    fontSize: 'clamp(1.3rem, 2vw, 1.6rem)',
                     color: '#2A2438',
                     marginBottom: 10,
                   }}
                 >
-                  {hobbies[currentIndex].caption}
+                  {hobbies[activeIndex].caption}
                 </h3>
                 <p
                   style={{
                     fontFamily: '"DM Sans", sans-serif',
                     fontSize: '0.95rem',
                     color: '#5A4F6E',
-                    lineHeight: 1.7,
+                    lineHeight: 1.75,
                   }}
                 >
-                  {hobbies[currentIndex].description}
+                  {hobbies[activeIndex].description}
                 </p>
               </div>
             </div>
-          </div>
 
-          {/* Dots Indicator */}
-          <div className="flex items-center justify-center gap-2 mt-6">
-            {hobbies.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
+            {/* Right column: scattered polaroid collage (desktop) */}
+            <div className="hidden md:block md:w-[55%]">
+              <div className="relative" style={{ height: 480 }}>
+                {hobbies.map((hobby, i) => {
+                  const isActive = i === activeIndex;
+                  const pos = cardLayout[i];
+                  return (
+                    <div
+                      key={hobby.id}
+                      onClick={() => setActiveIndex(i)}
+                      style={{
+                        position: 'absolute',
+                        top: pos.top,
+                        left: pos.left,
+                        width: 200,
+                        background: '#ffffff',
+                        padding: 10,
+                        borderRadius: 4,
+                        boxShadow: isActive
+                          ? '0 8px 32px rgba(42,36,56,0.25)'
+                          : '0 4px 20px rgba(42,36,56,0.15)',
+                        transform: isActive
+                          ? 'rotate(0deg) scale(1.06)'
+                          : `rotate(${pos.rotate}) scale(1)`,
+                        outline: isActive ? '2px solid #E89A85' : 'none',
+                        zIndex: isActive ? 10 : i + 1,
+                        cursor: isActive ? 'default' : 'pointer',
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease, outline 0.3s ease',
+                      }}
+                    >
+                      <img
+                        src={hobby.image}
+                        alt={hobby.caption}
+                        style={{
+                          width: '100%',
+                          height: 160,
+                          objectFit: 'cover',
+                          display: 'block',
+                          borderRadius: 2,
+                        }}
+                      />
+                      <p
+                        style={{
+                          fontFamily: '"DM Sans", sans-serif',
+                          fontSize: '0.75rem',
+                          color: '#5A4F6E',
+                          marginTop: 8,
+                          textAlign: 'center',
+                          lineHeight: 1.3,
+                        }}
+                      >
+                        {hobby.caption}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Mobile: horizontal scroll row */}
+            <div className="md:hidden w-full">
+              <div
                 style={{
-                  height: 8,
-                  borderRadius: 999,
-                  border: 'none',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease',
-                  width: index === currentIndex ? 32 : 8,
-                  background: index === currentIndex ? '#E89A85' : 'rgba(232,154,133,0.3)',
+                  display: 'flex',
+                  overflowX: 'auto',
+                  gap: 16,
+                  paddingBottom: 12,
+                  scrollbarWidth: 'none',
                 }}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
+              >
+                {hobbies.map((hobby, i) => {
+                  const isActive = i === activeIndex;
+                  return (
+                    <div
+                      key={hobby.id}
+                      onClick={() => setActiveIndex(i)}
+                      style={{
+                        flexShrink: 0,
+                        width: 160,
+                        background: '#ffffff',
+                        padding: 8,
+                        borderRadius: 4,
+                        boxShadow: isActive
+                          ? '0 6px 24px rgba(42,36,56,0.2)'
+                          : '0 3px 14px rgba(42,36,56,0.12)',
+                        outline: isActive ? '2px solid #E89A85' : 'none',
+                        cursor: isActive ? 'default' : 'pointer',
+                        transition: 'box-shadow 0.3s ease, outline 0.3s ease',
+                      }}
+                    >
+                      <img
+                        src={hobby.image}
+                        alt={hobby.caption}
+                        style={{
+                          width: '100%',
+                          height: 120,
+                          objectFit: 'cover',
+                          display: 'block',
+                          borderRadius: 2,
+                        }}
+                      />
+                      <p
+                        style={{
+                          fontFamily: '"DM Sans", sans-serif',
+                          fontSize: '0.7rem',
+                          color: '#5A4F6E',
+                          marginTop: 6,
+                          textAlign: 'center',
+                          lineHeight: 1.3,
+                        }}
+                      >
+                        {hobby.caption}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Mobile description */}
+              <div key={activeIndex} className="animate-fade-in mt-6">
+                <h3
+                  style={{
+                    fontFamily: '"DM Serif Display", Georgia, serif',
+                    fontStyle: 'italic',
+                    fontSize: '1.3rem',
+                    color: '#2A2438',
+                    marginBottom: 8,
+                  }}
+                >
+                  {hobbies[activeIndex].caption}
+                </h3>
+                <p
+                  style={{
+                    fontFamily: '"DM Sans", sans-serif',
+                    fontSize: '0.95rem',
+                    color: '#5A4F6E',
+                    lineHeight: 1.75,
+                  }}
+                >
+                  {hobbies[activeIndex].description}
+                </p>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>

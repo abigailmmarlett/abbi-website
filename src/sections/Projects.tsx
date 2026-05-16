@@ -8,6 +8,8 @@ interface Project {
   year: string
   cardColor: string
   link?: string
+  image?: string
+  imageFit?: 'cover' | 'contain'
 }
 
 const FlowerIllustration = ({ size = 120 }: { size?: number }) => (
@@ -30,10 +32,11 @@ const projects: Project[] = [
     id: 'kelsey-day',
     title: 'Kelsey Day Book Tour Website',
     description: 'A modern, responsive website to promote an author\'s book tour and connect with readers.',
-    category: 'Full-Stack · Web',
+    category: 'Frontend · Web',
     year: '2025',
     cardColor: '#D8CCE8',
     link: 'https://kelseyday.netlify.app/#home',
+    image: '/images/spiral-key-photo.jpg',
   },
   {
     id: 'cherry-oven',
@@ -43,14 +46,16 @@ const projects: Project[] = [
     year: '2026',
     cardColor: '#F8C8B5',
     link: 'https://cherryoven.netlify.app/',
+    image: '/images/thecherryovenlogo.jpg',
   },
   {
     id: 'cue',
     title: 'Cue',
     description: 'React Native app for building and managing workout sequences — organize exercises into sections, tag routines, and save to a personal library.',
-    category: 'Mobile · React Native',
+    category: 'Mobile · Full-Stack',
     year: '2026',
     cardColor: '#C7D9C0',
+    image: '/images/cue.PNG',
   },
 ]
 
@@ -75,20 +80,8 @@ export function Projects() {
               fontWeight: 600,
             }}
           >
-            + 01 — SELECTED WORK
+            SELECTED WORK
           </p>
-          <a
-            href="#"
-            style={{
-              fontSize: 13,
-              color: '#5A4F6E',
-              fontFamily: '"DM Sans", sans-serif',
-              textDecoration: 'none',
-            }}
-            className="hover:text-[#E89A85] transition-colors"
-          >
-            full archive →
-          </a>
         </div>
 
         {/* Title */}
@@ -148,7 +141,20 @@ export function Projects() {
                 >
                   {project.year}
                 </div>
-                <FlowerIllustration size={110} />
+                {project.image ? (
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: project.imageFit ?? 'cover',
+                      objectPosition: 'center',
+                    }}
+                  />
+                ) : (
+                  <FlowerIllustration size={110} />
+                )}
               </div>
 
               {/* Card metadata */}

@@ -39,7 +39,7 @@ export function About() {
                 marginBottom: 16,
               }}
             >
-              + 02 — ABOUT
+              ABOUT
             </p>
 
             {/* Title */}
@@ -90,7 +90,7 @@ export function About() {
             >
               I've been writing code professionally since 2023 — currently at CoStar Group —
               and coaching fitness classes on the side. Before that, UNC Chapel Hill,
-              Computer Science.
+              B.A. Computer Science, minor in Data Science.
             </p>
 
             {/* Skill tags */}

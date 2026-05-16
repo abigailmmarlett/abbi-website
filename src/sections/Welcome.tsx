@@ -120,7 +120,7 @@ export function Welcome({ onWorkClick, onContactClick }: WelcomeProps) {
             animationDelay: '1.2s',
           }}
         >
-          ❋&nbsp; building thoughtful software · richmond, va &nbsp;❋
+          ✿&nbsp; building thoughtful software · richmond, va &nbsp;✿
         </p>
 
         {/* CTA buttons */}
