@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from 'react'
+import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 
 interface IntroProps {
@@ -7,37 +7,72 @@ interface IntroProps {
 
 export function Intro({ onComplete }: IntroProps) {
   const containerRef = useRef<HTMLDivElement>(null)
-  const arrowRef = useRef<HTMLButtonElement>(null)
   const pathRefs = useRef<SVGPathElement[]>([])
-  const [showArrow, setShowArrow] = useState(false)
 
-  const handleArrowClick = useCallback(() => {
-    if (containerRef.current) {
-      // Fade out intro
-      gsap.to(containerRef.current, {
-        opacity: 0,
-        duration: 0.6,
-        ease: "power2.inOut",
-        pointerEvents: "none",
-        onComplete: () => {
-          onComplete()
-        },
-      })
+  const spawnConfetti = () => {
+    const container = containerRef.current
+    if (!container) return
 
-      // Scroll to welcome section
-      const welcomeElement = document.getElementById('welcome')
-      if (welcomeElement) {
-        welcomeElement.scrollIntoView({ behavior: 'smooth' })
-      }
+    const colors = ['#F8C8B5', '#D8CCE8', '#C7D9C0', '#F5E6A8', '#ffffff', '#E89A85', '#9B86C2']
+
+    for (let i = 0; i < 80; i++) {
+      const el = document.createElement('div')
+      const color = colors[Math.floor(Math.random() * colors.length)]
+      const isCircle = Math.random() > 0.5
+      const size = 5 + Math.random() * 9
+
+      el.style.cssText = `
+        position: absolute;
+        width: ${size}px;
+        height: ${size}px;
+        background: ${color};
+        border-radius: ${isCircle ? '50%' : '2px'};
+        left: 50%;
+        top: 50%;
+        margin-left: -${size / 2}px;
+        margin-top: -${size / 2}px;
+        pointer-events: none;
+        z-index: 60;
+      `
+      container.appendChild(el)
+
+      const angle = Math.random() * Math.PI * 2
+      const distance = 150 + Math.random() * 250
+      gsap.fromTo(
+        el,
+        { x: 0, y: 0, opacity: 1, rotation: 0, scale: 1 },
+        {
+          x: Math.cos(angle) * distance,
+          y: Math.sin(angle) * distance,
+          opacity: 0,
+          rotation: Math.random() * 720 - 360,
+          scale: 0.2,
+          duration: 1.0 + Math.random() * 0.6,
+          ease: 'power2.out',
+          delay: Math.random() * 0.4,
+          onComplete: () => el.remove(),
+        }
+      )
     }
-  }, [onComplete])
+  }
+
+  const handleTransition = () => {
+    if (!containerRef.current) return
+    gsap.to(containerRef.current, {
+      y: '-100%',
+      duration: 0.9,
+      ease: 'power3.inOut',
+      onComplete: () => onComplete(),
+    })
+  }
 
   useEffect(() => {
     // Animate all paths as if being written
     if (pathRefs.current.length > 0) {
       const timeline = gsap.timeline({
         onComplete: () => {
-          setShowArrow(true)
+          spawnConfetti()
+          gsap.delayedCall(1.5, handleTransition)
         },
       })
 
@@ -61,18 +96,6 @@ export function Intro({ onComplete }: IntroProps) {
       })
     }
   }, [])
-
-  // Handle scroll to close intro
-  useEffect(() => {
-    const handleWheel = (e: WheelEvent) => {
-      if (showArrow && e.deltaY > 0) {
-        handleArrowClick()
-      }
-    }
-
-    window.addEventListener('wheel', handleWheel, { passive: true })
-    return () => window.removeEventListener('wheel', handleWheel)
-  }, [showArrow, handleArrowClick])
 
   return (
     <div
@@ -319,28 +342,6 @@ export function Intro({ onComplete }: IntroProps) {
           />
         </svg>
 
-        {/* Scroll indicator arrow */}
-        {showArrow && (
-          <button
-            ref={arrowRef}
-            onClick={handleArrowClick}
-            className="flex flex-col items-center gap-2 text-white hover:opacity-80 transition-opacity cursor-pointer bg-transparent border-none p-0"
-          >
-            <svg
-              className="w-6 h-6 animate-bounce"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 14l-7 7m0 0l-7-7m7 7V3"
-              />
-            </svg>
-          </button>
-        )}
       </div>
     </div>
   )
