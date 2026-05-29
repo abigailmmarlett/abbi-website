@@ -280,9 +280,6 @@ function App() {
               <p style={{ color: '#D8CCE8', fontSize: '0.875rem', fontFamily: '"DM Sans", sans-serif' }}>
                 Thanks for visiting!
               </p>
-              <p style={{ color: 'rgba(216,204,232,0.6)', fontSize: '0.75rem', fontFamily: '"DM Sans", sans-serif' }}>
-                © 2025 Abigail Marlett. All rights reserved.
-              </p>
             </div>
           </div>
         </div>
