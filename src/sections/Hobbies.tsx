@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const hobbies = [
   {
@@ -43,6 +44,8 @@ const cardLayout = [
 
 export function Hobbies() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const prevHobby = () => setActiveIndex(i => (i - 1 + hobbies.length) % hobbies.length);
+  const nextHobby = () => setActiveIndex(i => (i + 1) % hobbies.length);
 
   return (
     <section id="outside-work" className="py-20 relative overflow-hidden" style={{ background: '#FAF6F2' }}>
@@ -100,8 +103,8 @@ export function Hobbies() {
                 you can find me...
               </p>
 
-              {/* Active hobby description */}
-              <div key={activeIndex} className="animate-fade-in">
+              {/* Active hobby description — desktop only */}
+              <div key={activeIndex} className="hidden md:block animate-fade-in">
                 <h3
                   style={{
                     fontFamily: '"DM Serif Display", Georgia, serif',
@@ -185,67 +188,117 @@ export function Hobbies() {
               </div>
             </div>
 
-            {/* Mobile: horizontal scroll row */}
+            {/* Mobile: single-card carousel */}
             <div className="md:hidden w-full">
-              <div
-                style={{
-                  display: 'flex',
-                  overflowX: 'auto',
-                  gap: 16,
-                  paddingBottom: 12,
-                  scrollbarWidth: 'none',
-                }}
-              >
-                {hobbies.map((hobby, i) => {
-                  const isActive = i === activeIndex;
-                  return (
-                    <div
-                      key={hobby.id}
-                      onClick={() => setActiveIndex(i)}
-                      style={{
-                        flexShrink: 0,
-                        width: 160,
-                        background: '#ffffff',
-                        padding: 8,
-                        borderRadius: 4,
-                        boxShadow: isActive
-                          ? '0 6px 24px rgba(42,36,56,0.2)'
-                          : '0 3px 14px rgba(42,36,56,0.12)',
-                        outline: isActive ? '2px solid #E89A85' : 'none',
-                        cursor: isActive ? 'default' : 'pointer',
-                        transition: 'box-shadow 0.3s ease, outline 0.3s ease',
-                      }}
-                    >
-                      <img
-                        src={hobby.image}
-                        alt={hobby.caption}
-                        style={{
-                          width: '100%',
-                          height: 120,
-                          objectFit: 'cover',
-                          display: 'block',
-                          borderRadius: 2,
-                        }}
-                      />
-                      <p
-                        style={{
-                          fontFamily: '"DM Sans", sans-serif',
-                          fontSize: '0.7rem',
-                          color: '#5A4F6E',
-                          marginTop: 6,
-                          textAlign: 'center',
-                          lineHeight: 1.3,
-                        }}
-                      >
-                        {hobby.caption}
-                      </p>
-                    </div>
-                  );
-                })}
+              {/* Card + arrows */}
+              <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                {/* Prev arrow */}
+                <button
+                  onClick={prevHobby}
+                  aria-label="Previous"
+                  style={{
+                    position: 'absolute',
+                    left: 0,
+                    zIndex: 10,
+                    background: 'rgba(255,255,255,0.85)',
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: 36,
+                    height: 36,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer',
+                    boxShadow: '0 2px 8px rgba(42,36,56,0.15)',
+                  }}
+                >
+                  <ChevronLeft size={20} style={{ color: '#E89A85' }} />
+                </button>
+
+                {/* Polaroid card */}
+                <div
+                  key={activeIndex}
+                  className="animate-fade-in"
+                  style={{
+                    width: '85%',
+                    background: '#ffffff',
+                    padding: 10,
+                    borderRadius: 4,
+                    boxShadow: '0 8px 32px rgba(42,36,56,0.18)',
+                  }}
+                >
+                  <img
+                    src={hobbies[activeIndex].image}
+                    alt={hobbies[activeIndex].caption}
+                    style={{
+                      width: '100%',
+                      aspectRatio: '3 / 2',
+                      objectFit: 'cover',
+                      display: 'block',
+                      borderRadius: 2,
+                    }}
+                  />
+                  <p
+                    style={{
+                      fontFamily: '"DM Sans", sans-serif',
+                      fontSize: '0.75rem',
+                      color: '#5A4F6E',
+                      marginTop: 8,
+                      textAlign: 'center',
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {hobbies[activeIndex].caption}
+                  </p>
+                </div>
+
+                {/* Next arrow */}
+                <button
+                  onClick={nextHobby}
+                  aria-label="Next"
+                  style={{
+                    position: 'absolute',
+                    right: 0,
+                    zIndex: 10,
+                    background: 'rgba(255,255,255,0.85)',
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: 36,
+                    height: 36,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer',
+                    boxShadow: '0 2px 8px rgba(42,36,56,0.15)',
+                  }}
+                >
+                  <ChevronRight size={20} style={{ color: '#E89A85' }} />
+                </button>
               </div>
 
-              {/* Mobile description */}
-              <div key={activeIndex} className="animate-fade-in mt-6">
+              {/* Navigation dots */}
+              <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: 16 }}>
+                {hobbies.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveIndex(i)}
+                    aria-label={`Go to ${hobbies[i].caption}`}
+                    style={{
+                      width: 10,
+                      height: 10,
+                      borderRadius: '50%',
+                      border: 'none',
+                      cursor: 'pointer',
+                      padding: 0,
+                      background: i === activeIndex ? '#E89A85' : 'rgba(90,79,110,0.25)',
+                      transition: 'background 0.2s ease',
+                    }}
+                  />
+                ))}
+              </div>
+
+              {/* Description */}
+              <div key={activeIndex} className="animate-fade-in" style={{ marginTop: 24 }}>
                 <h3
                   style={{
                     fontFamily: '"DM Serif Display", Georgia, serif',
