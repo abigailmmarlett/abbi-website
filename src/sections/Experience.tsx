@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Download } from "lucide-react";
 
 const FlowerDot = () => (
   <svg width="20" height="20" viewBox="0 0 60 60" style={{ flexShrink: 0 }}>
@@ -161,17 +162,48 @@ export function Experience() {
             been &amp; learned
           </span>
         </h2>
-        <p
-          style={{
-            fontSize: '0.875rem',
-            color: '#9B86C2',
-            fontFamily: '"DM Sans", sans-serif',
-            fontStyle: 'italic',
-            marginBottom: 32,
-          }}
-        >
-          click any entry to expand · scroll to reveal
-        </p>
+        <div className="flex flex-wrap items-center gap-4" style={{ marginBottom: 32 }}>
+          <p
+            style={{
+              fontSize: '0.875rem',
+              color: '#9B86C2',
+              fontFamily: '"DM Sans", sans-serif',
+              fontStyle: 'italic',
+            }}
+          >
+            click any entry to expand · scroll to reveal
+          </p>
+          <a
+            href="/Abigail_Marlett_Resume.pdf"
+            download
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2"
+            style={{
+              fontFamily: '"DM Sans", sans-serif',
+              fontSize: '0.8125rem',
+              fontWeight: 500,
+              color: '#fff',
+              background: '#E89A85',
+              borderRadius: 999,
+              padding: '8px 20px',
+              textDecoration: 'none',
+              transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+              boxShadow: '0 2px 8px rgba(232,154,133,0.3)',
+            }}
+            onMouseEnter={e => {
+              (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-2px)';
+              (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 0 20px rgba(232,154,133,0.4)';
+            }}
+            onMouseLeave={e => {
+              (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(0)';
+              (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 2px 8px rgba(232,154,133,0.3)';
+            }}
+          >
+            <Download size={14} />
+            Download Resume
+          </a>
+        </div>
 
         {/* Tab switcher */}
         <div
