@@ -89,7 +89,7 @@ const education = {
   minor: 'Data Science',
   gpa: '3.8 / 4.0',
   achievements: [
-    'B.S. Computer Science with a minor in Data Science.',
+    'B.A. Computer Science with a minor in Data Science.',
     'GPA: 3.8 / 4.0',
     'Undergraduate Teaching Assistant for Web Development coursework.',
   ],
@@ -136,7 +136,7 @@ export function Experience() {
             marginBottom: 12,
           }}
         >
-          + 04 — THE RESUME BITS
+          THE RESUME BITS
         </p>
 
         {/* Title */}
@@ -371,30 +371,6 @@ export function Experience() {
             />
 
             <div className="space-y-10">
-              {/* Degree */}
-              <div className="relative">
-                <div style={{ position: 'absolute', left: -32, top: 4, transform: 'translateX(-50%)', marginLeft: 10 }}>
-                  <FlowerDot />
-                </div>
-                <p style={{ fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#E89A85', fontFamily: '"DM Sans", sans-serif', fontWeight: 600, marginBottom: 4 }}>
-                  B.S. Computer Science
-                </p>
-                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
-                  <div>
-                    <h3 style={{ fontFamily: '"Cormorant Garamond", Georgia, serif', fontSize: 'clamp(1.4rem, 2.5vw, 1.8rem)', fontWeight: 600, color: '#2A2438', lineHeight: 1.1, marginBottom: 4 }}>
-                      {education.school}
-                    </h3>
-                    <p style={{ fontSize: '0.875rem', color: '#5A4F6E', fontFamily: '"DM Sans", sans-serif' }}>
-                      Major: {education.major} · Minor: {education.minor} · GPA: {education.gpa}
-                    </p>
-                  </div>
-                  <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                    <p style={{ fontSize: '0.8rem', fontFamily: '"DM Sans", sans-serif', color: '#5A4F6E', whiteSpace: 'nowrap' }}>{education.period}</p>
-                    <p style={{ fontSize: '0.8rem', fontFamily: '"DM Sans", sans-serif', color: '#9B86C2' }}>{education.location}</p>
-                  </div>
-                </div>
-              </div>
-
               {/* Certifications */}
               {certifications.map((cert, i) => (
                 <div key={i} className="relative">
@@ -419,6 +395,30 @@ export function Experience() {
                   </div>
                 </div>
               ))}
+
+              {/* Degree */}
+              <div className="relative">
+                <div style={{ position: 'absolute', left: -32, top: 4, transform: 'translateX(-50%)', marginLeft: 10 }}>
+                  <FlowerDot />
+                </div>
+                <p style={{ fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#E89A85', fontFamily: '"DM Sans", sans-serif', fontWeight: 600, marginBottom: 4 }}>
+                  B.A. Computer Science
+                </p>
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+                  <div>
+                    <h3 style={{ fontFamily: '"Cormorant Garamond", Georgia, serif', fontSize: 'clamp(1.4rem, 2.5vw, 1.8rem)', fontWeight: 600, color: '#2A2438', lineHeight: 1.1, marginBottom: 4 }}>
+                      {education.school}
+                    </h3>
+                    <p style={{ fontSize: '0.875rem', color: '#5A4F6E', fontFamily: '"DM Sans", sans-serif' }}>
+                      Major: {education.major} · Minor: {education.minor} · GPA: {education.gpa}
+                    </p>
+                  </div>
+                  <div style={{ textAlign: 'right', flexShrink: 0 }}>
+                    <p style={{ fontSize: '0.8rem', fontFamily: '"DM Sans", sans-serif', color: '#5A4F6E', whiteSpace: 'nowrap' }}>{education.period}</p>
+                    <p style={{ fontSize: '0.8rem', fontFamily: '"DM Sans", sans-serif', color: '#9B86C2' }}>{education.location}</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         )}
